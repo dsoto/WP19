@@ -54,11 +54,14 @@ def load_timeseries_file(filename):
     return pd.read_csv(filename, index_col=0, parse_dates=True)
 
 def get_gaps_timestamp(energy_data):
-    time_gaps = np.diff(energy_data.index.values) / np.timedelta64(1,'s')
-    time_gaps = pd.Series(time_gaps)
-    return time_gaps[time_gaps > 60.0]
+    # returns a series of gap durations with the start time as index
+    differences = np.diff(energy_data.index.values)
+    gaps = pd.Series(index=energy_data.index[:-1], data=differences)
+    gaps = gaps[gaps > np.timedelta64(1,'m')]
+    return gaps
 
 def get_gaps_messages(messages):
+    # returns a series of gap durations with the start time as index
     power_down = messages[messages['message']=='Power Down']
     power_up = messages[messages['message']=='Power Up']
 
@@ -158,7 +161,13 @@ def num_gaps_messages(messages):
 
     return len(power_down)
 
+def get_gaps_timestamp(energy_data):
+    time_gaps = np.diff(energy_data.index.values) / np.timedelta64(1,'s')
+    time_gaps = pd.Series(time_gaps)
+    return time_gaps[time_gaps > 60.0]
+
 def get_downtime_timestamps(energy_data):
+    # return a series of durations with start time as index
     time_gaps = np.diff(energy_data.index.values) / np.timedelta64(1,'s')
     time_gaps = pd.Series(time_gaps)
     return time_gaps[time_gaps > 60.0].sum()
