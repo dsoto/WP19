@@ -47,6 +47,30 @@ raw_file_data = [{'files':['4. April/Data_Logs AJAU April 22 - 30.xls',
 'village_name':'kensio'},
 ]
 
+def load_message_file(filename):
+    return pd.read_csv(filename, index_col=0, parse_dates=True)
+
+def load_timeseries_file(filename):
+    return pd.read_csv(filename, index_col=0, parse_dates=True)
+
+def get_gaps_timestamp(energy_data):
+    time_gaps = np.diff(energy_data.index.values) / np.timedelta64(1,'s')
+    time_gaps = pd.Series(time_gaps)
+    return time_gaps[time_gaps > 60.0]
+
+def get_gaps_messages(messages):
+    power_down = messages[messages['message']=='Power Down']
+    power_up = messages[messages['message']=='Power Up']
+
+    # first message should be a power down
+    assert (power_down.index[0] < power_up.index[0]), 'first message not power down'
+    # last message should be a power up
+    assert (power_down.index[-1] < power_up.index[-1]), 'last message not power up'
+    # should be same number of up and down messages
+    assert (len(power_down) == len(power_up)), 'unequal up and down messages'
+
+    return pd.Series(data = (power_up.index - power_down.index), index=power_down.index)
+
 def calculate_uptime(energy_data):
     # take the discrete difference between time samples
     # convert to seconds from nanoseconds
@@ -95,25 +119,6 @@ def get_durations(messages):
     return pd.DataFrame(data = {'durations':(power_up.index - power_down.index)/np.timedelta64(1, 'h')},
                         index=power_down.index)
 
-def get_gaps_messages(messages):
-    power_down = messages[messages['message']=='Power Down']
-    power_up = messages[messages['message']=='Power Up']
-
-    # first message should be a power down
-    assert (power_down.index[0] < power_up.index[0]), 'first message not power down'
-    # last message should be a power up
-    assert (power_down.index[-1] < power_up.index[-1]), 'last message not power up'
-    # should be same number of up and down messages
-    assert (len(power_down) == len(power_up)), 'unequal up and down messages'
-
-    return pd.Series(data = (power_up.index - power_down.index), index=power_down.index)
-
-def load_message_file(filename):
-    return pd.read_csv(filename, index_col=0, parse_dates=True)
-
-def load_timeseries_file(filename):
-    return pd.read_csv(filename, index_col=0, parse_dates=True)
-
 def get_total_duration(observations):
     return (observations.index[-1] - observations.index[0])/np.timedelta64(1, 'h')
 
@@ -158,7 +163,3 @@ def get_downtime_timestamps(energy_data):
     time_gaps = pd.Series(time_gaps)
     return time_gaps[time_gaps > 60.0].sum()
 
-def get_gaps_timestamp(energy_data):
-    time_gaps = np.diff(energy_data.index.values) / np.timedelta64(1,'s')
-    time_gaps = pd.Series(time_gaps)
-    return time_gaps[time_gaps > 60.0]
