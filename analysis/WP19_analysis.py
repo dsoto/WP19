@@ -74,6 +74,9 @@ def get_gaps_messages(messages):
 
     return pd.Series(data = (power_up.index - power_down.index), index=power_down.index)
 
+def get_total_duration(energy_data):
+    return (energy_data.index[-1] - energy_data.index[0])/np.timedelta64(1, 'h')
+
 def calculate_uptime(energy_data):
     # take the discrete difference between time samples
     # convert to seconds from nanoseconds
@@ -109,6 +112,7 @@ def get_durations_messages(messages):
     return get_durations(messages)
 
 def get_durations(messages):
+    print('this is a deprecated function')
     power_down = messages[messages['message']=='Power Down']
     power_up = messages[messages['message']=='Power Up']
 
@@ -122,15 +126,14 @@ def get_durations(messages):
     return pd.DataFrame(data = {'durations':(power_up.index - power_down.index)/np.timedelta64(1, 'h')},
                         index=power_down.index)
 
-def get_total_duration(observations):
-    return (observations.index[-1] - observations.index[0])/np.timedelta64(1, 'h')
-
 def num_gaps_timestamp(energy_data):
+    print('this is a deprecated function')
     time_gaps = np.diff(energy_data.index.values) / np.timedelta64(1,'s')
     time_gaps = pd.Series(time_gaps)
     return len(time_gaps[time_gaps > 60.0])
 
 def num_gaps_messages(messages):
+    print('this is a deprecated function')
     power_down = messages[messages['message']=='Power Down']
     power_up = messages[messages['message']=='Power Up']
 
@@ -144,11 +147,13 @@ def num_gaps_messages(messages):
     return len(power_down)
 
 def num_gaps_timestamp(energy_data):
+    # todo: use get_gaps_timestamp
     time_gaps = np.diff(energy_data.index.values) / np.timedelta64(1,'s')
     time_gaps = pd.Series(time_gaps)
     return len(time_gaps[time_gaps > 60.0])
 
 def num_gaps_messages(messages):
+    # todo: use get_gaps_messages
     power_down = messages[messages['message']=='Power Down']
     power_up = messages[messages['message']=='Power Up']
 
@@ -160,15 +165,4 @@ def num_gaps_messages(messages):
     assert (len(power_down) == len(power_up)), 'unequal up and down messages'
 
     return len(power_down)
-
-def get_gaps_timestamp(energy_data):
-    time_gaps = np.diff(energy_data.index.values) / np.timedelta64(1,'s')
-    time_gaps = pd.Series(time_gaps)
-    return time_gaps[time_gaps > 60.0]
-
-def get_downtime_timestamps(energy_data):
-    # return a series of durations with start time as index
-    time_gaps = np.diff(energy_data.index.values) / np.timedelta64(1,'s')
-    time_gaps = pd.Series(time_gaps)
-    return time_gaps[time_gaps > 60.0].sum()
 
