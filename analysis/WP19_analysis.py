@@ -77,6 +77,12 @@ def get_gaps_messages(messages):
 def get_total_duration(energy_data):
     return (energy_data.index[-1] - energy_data.index[0])/np.timedelta64(1, 'h')
 
+def get_start_time(energy_data):
+    return energy_data.index[0]
+
+def get_end_time(energy_data):
+    return energy_data.index[-1]
+
 def calculate_uptime(energy_data):
     # take the discrete difference between time samples
     # convert to seconds from nanoseconds
