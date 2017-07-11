@@ -1,3 +1,5 @@
+# to run tests at command line   > pytest test.py
+
 import WP19_analysis as wpa
 import numpy as np
 
@@ -7,3 +9,8 @@ def test_get_gaps_timestamp():
     assert len(gaps) == 2
     assert gaps[0] == np.timedelta64(5,'m')
     assert gaps[1] == np.timedelta64(4,'m')
+    # TODO: test that gaps have the correct start date
+
+def test_get_gaps_messages():
+    pass
+    # TODO test that messages function gives correct results
