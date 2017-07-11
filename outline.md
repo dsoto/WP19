@@ -1,0 +1,177 @@
+---
+title: Sentani Load Profile Working Paper
+author: Daniel Soto
+---
+
+# Possible Titles
+
+- Measurements of Microgrid Consumption in Lake Sentani, Indonesia
+- Microgrid Energy Consumption, Uptime and Load Factor in Lake Sentani, Indonesia
+
+# Abstract
+
+- we measure
+- we find
+
+## contributions
+
+- measurement showing SAIDI on grids and microgrids are below the reported values for larger communities
+- proposal and calculation of SAIDI for grids with evening schedules
+- measurement of per capita daily energy use
+- measurement of per capita max power
+
+# Introduction
+
+<!-- first paragraph: main issue -->
+- TODO: do I need a clearly stated research question?
+- TODO: how does this work further the goals of the energy access field in Indonesia
+- This paper provides electricity consumption data and analysis useful to Indonesia's universal electricity access effort
+    - By measuring key electricity parameters, we hope to add to the body of data
+    - A richer body of data will lead to more robust technical, economic, and social designs for electricity
+
+<!-- second paragraph: context and motivation -->
+- indonesia is executing a large electrification expansion to achieve universal access (ADB paper)
+    - has made progress on percent with electricity access over the last decades (ADB?)
+    - the archipelago however presents challenges and there are wide differences in the electrification rate
+    - least cost analysis identifies PV microgrids as the best option for some areas (ADB energy access)
+
+<!-- third paragraph: reason study needed -->
+<!-- academic community doesn't have data, does the electric utility? -->
+- TODO: is it clear that the purpose of paper is to add to consumption data to the literature?
+- TODO: is it clear why the paper is needed?
+- electricity planning requires an accurate load estimation for financial viability
+    - without this load estimation, getting investment is difficult (jaramillo)
+    - researchers have demonstrated the lack of capital is partly due to lack of data (jaramillo?)
+
+- distributed electricity increases the need for accurate load estimation
+    - since DER is dominated by capital costs, the initial allocation is important
+    - getting the load estimation is important and difficult (louie paper)
+    - existing remote grids and diesel-powered microgrids give insight into the loads in similar neighboring areas
+
+- this paper reports measurements of the load in an area with low electrification that are germane to investment
+    - there are only a few published measurements of electricity use in these areas
+    - we report on saidi, saifi, and load factor
+
+- we compare the reliability of these measured grids to the country and area averages
+    - SAIDI varies widely across the country
+    - We observe SAIDI values well above the averages reported (ADB)
+    - These SAIDI are closer to those observed in SSA (WB "doing business" 2016)
+
+- the observed load factor in these areas is _________
+    - load factor tells how difficult the load is to serve because of variations in the power demanded
+    - kirubi measured the load factor in Mpetonka.  higher load factor is more efficient in capital allocation for the generation assets.
+    - load factor can point to the need to promote assets to smooth this factor
+    - distributed generation has a different requirement for load factor compared to fossil generation
+
+- we include observations on the variation of electricity demand throughout the day
+    - there is little published data on temporal patterns
+    - energy and the time of day that energy is used tell us about the needs of the solar generation
+    - power peaks also tell us about the needs of the generation equipment
+    - these temporal data are necessary for allocating electricity generation equipment
+
+- the paper is arranged in the following sections
+    - methods
+    - uptime results
+    - schedule results
+    - energy and power level results
+
+# Methods
+
+## Data Collection
+
+- We measure 2 villages with connections to the main grid and 3 villages with diesel microgrids
+- The main supply to each of these villages was fitted with a logging electrical power meter
+- TODO: write the make and model of the power meter and method of collection.
+- TODO: decide what detail we will provide about internet data collection
+- The power meter records the power, voltage, and current each minute
+- These recordings were compiled from late April to July 2015
+- These readings were collected in a server and data gaps exist
+
+## Uptime measurement data analysis
+
+- We estimate the power availability from messages for power availibility provided by the meter.
+- The meters sends message when the voltage drops below a certain level and when the voltage is regained.
+- The time difference between a power down message and the following power up messages is computed and summed.
+- This down time is then compared to the total time under observation.
+- We extrapolate from our sample to the whole year assuming that the downtime statistics will be similar throughout the year.
+- Since it is possible that power down and up messages we not recorded at the server, this estimate of uptime is a lower bound
+
+- TODO: did the SATECs have local storage?
+- TODO: how do we explain that there may be unreported outages if there is a coincident data outage.
+
+## Microgrid schedule data analysis
+
+- We compare the uptime to the promised schedule of reliability to form a meaningful indication.
+- The SAIDI measures the difference between the expectation between power that is always available to the available power.
+- Since the microgrid availability expectation is ~8 hours per night, we calculate a metric that reflects the deviation from that expectation.
+- SAIDI is a disruption index so we normalize for the intended schedule
+- We plot the probability of observing power as a function of the hour of day to infer the schedule.
+- The probability is constructed by counting days for which power is observed at that time and dividing by the total number of days in the data range.  We use the power up and power down messages for this.
+- Deviations from this schedule are used to calculate an adjusted SAIDI
+- Any reliability metric we compute should be relative to the promised availability. (belongs in methods)
+
+<!-- TODO: WF the intended hours of operation from Matt/EVI -->
+<!-- TODO: how do we handle missing data? -->
+
+## Energy and power consumption analysis
+
+- TODO: get the village populations to create per-capita estimates
+- we sample each day and only measure daily energy on days with 2 valid midnight samples
+- we take the difference of these sub-sampled data points to get the daily average
+- we report an average for energy delivered on days with full access
+- we report another average for actual energy delivered each day
+
+## Load Factor
+
+- the load factor is the average load divided by the peak load
+- since the average load is related to the revenue and the peak load is related to the capital investment, low load factors are difficult to service
+- TODO: is there a source for a recommended load factor for financial sustainability?  could I estimate this from solar costs?
+
+- we report one load factor for the average load when the grid is functioning
+- I report a second load factor for the actual average load (how should I define this?)
+
+# Results
+
+## Centralized Grid Uptime
+
+- The observed uptimes on these grids is below the averages for the Papua region.
+- IISD GSI report shows the Papua system with a SAIDI of about 2 hours per customer.  This data is from PT PLN (Persero) 2014
+- The observed grid uptime of approximately 95% translates to a SAIDI of around 440.  This is over one hour per day.
+
+<!-- TODO: use a cumulative plot of message downtimes to show the most disruptive outage durations -->
+<!-- TODO: what is the explanation for such a departure? -->
+<!-- TODO: create a table with uptimes for each village name, uptime, type of grid -->
+
+## Microgrid Uptime
+
+- To conserve fuel, many microgrids are only operated in the evenings. (cite Schnitzer?)
+- These microgrids are mostly operated between the hours of X and Y according to the data.
+- During these times, we observe outages of Z frequency.
+
+- The microgrids reflect an uptime that is reasonable given that electricity is only promised to be available 6-8 hours per day.
+- Atamali and Ayapo showed 33% uptime while Kensio had 16%
+- If electricity is promised 8 hours per day, an uptime of 33% would be perfect.
+
+- TODO: is there any literature on microgrid uptimes?
+- TODO: what is a more specific way than uptime to show the deviation from a promised schedule?
+- TODO: do I have any data from Matt about the promised schedule?  is it in the dropbox folder?
+- TODO: how do micogrid uptimes compare to perfect uptime?  How do I make this comparison clearly?
+- TODO: what comparison will you make?
+
+## Electricity Consumption
+
+- grid locations have higher per capita electricity consumptions per day than the microgrid
+- TODO: create tables that support this
+
+- we compare the per capita electricity consumptions to the Indonesia and Papua averages published by ADB/IISD/PLN
+- TODO: get the right data for these stats
+
+## Load Factor
+
+- we report the peak power per capita on the microgrids and normal grids
+
+- Q: will we attempt to estimate the extra revenue required to get to full SAIDI for microgrids?
+
+# Discussion
+
+# Conclusion
