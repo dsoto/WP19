@@ -131,12 +131,16 @@ author: Daniel Soto
 
 ## Energy and power consumption analysis
 
-<!-- TODO: get the village populations to create per&#45;capita estimates -->
 
-- we sample each day and only measure daily energy on days with 2 valid midnight samples
-- we take the difference of these sub-sampled data points to get the daily average
-- we report an average for energy delivered on days with full access
-- we report another average for actual energy delivered each day
+- From the metered data and the village populations we can estimate the per capita electricity consumption.
+- The meter records an energy accumulator that is reported at each timestamp with 1 kWh resolution.
+- By sampling this energy accumulation each day taking the difference between neighboring days, we compute the daily energy.
+- Since gaps in the data can corrupt the measurement we only report daily energy on days with 2 valid midnight samples.
+- We report an average for energy delivered on days with full access.
+- We report another average for actual energy delivered each day.
+
+<!-- TODO: get the village populations to create per&#45;capita estimates -->
+<!-- TODO: will we consider days with valid midnight samples but data missing during the day? -->
 
 ## Load Factor
 
