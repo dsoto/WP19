@@ -117,7 +117,7 @@ author: Daniel Soto
 - A valid observation of power at time t is defined as having a time series observation of the power at time t.
 - A valid observation of blackout at time t, is defined as time t falling in a recorded gap observation.
 
-![](./plots/uptime-probability.pdf)
+![](./plots/uptime-probability.png)
 
 <!-- TODO: what can we say about the average hours of operation? -->
 
