@@ -172,3 +172,20 @@ def num_gaps_messages(messages):
 
     return len(power_down)
 
+def create_uptime_boolean(energy_data, messages):
+    index = pd.DatetimeIndex(start=get_start_time(energy_data),
+                             end=get_end_time(energy_data),
+                             freq='1T').values
+    power_down = messages[messages['message']=='Power Down'].index.values
+    power_up = messages[messages['message']=='Power Up'].index.values
+
+    on = []
+    for i in index:
+        # if the insertion point of the index is one greater for the power_down time, you are in a gap
+        if np.searchsorted(power_down, i) == np.searchsorted(power_up, i) + 1:
+            on.append(0)
+        else:
+            on.append(1)
+
+    return pd.DataFrame(index=index, data=on)
+

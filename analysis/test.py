@@ -14,3 +14,17 @@ def test_get_gaps_timestamp():
 def test_get_gaps_messages():
     pass
     # TODO test that messages function gives correct results
+
+
+def test_create_uptime_boolean():
+    # test creation of uptime booleans from the message file
+    # verifies both in gap and out of gap samples
+    message_data = wpa.load_message_file('test-messages.csv')
+    energy_data = wpa.load_timeseries_file('test-clean.csv')
+    uptime_boolean = wpa.create_uptime_boolean(energy_data, message_data)
+    assert uptime_boolean.iloc[4][0] == 1
+    assert uptime_boolean.iloc[6][0] == 0
+    assert uptime_boolean.iloc[9][0] == 0
+
+
+
