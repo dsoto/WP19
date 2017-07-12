@@ -108,21 +108,31 @@ author: Daniel Soto
 
 ## Microgrid schedule data analysis
 
-- We compare the uptime to the promised schedule of reliability to form a meaningful indication.
-- The SAIDI measures the difference between the expectation between power that is always available to the available power.
-- Since the microgrid availability expectation is ~8 hours per night, we calculate a metric that reflects the deviation from that expectation.
-- SAIDI is a disruption index so we normalize for the intended schedule
+- From the data sets we can observe the adherence of the microgrid power availability to a fixed schedule.
+- Small diesel microgrids like these often operate only in the evenings to conserve fuel (cite).
+
+<!-- TODO: section on getting the schedule -->
+
+- Using the data, we can observe the schedule and find the operation times of the grids.
 - We plot the probability of observing power as a function of the hour of day to infer the schedule.
 - The probability is constructed by counting days for which power is observed at that time and dividing by the total number of days in the data range.  We use the power up and power down messages for this.
-- Deviations from this schedule are used to calculate an adjusted SAIDI
-- Any reliability metric we compute should be relative to the promised availability. (belongs in methods)
+
+<!-- TODO: section on getting deviation from the schedule -->
+
+- Using the data, we can then observe deviations from this schedule.
+- Any reliability metric we compute should be relative to the promised availability.
+- Since the microgrid availability expectation is ~8 hours per night, we calculate a metric that reflects the deviation from that expectation.
+- We compare the uptime to the promised schedule of reliability to form a meaningful indication.
+- The SAIDI metric measures the difference between the expectation between power that is always available to the available power.
+- From this we can create an adjusted metric, similar to SAIDI, that separates the expected unavailability of electricity from the unexpected.
 
 <!-- TODO: how do we handle missing data? -->
 <!-- TODO: resolve issue with unexpected daytime usage -->
 
 ## Energy and power consumption analysis
 
-- TODO: get the village populations to create per-capita estimates
+<!-- TODO: get the village populations to create per&#45;capita estimates -->
+
 - we sample each day and only measure daily energy on days with 2 valid midnight samples
 - we take the difference of these sub-sampled data points to get the daily average
 - we report an average for energy delivered on days with full access
@@ -132,7 +142,8 @@ author: Daniel Soto
 
 - the load factor is the average load divided by the peak load
 - since the average load is related to the revenue and the peak load is related to the capital investment, low load factors are difficult to service
-- TODO: is there a source for a recommended load factor for financial sustainability?  could I estimate this from solar costs?
+
+<!-- TODO: is there a source for a recommended load factor for financial sustainability?  could I estimate this from solar costs? -->
 
 - we report one load factor for the average load when the grid is functioning
 - I report a second load factor for the actual average load (how should I define this?)
@@ -159,10 +170,10 @@ author: Daniel Soto
 - Atamali and Ayapo showed 33% uptime while Kensio had 16%
 - If electricity is promised 8 hours per day, an uptime of 33% would be perfect.
 
-- TODO: is there any literature on microgrid uptimes?
-- TODO: what is a more specific way than uptime to show the deviation from a promised schedule?
-- TODO: how do micogrid uptimes compare to perfect uptime?  How do I make this comparison clearly?
-- TODO: what comparison will you make?
+<!-- TODO: is there any literature on microgrid uptimes? -->
+<!-- TODO: what is a more specific way than uptime to show the deviation from a promised schedule? -->
+<!-- TODO: how do micogrid uptimes compare to perfect uptime?  How do I make this comparison clearly? -->
+<!-- TODO: what comparison will you make? -->
 
 ## Electricity Consumption
 
@@ -170,13 +181,13 @@ author: Daniel Soto
 - TODO: create tables that support this
 
 - we compare the per capita electricity consumptions to the Indonesia and Papua averages published by ADB/IISD/PLN
-- TODO: get the right data for these stats
+<!-- TODO: get the right data for these stats -->
 
 ## Load Factor
 
 - we report the peak power per capita on the microgrids and normal grids
 
-- Q: will we attempt to estimate the extra revenue required to get to full SAIDI for microgrids?
+<!-- Q: will we attempt to estimate the extra revenue required to get to full SAIDI for microgrids? -->
 
 # Discussion
 
