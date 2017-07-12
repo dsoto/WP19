@@ -10,8 +10,6 @@ author: Daniel Soto
 
 # Abstract
 
-- we measure
-- we find
 
 ## contributions
 
@@ -23,8 +21,8 @@ author: Daniel Soto
 # Introduction
 
 <!-- first paragraph: main issue -->
-- TODO: do I need a clearly stated research question?
-- TODO: how does this work further the goals of the energy access field in Indonesia
+<!-- TODO: do I need a clearly stated research question? -->
+<!-- TODO: how does this work further the goals of the energy access field in Indonesia -->
 - This paper provides electricity consumption data and analysis useful to Indonesia's universal electricity access effort
     - By measuring key electricity parameters, we hope to add to the body of data
     - A richer body of data will lead to more robust technical, economic, and social designs for electricity
@@ -37,8 +35,8 @@ author: Daniel Soto
 
 <!-- third paragraph: reason study needed -->
 <!-- academic community doesn't have data, does the electric utility? -->
-- TODO: is it clear that the purpose of paper is to add to consumption data to the literature?
-- TODO: is it clear why the paper is needed?
+<!-- TODO: is it clear that the purpose of paper is to add to consumption data to the literature? -->
+<!-- TODO: is it clear why the paper is needed? -->
 - electricity planning requires an accurate load estimation for financial viability
     - without this load estimation, getting investment is difficult (jaramillo)
     - researchers have demonstrated the lack of capital is partly due to lack of data (jaramillo?)
@@ -80,24 +78,33 @@ author: Daniel Soto
 ## Data Collection
 
 - We measure 2 villages with connections to the main grid and 3 villages with diesel microgrids
-- The main supply to each of these villages was fitted with a logging electrical power meter
-- TODO: write the make and model of the power meter and method of collection.
-- TODO: decide what detail we will provide about internet data collection
-- The power meter records the power, voltage, and current each minute
+- The power meter records the power, voltage, and current.
+- The data is recorded at one-minute intervals.
 - These recordings were compiled from late April to July 2015
-- These readings were collected in a server and data gaps exist
+- The main supply to each of these villages was fitted with a logging electrical power meter
+- The meter measurements are transmitted to a database over a communication network
+- Since the communication network wasn't fully robust, some gaps in the data exist
+
+<!-- TODO: is the network cellular and internet? -->
+<!-- TODO: write the make and model of the power meter and method of collection. -->
 
 ## Uptime measurement data analysis
 
-- We estimate the power availability from messages for power availibility provided by the meter.
-- The meters sends message when the voltage drops below a certain level and when the voltage is regained.
-- The time difference between a power down message and the following power up messages is computed and summed.
-- This down time is then compared to the total time under observation.
+- From the meter data we can estimate the fraction of the time that power is available to the customers.
+- There are two possible methods for this estimation, one using event messages about power loss from the meter and the other using gaps in the timeseries data from the meter.
+- The meters sends a message that the power has been lost when the voltage drops below a certain level and also when the voltage has recovered.
+- The time difference between the power down messages and the following power up messages is computed and summed.
+- If the database is missing any of these event pairs, this method will underestimate the time without power.
+- During the time when the power is down, the meters do not record or transmit data.
+- By finding the gaps in the timeseries data that are longer than the one-minute reporting interval, we can estimate the time without power.
+- This method provides an overestimate because communication problems will also result in missing data despite power being available.
+- Both of these methods together provide an upper and lower bound for the time without power.
 - We extrapolate from our sample to the whole year assuming that the downtime statistics will be similar throughout the year.
-- Since it is possible that power down and up messages we not recorded at the server, this estimate of uptime is a lower bound
 
-- TODO: did the SATECs have local storage?
-- TODO: how do we explain that there may be unreported outages if there is a coincident data outage.
+<!-- TODO: is it possible to find timestamp gaps where the kWh export increments -->
+<!-- TODO: can we combine the message and timestamp methods to get higher confidence in the measurement? -->
+<!-- TODO: did the SATECs have local storage? -->
+<!-- TODO: how do we explain that there may be unreported outages if there is a coincident data outage. -->
 
 ## Microgrid schedule data analysis
 
@@ -110,8 +117,8 @@ author: Daniel Soto
 - Deviations from this schedule are used to calculate an adjusted SAIDI
 - Any reliability metric we compute should be relative to the promised availability. (belongs in methods)
 
-<!-- TODO: WF the intended hours of operation from Matt/EVI -->
 <!-- TODO: how do we handle missing data? -->
+<!-- TODO: resolve issue with unexpected daytime usage -->
 
 ## Energy and power consumption analysis
 
@@ -154,7 +161,6 @@ author: Daniel Soto
 
 - TODO: is there any literature on microgrid uptimes?
 - TODO: what is a more specific way than uptime to show the deviation from a promised schedule?
-- TODO: do I have any data from Matt about the promised schedule?  is it in the dropbox folder?
 - TODO: how do micogrid uptimes compare to perfect uptime?  How do I make this comparison clearly?
 - TODO: what comparison will you make?
 
@@ -175,3 +181,5 @@ author: Daniel Soto
 # Discussion
 
 # Conclusion
+
+
