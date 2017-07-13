@@ -78,12 +78,12 @@ author: Daniel Soto
 ## Data Collection
 
 - We measure 2 villages with connections to the main grid and 3 villages with diesel microgrids
-- The power meter records the power, voltage, and current.
-- The data is recorded at one-minute intervals.
-- These recordings were compiled from late April to July 2015
-- The main supply to each of these villages was fitted with a logging electrical power meter
-- The meter measurements are transmitted to a database over a communication network
-- Since the communication network wasn't fully robust, some gaps in the data exist
+    - The power meter records the power, voltage, and current.
+    - The data is recorded at one-minute intervals.
+    - These recordings were compiled from late April to July 2015
+    - The main supply to each of these villages was fitted with a logging electrical power meter
+    - The meter measurements are transmitted to a database over a communication network
+    - Since the communication network wasn't fully robust, some gaps in the data exist
 
 <!-- TODO: is the network cellular and internet? -->
 <!-- TODO: write the make and model of the power meter and method of collection. -->
@@ -91,15 +91,15 @@ author: Daniel Soto
 ## Uptime measurement data analysis
 
 - From the meter data we can estimate the fraction of the time that power is available to the customers.
-- There are two possible methods for this estimation, one using event messages about power loss from the meter and the other using gaps in the timeseries data from the meter.
-- The meters sends a message that the power has been lost when the voltage drops below a certain level and also when the voltage has recovered.
-- The time difference between the power down messages and the following power up messages is computed and summed.
-- If the database is missing any of these event pairs, this method will underestimate the time without power.
-- During the time when the power is down, the meters do not record or transmit data.
-- By finding the gaps in the timeseries data that are longer than the one-minute reporting interval, we can estimate the time without power.
-- This method provides an overestimate because communication problems will also result in missing data despite power being available.
-- Both of these methods together provide an upper and lower bound for the time without power.
-- We extrapolate from our sample to the whole year assuming that the downtime statistics will be similar throughout the year.
+    - There are two possible methods for this estimation, one using event messages about power loss from the meter and the other using gaps in the timeseries data from the meter.
+    - The meters sends a message that the power has been lost when the voltage drops below a certain level and also when the voltage has recovered.
+    - The time difference between the power down messages and the following power up messages is computed and summed.
+    - If the database is missing any of these event pairs, this method will underestimate the time without power.
+    - During the time when the power is down, the meters do not record or transmit data.
+    - By finding the gaps in the timeseries data that are longer than the one-minute reporting interval, we can estimate the time without power.
+    - This method provides an overestimate because communication problems will also result in missing data despite power being available.
+    - Both of these methods together provide an upper and lower bound for the time without power.
+    - We extrapolate from our sample to the whole year assuming that the downtime statistics will be similar throughout the year.
 
 <!-- TODO: is it possible to find timestamp gaps where the kWh export increments -->
 <!-- TODO: can we combine the message and timestamp methods to get higher confidence in the measurement? -->
@@ -109,24 +109,24 @@ author: Daniel Soto
 ## Microgrid schedule data analysis
 
 - From the data sets we can observe the adherence of the microgrid power availability to a fixed schedule.
-- Small diesel microgrids like these often operate only in the evenings to conserve fuel (cite).
+    - Small diesel microgrids like these often operate only in the evenings to conserve fuel (cite).
 
 - Using the data, we can observe the schedule and find the operation times of the grids.
-- We plot the probability of observing power as a function of the hour of day to infer the schedule.
-- The probability is defined as the number valid observations of power at time t divided by the number of valid observations of either power and blackout at time t.
-- A valid observation of power at time t is defined as having a time series observation of the power at time t.
-- A valid observation of blackout at time t, is defined as time t falling in a recorded gap observation.
+    - We plot the probability of observing power as a function of the hour of day to infer the schedule.
+    - The probability is defined as the number valid observations of power at time t divided by the number of valid observations of either power and blackout at time t.
+    - A valid observation of power at time t is defined as having a time series observation of the power at time t.
+    - A valid observation of blackout at time t, is defined as time t falling in a recorded gap observation.
 
 ![](./plots/uptime-probability.png)
 
 <!-- TODO: what can we say about the average hours of operation? -->
 
 - Using the data, we can then observe deviations from this schedule.
-- Any reliability metric we compute should be relative to the promised availability.
-- We compare the uptime to the promised schedule of reliability to form a meaningful indication.
-- The SAIDI metric measures the difference between the expectation between power that is always available to the available power.
-- From this we can create an adjusted metric, similar to SAIDI, that separates the expected unavailability of electricity from the unexpected.
-- Since the microgrid availability expectation is ~8 hours per night, the adjusted uptime percentage is the uptime percentage multiplied by a factor of 3.
+    - Any reliability metric we compute should be relative to the promised availability.
+    - We compare the uptime to the promised schedule of reliability to form a meaningful indication.
+    - The SAIDI metric measures the difference between the expectation between power that is always available to the available power.
+    - From this we can create an adjusted metric, similar to SAIDI, that separates the expected unavailability of electricity from the unexpected.
+    - Since the microgrid availability expectation is ~8 hours per night, the adjusted uptime percentage is the uptime percentage multiplied by a factor of 3.
 
 <!-- TODO: we could take the average probability over the probabilities over a threshold to get the adjusted probability -->
 <!-- TODO: think through if discarding unobserved blackouts or uptime biases the probability -->
