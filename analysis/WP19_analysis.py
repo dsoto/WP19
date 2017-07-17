@@ -173,6 +173,7 @@ def num_gaps_messages(messages):
     return len(power_down)
 
 def create_uptime_boolean(energy_data, messages):
+    # todo: decide if this should be a deprecated function?
     index = pd.DatetimeIndex(start=get_start_time(energy_data),
                              end=get_end_time(energy_data),
                              freq='1T').values
@@ -189,3 +190,29 @@ def create_uptime_boolean(energy_data, messages):
 
     return pd.DataFrame(index=index, data=on)
 
+def create_downtime_boolean_message(energy_data, messages):
+    # create boolean array of whether timestamp falls in recorded power gap
+    # todo: create test function
+    index = pd.DatetimeIndex(start=get_start_time(energy_data),
+                             end=get_end_time(energy_data),
+                             freq='1T').values
+    power_down = messages[messages['message']=='Power Down'].index.values
+    power_up = messages[messages['message']=='Power Up'].index.values
+
+    downtime = []
+    for i in index:
+        # if the insertion point of the index is one greater for the power_down time, you are in a gap
+        if np.searchsorted(power_down, i) == np.searchsorted(power_up, i) + 1:
+            downtime.append(1)
+        else:
+            downtime.append(0)
+
+    return pd.Series(index=index, data=downtime)
+
+def create_uptime_boolean_timestamp(energy_data):
+    # create boolean array of whether timestamp is during a valid power observation
+    # todo: create test function
+    acc_energy = energy_data['kWh export']
+    rs_acc_energy = acc_energy.resample('1T').asfreq()
+    boolean_uptime = (~rs_acc_energy.isnull()).astype(int)
+    return boolean_uptime
