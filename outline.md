@@ -85,8 +85,26 @@ author: Daniel Soto
     - The meter measurements are transmitted to a database over a communication network
     - Since the communication network wasn't fully robust, some gaps in the data exist
 
+## Timeseries Synthesis and Quality
+
+- Energy analysis techniques rely on a complete observation of the period under question.
+    - Since these grids often have outages gaps in the data exist.
+    - During a power outage, the meter conserves data and power by storing a single message for the power going down.
+    - The one-minute observations are suspended until the power returns and a single message for power up is recorded.
+    - Observations of zero grid voltage and zero power consumption can be inserted into the timeseries for these periods.
+    - Other gaps in the timeseries record exist that do not correspond to a recorded message.
+    - These gaps are left with null rather than zero values so that they do not bias our statistics.
+
+- We quantify the fraction of the observation period with valid data.
+    - Once we have synthesized a timeseries with as much data as available
+    - The percent coverage is defined as the ratio of valid entries to the total time period.
+    - A higher percent coverage will give us more confidence in the measurements we extract from the time series.
+
+<!-- TODO: would it be easier to do the zero insertion from the raw data rather than after the fact? -->
 <!-- TODO: is the network cellular and internet? -->
+<!-- TODO: can I get information on the voltage threshold for a power down and up message? -->
 <!-- TODO: write the make and model of the power meter and method of collection. -->
+<!-- TODO: are we going to fill or interpolate any short data gaps? -->
 
 ## Uptime measurement data analysis
 
@@ -117,7 +135,6 @@ author: Daniel Soto
     - A valid observation of power at time t is defined as having a time series observation of the power at time t.
     - A valid observation of blackout at time t, is defined as time t falling in a recorded gap observation.
 
-![](./plots/uptime-probability.png)
 
 <!-- TODO: what can we say about the average hours of operation? -->
 
@@ -128,6 +145,7 @@ author: Daniel Soto
     - From this we can create an adjusted metric, similar to SAIDI, that separates the expected unavailability of electricity from the unexpected.
     - Since the microgrid availability expectation is ~8 hours per night, the adjusted uptime percentage is the uptime percentage multiplied by a factor of 3.
 
+<!-- TODO: We could use an uninterrupted night of service as one metric for scheduled service -->
 <!-- TODO: we could take the average probability over the probabilities over a threshold to get the adjusted probability -->
 <!-- TODO: think through if discarding unobserved blackouts or uptime biases the probability -->
 <!-- TODO: how do we handle missing data? -->
@@ -135,13 +153,29 @@ author: Daniel Soto
 
 ## Energy and power consumption analysis
 
-
 - From the metered data and the village populations we can estimate the per capita electricity consumption.
-- The meter records an energy accumulator that is reported at each timestamp with 1 kWh resolution.
-- By sampling this energy accumulation each day taking the difference between neighboring days, we compute the daily energy.
-- Since gaps in the data can corrupt the measurement we only report daily energy on days with 2 valid midnight samples.
-- We report an average for energy delivered on days with full access.
-- We report another average for actual energy delivered each day.
+    - The meter records an energy accumulator that is reported at each timestamp with 1 kWh resolution.
+    - This energy accumulation record is incomplete.
+    - The meter does not record zeros when the grid power is unavailable
+    - We resample the timeseries onto a one-minute time scale
+    - Take the difference between neighboring minutes
+    - Samples without valid data are assigned null values
+    - We insert zeros into the time series during the recorded gaps by the meter
+    - Only the times with data outages are represented by nulls.
+
+- We use this synthesized record of minute-energy differences
+    - By summing these accumulated energy differences over a day, we get the energy consumption.
+
+- We report two electricity consumption averages.
+    - We report an average for energy delivered on days or nights with full access.
+    - We report another average for actual energy delivered each day.
+    - The first average gives the potential energy consumption for the system when it is fully operational without technical or operational constraints.
+    - The second average is the actual electricity delivered.
+    - The difference between these two provides a measure of latent demand.
+
+- We define full access differently for the two grid types
+    - For the centralized grid, we define full access as a day with above a threshold level of grid operation and data coverage over a 24 hour period.
+    - Since the microgrids only operate in the evening, we define full access as an evening of access without interruption.
 
 <!-- TODO: get the village populations to create per&#45;capita estimates -->
 <!-- TODO: will we consider days with valid midnight samples but data missing during the day? -->
@@ -149,24 +183,41 @@ author: Daniel Soto
 ## Load Factor
 
 - the load factor is the average load divided by the peak load
-- since the average load is related to the revenue and the peak load is related to the capital investment, low load factors are difficult to service
+    - since the average load is related to the revenue and the peak load is related to the capital investment, low load factors are difficult to service
+    - we report one load factor for the average load when the grid is functioning
+    - I report a second load factor for the actual average load (how should I define this?)
 
 <!-- TODO: is there a source for a recommended load factor for financial sustainability?  could I estimate this from solar costs? -->
 
-- we report one load factor for the average load when the grid is functioning
-- I report a second load factor for the actual average load (how should I define this?)
-
 # Results
+
+## Data Coverage
+
+- The data cover from two to three months in the villages.
+    - While there are gaps in the data, there is valid data for at least 86% of the time in all villages.
+    - One grid-connected village has over 99% of the time accounted for with a valid data entry.
+    - These gaps are most likely due to data transmission issues.
+    - We have no robust way of the presence or absence of power in the data gaps with the data set available.
+
+<!-- TODO: can we use the increase in accumulated energy to infer a data gap with power present? -->
+<!-- TODO: do I think these missing data will bias uptime or downtime measurements? -->
+<!-- TODO: are statistics of these data gaps different than the power gaps?  if so, how? -->
+
+| Village   | Start Date | End Date   |   Duration |   Coverage |
+|:----------|:-----------|:-----------|-----------:|-----------:|
+| Ajau      | 2015-04-22 | 2015-08-28 |   128.481  |   0.993579 |
+| Asei      | 2015-04-22 | 2015-07-09 |    78.6889 |   0.968477 |
+| Atamali   | 2015-04-24 | 2015-08-26 |   124.065  |   0.863161 |
+| Ayapo     | 2015-04-22 | 2015-08-27 |   127.433  |   0.904552 |
+| Kensio    | 2015-05-11 | 2015-08-21 |   102.194  |   0.92657  |
 
 ## Centralized Grid Uptime
 
 - The observed uptimes on these grids is below the averages for the Papua region.
-- IISD GSI report shows the Papua system with a SAIDI of about 2 hours per customer.  This data is from PT PLN (Persero) 2014
-- The observed grid uptime of approximately 95% translates to a SAIDI of around 440.  This is over one hour per day.
+    - IISD GSI report shows the Papua system with a SAIDI of about 2 hours per customer.  This data is from PT PLN (Persero) 2014
+    - The observed grid uptime of approximately 95% translates to a SAIDI of around 440.  This is over one hour per day.
 
 - The two grid locations show uptime that is well over 90% at times of day.
-
-
 
 <!-- TODO: use a cumulative plot of message downtimes to show the most disruptive outage durations -->
 <!-- TODO: what is the explanation for such a departure? -->
@@ -175,15 +226,15 @@ author: Daniel Soto
 ## Microgrid Uptime
 
 - To conserve fuel, many microgrids are only operated in the evenings. (cite Schnitzer?)
-- These microgrids are mostly operated between the hours of X and Y according to the data.
-- During these times, we observe outages of Z frequency.
+    - These microgrids are mostly operated between the hours of X and Y according to the data.
+    - During these times, we observe outages of Z frequency.
+    - The microgrids reflect an uptime that is reasonable given that electricity is only promised to be available 6-8 hours per day.
+    - Atamali and Ayapo showed 33% uptime while Kensio had 16%
+    - If electricity is promised 8 hours per day, an uptime of 33% would be perfect.
+    - At the highest probability times in the evening, the probability peaks at about 80%.
+    - There are times of day when the microgrid is never observed to be running.
 
-- The microgrids reflect an uptime that is reasonable given that electricity is only promised to be available 6-8 hours per day.
-- Atamali and Ayapo showed 33% uptime while Kensio had 16%
-- If electricity is promised 8 hours per day, an uptime of 33% would be perfect.
-
-- At the highest probability times in the evening, the probability peaks at about 80%.
-- There are times of day when the microgrid is never observed to be running.
+![](./plots/uptime-probability.png)
 
 <!-- TODO: is there any literature on microgrid uptimes? -->
 <!-- TODO: what is a more specific way than uptime to show the deviation from a promised schedule? -->
@@ -193,10 +244,13 @@ author: Daniel Soto
 ## Electricity Consumption
 
 - grid locations have higher per capita electricity consumptions per day than the microgrid
-- TODO: create tables that support this
 
 - we compare the per capita electricity consumptions to the Indonesia and Papua averages published by ADB/IISD/PLN
+
+
+<!-- TODO: create tables that support this -->
 <!-- TODO: get the right data for these stats -->
+<!-- TODO: how do both of the electricity consumption estimates compare to the published Indo values. -->
 
 ## Load Factor
 
