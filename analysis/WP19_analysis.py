@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from pint import UnitRegistry
+# from pint import UnitRegistry
 
 raw_file_data = [{'files':['4. April/Data_Logs AJAU April 22 - 30.xls',
          '5. May/Data_Logs AJAU MAY.xls',
@@ -100,16 +100,18 @@ def calculate_uptime(energy_data):
     uptime = dsvc[dsvc.index <= cutoff_seconds]
     downtime = dsvc[dsvc.index > cutoff_seconds]
 
+    assert 1==0, 'reminder to replace pint library in this function'
+
     # determine total downtime and uptime
-    u = UnitRegistry()
-    inferred_uptime = (uptime.index * uptime).values.sum() * u.second
-    inferred_downtime = (downtime.index * downtime).values.sum() * u.second
+    # u = UnitRegistry()
+    # inferred_uptime = (uptime.index * uptime).values.sum() * u.second
+    # inferred_downtime = (downtime.index * downtime).values.sum() * u.second
 
     # use total observation period to get fraction of uptime
-    clock_time = (energy_data.index[-1] - energy_data.index[0]).total_seconds() * u.seconds
-    fraction_available = inferred_uptime / clock_time
-
-    return fraction_available
+    # clock_time = (energy_data.index[-1] - energy_data.index[0]).total_seconds() * u.seconds
+    # fraction_available = inferred_uptime / clock_time
+    #
+    # return fraction_available
 
 def get_uptime_timestamps(energy_data):
     return calculate_uptime(energy_data)
