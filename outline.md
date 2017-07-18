@@ -247,10 +247,33 @@ author: Daniel Soto
 
 - we compare the per capita electricity consumptions to the Indonesia and Papua averages published by ADB/IISD/PLN
 
+- In 2013, PLN reported 218 kWh sold per capita per year.
+    - reported 3.9 persons per household
 
-<!-- TODO: create tables that support this -->
-<!-- TODO: get the right data for these stats -->
-<!-- TODO: how do both of the electricity consumption estimates compare to the published Indo values. -->
+- Grid locations have much higher (on the order of 10x) greater mean electricity consumption per household.
+
+
+|         |   days observed |   mean kWh per day |   median kWh per day |
+|:--------|----------------:|-------------------:|---------------------:|
+| Ajau    |             129 |          600.388   |                609   |
+| Asei    |              78 |          180.038   |                186   |
+| Atamali |             110 |           15.0545  |                 16   |
+| Ayapo   |             117 |           84.9829  |                 95   |
+| Kensio  |              98 |            5.31633 |                  1.5 |
+
+|         |   days observed |   mean kWh per day per household |   median kWh per day per housheold |
+|:--------|----------------:|---------------------------------:|-----------------------------------:|
+| ajau    |             129 |                         4.96188  |                            5.03306 |
+| asei    |              78 |                         5.45571  |                            5.63636 |
+| atamali |             110 |                         0.376364 |                            0.4     |
+| ayapo   |             117 |                         0.825077 |                            0.92233 |
+| kensio  |              98 |                         0.265816 |                            0.075   |
+
+<!-- TODO: how does the max kWh per day per household compare? -->
+<!-- TODO: find and cite the per capita electricity consumption -->
+<!-- TODO: use boxplot or something to get better indication of statistics -->
+<!-- TODO: where can I find village populations? Did Joshua Ferrer do this? -->
+<!-- TODO: how do both of the per capita electricity consumption estimates compare to the published Indo values. -->
 
 ## Load Factor
 
