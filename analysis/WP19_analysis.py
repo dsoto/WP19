@@ -89,6 +89,7 @@ def get_end_time(energy_data):
     return energy_data.index[-1]
 
 def calculate_uptime(energy_data):
+    # TODO: should this function be deprecated?
     # take the discrete difference between time samples
     # convert to seconds from nanoseconds
     # put in pandas series
@@ -119,9 +120,11 @@ def calculate_uptime(energy_data):
     # return fraction_available
 
 def get_uptime_timestamps(energy_data):
+    # this calls a deprecated function
     return calculate_uptime(energy_data)
 
 def get_durations_messages(messages):
+    # this calls a deprecated function
     return get_durations(messages)
 
 def get_durations(messages):
