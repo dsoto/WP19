@@ -222,13 +222,14 @@ author: Daniel Soto
 <!-- TODO: use a cumulative plot of message downtimes to show the most disruptive outage durations -->
 <!-- TODO: what is the explanation for such a departure? -->
 <!-- TODO: create a table with uptimes for each village name, uptime, type of grid -->
+<!-- TODO: what data is best explained in my probability of service by hour and what in the CDFs? -->
 
 ## Microgrid Uptime
 
 - To conserve fuel, many microgrids are only operated in the evenings. (cite Schnitzer?)
     - These microgrids are mostly operated between the hours of X and Y according to the data.
     - During these times, we observe outages of Z frequency.
-    - The microgrids reflect an uptime that is reasonable given that electricity is only promised to be available 6-8 hours per day.
+    - The microgrids reflect an uptime that is reasonable given that electricity is only promised to be available 6-8 hours per day.  (cite MBPC)
     - Atamali and Ayapo showed 33% uptime while Kensio had 16%
     - If electricity is promised 8 hours per day, an uptime of 33% would be perfect.
     - At the highest probability times in the evening, the probability peaks at about 80%.
@@ -236,21 +237,31 @@ author: Daniel Soto
 
 ![](./plots/uptime-probability.png)
 
+- Cumulative distribution plots show the most frequent durations.
+    - One microgrid shows 6 hours of operation per day on about 75% of the days.
+    - Another microgrid shows over 5 hours of operation per day on 60% of the days observed.
+    - One microgrid, however, shows very few days with more than 5 hours of service.
+
+![](./plots/uptime_CDF.png)
+
 <!-- TODO: is there any literature on microgrid uptimes? -->
 <!-- TODO: what is a more specific way than uptime to show the deviation from a promised schedule? -->
-<!-- TODO: how do micogrid uptimes compare to perfect uptime?  How do I make this comparison clearly? -->
-<!-- TODO: what comparison will you make? -->
 
 ## Electricity Consumption
 
-- grid locations have higher per capita electricity consumptions per day than the microgrid
+- grid locations have higher per capita electricity consumptions per day than
+- the microgrid
 
-- we compare the per capita electricity consumptions to the Indonesia and Papua averages published by ADB/IISD/PLN
+- we compare the per capita electricity consumptions to the Indonesia and Papua
+- averages published by ADB/IISD/PLN
 
 - In 2013, PLN reported 218 kWh sold per capita per year.
     - reported 3.9 persons per household
+- Assuming each connection is a typical household, we can estimate the per capita electricity usage at above 1 kWh per capita per day for the grid-connected regions and 0.2 kWh or below for the microgrid regions.
 
 - Grid locations have much higher (on the order of 10x) greater mean electricity consumption per household.
+- Two of the microgrids had much larger maximum consumption days than the median.
+
 
 
 |         |   days observed |   mean kWh per day |   median kWh per day |
@@ -263,12 +274,14 @@ author: Daniel Soto
 
 |         |   days observed |   mean kWh per day per household |   median kWh per day per housheold |
 |:--------|----------------:|---------------------------------:|-----------------------------------:|
-| ajau    |             129 |                         4.96188  |                            5.03306 |
-| asei    |              78 |                         5.45571  |                            5.63636 |
-| atamali |             110 |                         0.376364 |                            0.4     |
-| ayapo   |             117 |                         0.825077 |                            0.92233 |
-| kensio  |              98 |                         0.265816 |                            0.075   |
+| Ajau    |             129 |                         4.96188  | 5.03306 |
+| Asei    |              78 |                         5.45571  | 5.63636 |
+| Atamali |             110 |                         0.376364 | 0.4     |
+| Ayapo   |             117 |                         0.825077 | 0.92233 |
+| Kensio  |              98 |                         0.265816 | 0.075   |
 
+<!-- TODO: are the variations in consumption due to constrained supply? -->
+<!-- TODO: how do we get statistics on a day with good access? -->
 <!-- TODO: how does the max kWh per day per household compare? -->
 <!-- TODO: find and cite the per capita electricity consumption -->
 <!-- TODO: use boxplot or something to get better indication of statistics -->
