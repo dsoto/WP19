@@ -8,7 +8,7 @@ def test_get_gaps_timestamp():
     energy_data = wpa.load_timeseries_file('test-clean.csv')
     gaps = wpa.get_gaps_timestamp(energy_data)
     # check number of gaps
-    assert len(gaps) == 2
+    assert len(gaps) == 3
     # check length of gaps
     assert gaps[0] == np.timedelta64(5,'m')
     assert gaps[1] == np.timedelta64(4,'m')
@@ -34,20 +34,27 @@ def test_create_uptime_boolean():
     message_data = wpa.load_message_file('test-messages.csv')
     energy_data = wpa.load_timeseries_file('test-clean.csv')
     uptime_boolean = wpa.create_uptime_boolean(energy_data, message_data)
-    assert uptime_boolean.iloc[4][0] == 1
-    assert uptime_boolean.iloc[6][0] == 0
-    assert uptime_boolean.iloc[9][0] == 0
+    assert type(uptime_boolean) == pd.Series
+    assert uptime_boolean.iloc[4] == 1
+    assert uptime_boolean.iloc[6] == 0
+    assert uptime_boolean.iloc[9] == 0
 
 def test_create_downtime_boolean_message():
-    #import pdb; pdb.set_trace()
     message_data = wpa.load_message_file('test-messages.csv')
     energy_data = wpa.load_timeseries_file('test-clean.csv')
     downtime_boolean = wpa.create_downtime_boolean_message(energy_data, message_data)
+    assert type(downtime_boolean) == pd.Series
     assert downtime_boolean.iloc[5] == 0
     assert downtime_boolean.iloc[8] == 1
     assert downtime_boolean.iloc[13] == 0
     assert downtime_boolean.iloc[15] == 1
 
-
+def test_create_uptime_boolean_timestamp():
+    energy_data = wpa.load_timeseries_file('test-clean.csv')
+    uptime_boolean = wpa.create_uptime_boolean_timestamp(energy_data)
+    assert type(uptime_boolean) == pd.Series
+    assert uptime_boolean.iloc[4] == 1
+    assert uptime_boolean.iloc[8] == 0
+    assert uptime_boolean.iloc[12] == 1
 
 

@@ -198,7 +198,7 @@ def create_uptime_boolean(energy_data, messages):
         else:
             on.append(1)
 
-    return pd.DataFrame(index=index, data=on)
+    return pd.Series(index=index, data=on)
 
 def create_downtime_boolean_message(energy_data, messages):
     # create boolean array of whether timestamp falls in recorded power gap
