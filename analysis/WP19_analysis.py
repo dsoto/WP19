@@ -226,3 +226,19 @@ def create_uptime_boolean_timestamp(energy_data):
     rs_acc_energy = acc_energy.resample('1T').asfreq()
     boolean_uptime = (~rs_acc_energy.isnull()).astype(int)
     return boolean_uptime
+
+def insert_power_gap_zeros(energy_data, messages):
+    # this puts zeros in the recorded power gaps and leaves data gaps untouched
+    power_down = messages[messages['message']=='Power Down'].index.values
+    power_up = messages[messages['message']=='Power Up'].index.values
+    # this is diffing all columns and possibly slowing down function
+    diffed = energy_data[['kWh export']].resample('1T').asfreq().diff().shift(-1)
+    for i in diffed.index.values:
+        # if either boundary of the interval is in a power gap, we want to insert a zero
+        # if the insertion point of the index is one greater for the power_down time, you are in a gap
+        if np.searchsorted(power_down, i) == np.searchsorted(power_up, i) + 1:
+            diffed.loc[i]['kWh export'] = 0
+        end_interval = i + np.timedelta64(1,'m')
+        if np.searchsorted(power_down, end_interval) == np.searchsorted(power_up, end_interval) + 1:
+            diffed.loc[i]['kWh export'] = 0
+    return diffed['kWh export']
