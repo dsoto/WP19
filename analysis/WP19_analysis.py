@@ -242,3 +242,13 @@ def insert_power_gap_zeros(energy_data, messages):
         if np.searchsorted(power_down, end_interval) == np.searchsorted(power_up, end_interval) + 1:
             diffed.loc[i]['kWh export'] = 0
     return diffed['kWh export']
+
+def insert_zeros_kVA(energy_data, message_data):
+    # returns a dataframe on one-minute intervals with kVA set to zero in message-confirmed-outages
+    power_down = messages[messages['message']=='Power Down'].index.values
+    power_up = messages[messages['message']=='Power Up'].index.values
+    energy_data_rs = energy_data.resample('1T').asfreq()
+    for i in energy_data_rs.index.values:
+        if np.searchsorted(power_down, i) == np.searchsorted(power_up, i) + 1:
+            energy_data_rs.loc[i]['kVA sliding window Demand'] = 0
+    return energy_data_rs
