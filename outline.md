@@ -151,7 +151,7 @@ author: Daniel Soto
 <!-- TODO: how do we handle missing data? -->
 <!-- TODO: resolve issue with unexpected daytime usage -->
 
-## Energy and power consumption analysis
+## Energy consumption analysis
 
 - From the metered data and the village populations we can estimate the per capita electricity consumption.
     - The meter records an energy accumulator that is reported at each timestamp with 1 kWh resolution.
@@ -180,7 +180,20 @@ author: Daniel Soto
 <!-- TODO: get the village populations to create per&#45;capita estimates -->
 <!-- TODO: will we consider days with valid midnight samples but data missing during the day? -->
 
-## Load Factor
+## Power Consumption Analysis
+
+- We investigate the character of the power demand by analyzing the apparent power measurements from the metering hardware.
+    - The meter provides the apparent power in kVA averaged over an interval at each time step.
+
+- Load Duration Curve
+    - The load duration curve shows the percentage of time that the grid is supplying a given power level.
+    - We sort the time series in descending order and normalize the x-axis to a scale of zero to one.
+
+- Mean Power Load
+    - We plot the mean load by averaging the valid observations for each minute in a time series.
+    - We visualize these in a time series plot.
+    - TODO: determine how to plot quartiles
+
 
 - the load factor is the average load divided by the peak load
     - since the average load is related to the revenue and the peak load is related to the capital investment, low load factors are difficult to service
@@ -288,9 +301,27 @@ author: Daniel Soto
 <!-- TODO: where can I find village populations? Did Joshua Ferrer do this? -->
 <!-- TODO: how do both of the per capita electricity consumption estimates compare to the published Indo values. -->
 
+## Power Consumption
+
+![](./plots/hourly_kVA.png)
+
+- The hourly power profiles show an early evening peak for the grids as well as a minimum during the day.
+- The microgrids have an evening peak as well, but aren't running during the day.
+
+![](./plots/load_duration_curve.png)
+
+- The load duration curve shows the grids to have three discernible levels of power demand.
+
+- The load duration curve for the microgrids shows one broad level of power demand.
+    - It also shows much longer durations of no power.
+
+
+
 ## Load Factor
 
 - we report the peak power per capita on the microgrids and normal grids
+    - the ratio of the average power to the peak power on the line-fed grids is 0.59 and 0.51.
+    - the load factor is higher, 0.70 -- 0.76 in the microgrids.  Since the grid isn't available during the low demand hours, the average load is closer to the peak load.
 
 <!-- Q: will we attempt to estimate the extra revenue required to get to full SAIDI for microgrids? -->
 
