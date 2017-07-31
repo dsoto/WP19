@@ -86,12 +86,8 @@ def test_insert_zeros_kVA():
     energy_data = wpa.load_timeseries_file('test-clean.csv')
     insert_zeros = wpa.insert_zeros_kVA(energy_data, message_data)
     assert type(insert_zeros) == pd.DataFrame
-    # when insert_zeros is 0 and the row is 0, the kVA sliding window demand is 0
-    # when insert_zeros is 0 and the row is 9, the insert_zeros_kVA function set it to 0,
-    # where there was no data before
-    assert insert_zeros.iloc[4][0] == 1
+    # rows 5, 6 and 9, 10 are on the boundaries of a gap
+    assert insert_zeros.iloc[5][9] == 2
     assert insert_zeros.iloc[6][9] == 0
-    assert insert_zeros.iloc[7][9] == 0
-    assert insert_zeros.iloc[10][0] == 0
-    assert insert_zeros.iloc[11][0] == 2
-    
+    assert insert_zeros.iloc[9][9] == 0
+    assert insert_zeros.iloc[10][9] == 2
