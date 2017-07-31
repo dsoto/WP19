@@ -75,35 +75,23 @@ def test_insert_power_gap_zeros():
     energy_data = wpa.load_timeseries_file('test-clean.csv')
     gap_zeros = wpa.insert_power_gap_zeros(energy_data, message_data)
     # when gap_zeros is >0 there is a difference of power from the previous minute
-    assert gap_zeros.iloc[0] == 0
-    assert gap_zeros.iloc[1] == 1
-    assert gap_zeros.iloc[2] == 0
-    assert gap_zeros.iloc[3] == 1
-    assert gap_zeros.iloc[4] == 0
-    assert gap_zeros.iloc[5] == 0
-    assert gap_zeros.iloc[6] == 0
-    assert gap_zeros.iloc[7] == 0
-    assert gap_zeros.iloc[8] == 0
     assert gap_zeros.iloc[9] == 0
     assert gap_zeros.iloc[10] == 2
     assert gap_zeros.iloc[11] == 0
     assert gap_zeros.iloc[12] == 1
     assert gap_zeros.iloc[13] == 0
-    assert gap_zeros.iloc[14] == 0
-    assert gap_zeros.iloc[15] == 0
-    assert gap_zeros.iloc[16] == 0
-    assert gap_zeros.iloc[17] == 1
-    assert gap_zeros.iloc[18] == 1
-    assert gap_zeros.iloc[19] == 0
 
-    # just incase if you wanted a more concise function
-def test_insert_power_gap_zeros2():
+def test_insert_zeros_kVA():
     message_data = wpa.load_message_file('test-messages.csv')
     energy_data = wpa.load_timeseries_file('test-clean.csv')
-    gap_zeros = wpa.insert_power_gap_zeros(energy_data, message_data)
-    # when gap_zeros is >0 there is a difference of power from the previous minute
-    assert gap_zeros.iloc[9] == 0
-    assert gap_zeros.iloc[10] == 2
-    assert gap_zeros.iloc[11] == 0
-    assert gap_zeros.iloc[12] == 1
-    assert gap_zeros.iloc[13] == 0
+    insert_zeros = wpa.insert_zeros_kVA(energy_data, message_data)
+    assert type(insert_zeros) == pd.DataFrame
+    # when insert_zeros is 0 and the row is 0, the kVA sliding window demand is 0
+    # when insert_zeros is 0 and the row is 9, the insert_zeros_kVA function set it to 0,
+    # where there was no data before
+    assert insert_zeros.iloc[4][0] == 1
+    assert insert_zeros.iloc[6][9] == 0
+    assert insert_zeros.iloc[7][9] == 0
+    assert insert_zeros.iloc[10][0] == 0
+    assert insert_zeros.iloc[11][0] == 2
+    
