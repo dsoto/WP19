@@ -69,3 +69,25 @@ def test_create_uptime_boolean_timestamp():
     assert uptime_boolean.iloc[8] == 0
     assert uptime_boolean.iloc[12] == 1
     assert uptime_boolean.iloc[21] == 0
+
+def test_insert_power_gap_zeros():
+    message_data = wpa.load_message_file('test-messages.csv')
+    energy_data = wpa.load_timeseries_file('test-clean.csv')
+    gap_zeros = wpa.insert_power_gap_zeros(energy_data, message_data)
+    # when gap_zeros is >0 there is a difference of power from the previous minute
+    assert gap_zeros.iloc[9] == 0
+    assert gap_zeros.iloc[10] == 2
+    assert gap_zeros.iloc[11] == 0
+    assert gap_zeros.iloc[12] == 1
+    assert gap_zeros.iloc[13] == 0
+
+def test_insert_zeros_kVA():
+    message_data = wpa.load_message_file('test-messages.csv')
+    energy_data = wpa.load_timeseries_file('test-clean.csv')
+    insert_zeros = wpa.insert_zeros_kVA(energy_data, message_data)
+    assert type(insert_zeros) == pd.DataFrame
+    # rows 5, 6 and 9, 10 are on the boundaries of a gap
+    assert insert_zeros.iloc[5][9] == 2
+    assert insert_zeros.iloc[6][9] == 0
+    assert insert_zeros.iloc[9][9] == 0
+    assert insert_zeros.iloc[10][9] == 2

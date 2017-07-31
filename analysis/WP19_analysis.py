@@ -243,7 +243,7 @@ def insert_power_gap_zeros(energy_data, messages):
             diffed.loc[i]['kWh export'] = 0
     return diffed['kWh export']
 
-def insert_zeros_kVA(energy_data, message_data):
+def insert_zeros_kVA(energy_data, messages):
     # returns a dataframe on one-minute intervals with kVA set to zero in message-confirmed-outages
     power_down = messages[messages['message']=='Power Down'].index.values
     power_up = messages[messages['message']=='Power Up'].index.values
