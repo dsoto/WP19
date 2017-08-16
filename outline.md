@@ -260,7 +260,7 @@ author: Daniel Soto
 <!-- TODO: is there any literature on microgrid uptimes? -->
 <!-- TODO: what is a more specific way than uptime to show the deviation from a promised schedule? -->
 
-## Electricity Consumption
+## Electricity Energy Consumption
 
 - grid locations have higher per capita electricity consumptions per day than
 - the microgrid
@@ -324,6 +324,13 @@ author: Daniel Soto
 The microgrids are operating well below the rated load of the generators.
 The most well-matched microgrid is operating at 32% of the rated load and one grid is only at 6% of the load.
 Operation of the generators at an inefficient operating point wastes diesel fuel and drives up operating costs.
+Newer
+
+<!-- Q: Do we have access to records of the fuel consumption rate in the microgrids? -->
+
+The microgrids are operating well below the rated load of the generators.
+The most well-matched microgrid is operating at 32% of the rated load and one grid is only at 6% of the load.
+Operation of the generators at an inefficient operating point wastes diesel fuel and drives up operating costs.
 
 <!-- Q: Do we have access to records of the fuel consumption rate in the microgrids? -->
 
@@ -333,7 +340,7 @@ Operation of the generators at an inefficient operating point wastes diesel fuel
     - the ratio of the average power to the peak power on the line-fed grids is 0.59 and 0.51.
     - the load factor is higher, 0.70 -- 0.76 in the microgrids.  Since the grid isn't available during the low demand hours, the average load is closer to the peak load.
 
-<!-- Q: will we attempt to estimate the extra revenue required to get to full SAIDI for microgrids? -->
+<!-- Q: how can we estimate the extra revenue required to get to full SAIDI for microgrids? -->
 
 # Discussion
 

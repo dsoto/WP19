@@ -29,12 +29,10 @@
 # What is the character of the customer load?
 
 - [x] What is the hourly power profile for times when electricity is being delivered?
+- [x] Does the microgrid load vary over the course of the evening?
 - [x] What is the load factor for the grids during operation?
-- [ ] Is the peak and average load well matched to the microgrid gensets?
-- [ ] What heat rate penalty do we think the microgrids are experiencing due to load below nominal rating?
-- [ ] Does this load factor point to a difficulty in servicing?
-- [ ] Does the microgrid load vary over the course of the evening?
-- [ ] Does an inverter deal with low load factor more economically than a diesel generator?
+- [x] Is the peak and average load well matched to the microgrid gensets?
+- [ ] What heat rate and cost penalty are the microgrids are experiencing due to low load?
 - [ ] What are the implications of a low load factor?
 - [ ] What are the possible ways to mitigate negative effects from low load factor?
 - [ ] What is the least-cost solution for these loads?
