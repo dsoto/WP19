@@ -328,6 +328,11 @@ Newer
 
 <!-- Q: Do we have access to records of the fuel consumption rate in the microgrids? -->
 
+The microgrids are operating well below the rated load of the generators.
+The most well-matched microgrid is operating at 32% of the rated load and one grid is only at 6% of the load.
+Operation of the generators at an inefficient operating point wastes diesel fuel and drives up operating costs.
+
+<!-- Q: Do we have access to records of the fuel consumption rate in the microgrids? -->
 
 ## Load Factor
 

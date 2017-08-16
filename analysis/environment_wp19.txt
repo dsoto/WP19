@@ -4,6 +4,8 @@
 # $ conda list --export
 # At least one of these packages is on conda-forge.  Add the channel using:
 # $ conda config --add channels conda-forge
+# To download packages you may need to update your login credentials using:
+# $ binstar login
 # platform: osx-64
 appnope=0.1.0=py36_0
 bleach=1.5.0=py36_0

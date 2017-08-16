@@ -42,4 +42,6 @@
 - [ ] Does the kWh export match the kVA?
 - [ ] Does the kWh export match the product of current and voltage?
 - [ ] What anomalies exist in the kWh export data?
+- [ ] What fraction of our date range has data gaps?
+- [ ] How many times is energy consumed during data gaps?
 
