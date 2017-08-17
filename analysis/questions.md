@@ -1,8 +1,12 @@
-# How reliable are the central grids?
+# What is the marginal cost to provide diesel microgrid power?
 
-- [ ] What are the observed grid SAIDI measurements for these sentani grids?
-- [ ] How do the uptimes on the central grids compare to the microgrids
-- [ ] How do the uptimes compare to other grids world wide?
+- [x] What are the expected fuel rates of the generators?
+- [x] Based on the load and expected fuel rates, what marginal cost per kWh or kVAh is being paid?
+- [ ] What is the observed fuel consumption in the microgrid generators?
+- [ ] Based on the load and observed fuel consumption, what marginal cost per kWh or kVAh is being paid?
+- [ ] Based on the load, what is the per household cost?
+- [ ] Are these marginal costs greater than the tariffs being charged?
+- [ ] Does excessive diesel cost constrain the operation of these grids?
 
 # How reliable are the microgrids?
 
@@ -10,13 +14,13 @@
 - [x] What is the probability of grid availability per hour?
 - [x] What is the cumulative probability of a certain number of service hours each day?
 - [ ] How much does the microgrid performance deviate from the promised schedule?
-- [ ] What are the form of the interruptions?  Early start, late end?
+- [ ] What are the forms of the interruptions?  Early start, late end?
 - [ ] How can we create a SAIDI measurement for evening-only microgrids?
 - [ ] Can we estimate the microgrid consumption if the grid were more reliable?
 - [ ] Does the lack of electricity predictability reduce consumer ability to use energy?
 - [ ] Can we infer a latent electricity demand from the microgrid that is unmet?
 
-# What electricity and service do the grids supply?
+# What electricity and service do these grids supply?
 
 - [x] What is the average daily electricity use in kWh per household in these villages?
 - [ ] What is the average daily electricity use in kWh per capita?
