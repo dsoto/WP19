@@ -22,18 +22,36 @@ author: Daniel Soto
 
 # Introduction
 
-<!-- p1: main issue -->
+<!-- p1: main issue: quantifying observed diesel marginal cost  -->
 - this paper establishes the observed marginal cost of diesel generation in a remote area
     - this establishes the current cost of energy for renewable sources to compare against
+    - evidence shows that tariffs are below operating costs in Haiti and that few if any grids are operating (Schnitzer_Thesis)
 
-<!-- p2: context and motivation -->
+<!-- p2: context and motivation: keeping indonesia on track -->
 - indonesia is executing a large electrification expansion to achieve universal access (ADB paper)
     - has made progress on percent with electricity access over the last decades (ADB?)
     - the archipelago however presents challenges and there are wide differences in the electrification rate
+    <!-- is diesel the dominant technology in Indonesia?  (ADB)  -->
+    - geospatial least cost studies show diesel as a significant part of the mix (ADB_AUEAII, modi?).  This assumption would be threatened by oversized generators.
 
-<!-- p3: reason study needed -->
+<!-- p3: reason study needed: least cost electrification efforts need the best data -->
 - least cost electrification needs data to support its assumptions
     - measuring the percent utilization of diesel generators gives a more accurate estimate of cost for comparison
+    - we want to simultaneously expand access and lower carbon intensity
+    - A diesel microgrid in Nicaragua runs at well below the generator rating (casillas 2010)
+
+<!-- p4: summary? -->
+- diesel cost and carbon intensity can match or greatly exceed coal and NG averages
+    - an efficient diesel generator has comparable cost and carbon intensity compared to existing fossil sources
+    - when the generator is run at low loads marginal cost and carbon emissions rise
+    - generator sizes are often greatly oversized, adding to cost (casillas, schnitzer)
+    - in the case of photovoltaics, oversizing systems adds to system cost (louie, lee)
+    - while PV costs rise on a capital basis, diesel costs rise on a marginal basis
+    - marginal costs are often more difficult because operation and maintenance isn't well handled
+    - at $400 per kW, $1 per liter, and 300 ml/kWh, fuel cost exceeds capital cost after about 1000 hours, making generator replacement feasible (confirm)
+
+
+
 
 # Methods
 
@@ -322,7 +340,25 @@ Operation of the generators at an inefficient operating point wastes diesel fuel
     - Atamali and Kensio with average loads at 11 and 6 percent of the design have theoretical specific fuel consumptions (SFC) of 460 ml per kVA-hour and 970 ml per kVA-hour.
     - This operation could increase wear and tear on the generator, increasing maintenance costs and downtime.
 
+- The operating costs are well above the tariffs
+    - Customers pay 5 cents or less per kWh and many meters don't function
+    - The observed marginal costs due to fuel well exceed this
+
+- The figure shows the ideal specific fuel consumption.
+    - It assumes the fuel consumption matches the data sheet
+    - In practice, we expect wear and tear to reduce the efficiency of the generator.
+
+- The observed average specific fuel consumption can be estimated from fuel logs.
+    - Atamali fuel logs show 30 liters of fuel being used each day.
+    - The mean kWh per day on days where the grid operates is 15 kWh.
+    - This results in a specific fuel consumption of 2 liters per kWh.
+    - This is far above the our ideal fuel consumption estimate for Atamali.
+    - At 1 USD per liter for diesel, this is a marginal cost of 2 USD per kWh
+    - Tariffs in the area are below 5 cents per kWh so the electricity is almost completely subsidized
+
 ![](./plots/specific_fuel_consumption_duration.png)
+
+
 
 # Discussion
 
