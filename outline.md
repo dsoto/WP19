@@ -57,7 +57,9 @@ author: Daniel Soto
 
 ## Data Collection
 
-- We measure 2 villages with connections to the main grid and 3 villages with diesel microgrids
+<!-- where and how was the data collected? -->
+
+- We measure 3 villages with diesel microgrids
     - The power meter records the power, voltage, and current.
     - The data is recorded at one-minute intervals.
     - These recordings were compiled from late April to July 2015
@@ -66,6 +68,9 @@ author: Daniel Soto
     - Since the communication network wasn't fully robust, some gaps in the data exist
 
 ## Timeseries Synthesis and Quality
+
+<!-- what methods were used to account for missing data? -->
+<!-- do these analyses primarily use the kWh accumulator or the kVA moving average? -->
 
 - Energy analysis techniques rely on a complete observation of the period under question.
     - Since these grids often have outages gaps in the data exist.
@@ -104,7 +109,9 @@ author: Daniel Soto
 <!-- TODO: did the SATECs have local storage? -->
 <!-- TODO: how do we explain that there may be unreported outages if there is a coincident data outage. -->
 
-## Microgrid schedule data analysis
+## Microgrid schedule data analysis (probability of operation)
+
+<!-- how do we define the probability since some observations are missing? -->
 
 - From the data sets we can observe the adherence of the microgrid power availability to a fixed schedule.
     - Small diesel microgrids like these often operate only in the evenings to conserve fuel (cite).
@@ -114,22 +121,6 @@ author: Daniel Soto
     - The probability is defined as the number valid observations of power at time t divided by the number of valid observations of either power and blackout at time t.
     - A valid observation of power at time t is defined as having a time series observation of the power at time t.
     - A valid observation of blackout at time t, is defined as time t falling in a recorded gap observation.
-
-
-<!-- TODO: what can we say about the average hours of operation? -->
-
-- Using the data, we can then observe deviations from this schedule.
-    - Any reliability metric we compute should be relative to the promised availability.
-    - We compare the uptime to the promised schedule of reliability to form a meaningful indication.
-    - The SAIDI metric measures the difference between the expectation between power that is always available to the available power.
-    - From this we can create an adjusted metric, similar to SAIDI, that separates the expected unavailability of electricity from the unexpected.
-    - Since the microgrid availability expectation is ~8 hours per night, the adjusted uptime percentage is the uptime percentage multiplied by a factor of 3.
-
-<!-- TODO: We could use an uninterrupted night of service as one metric for scheduled service -->
-<!-- TODO: we could take the average probability over the probabilities over a threshold to get the adjusted probability -->
-<!-- TODO: think through if discarding unobserved blackouts or uptime biases the probability -->
-<!-- TODO: how do we handle missing data? -->
-<!-- TODO: resolve issue with unexpected daytime usage -->
 
 ## Energy consumption analysis
 
@@ -211,19 +202,6 @@ author: Daniel Soto
 | Atamali   | 2015-04-24 | 2015-08-26 |   124.065  |   0.863161 |
 | Ayapo     | 2015-04-22 | 2015-08-27 |   127.433  |   0.904552 |
 | Kensio    | 2015-05-11 | 2015-08-21 |   102.194  |   0.92657  |
-
-## Centralized Grid Uptime
-
-- The observed uptimes on these grids is below the averages for the Papua region.
-    - IISD GSI report shows the Papua system with a SAIDI of about 2 hours per customer.  This data is from PT PLN (Persero) 2014
-    - The observed grid uptime of approximately 95% translates to a SAIDI of around 440.  This is over one hour per day.
-
-- The two grid locations show uptime that is well over 90% at times of day.
-
-<!-- TODO: use a cumulative plot of message downtimes to show the most disruptive outage durations -->
-<!-- TODO: what is the explanation for such a departure? -->
-<!-- TODO: create a table with uptimes for each village name, uptime, type of grid -->
-<!-- TODO: what data is best explained in my probability of service by hour and what in the CDFs? -->
 
 ## Microgrid Uptime
 
