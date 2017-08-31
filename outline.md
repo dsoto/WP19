@@ -1,77 +1,57 @@
 ---
-title: Sentani Load Profile Working Paper
+title: Sentani Microgrid Marginal Cost Working Paper
 author: Daniel Soto
 ---
 
+# Key Questions
+
+- What are the observed costs of electrical energy on these microgrids?
+- How reliable is the electricity on these microgrids?
+
+# Contributions
+
+- estimations of specific fuel consumption for electricity generation on diesel microgrids
+
 # Possible Titles
 
+- Microgrid Marginal Electricity cost in Lake Sentani, Indonesia
 - Measurements of Microgrid Consumption in Lake Sentani, Indonesia
 - Microgrid Energy Consumption, Uptime and Load Factor in Lake Sentani, Indonesia
 
 # Abstract
 
-
-## contributions
-
-- measurement showing SAIDI on grids and microgrids are below the reported values for larger communities
-- proposal and calculation of SAIDI for grids with evening schedules
-- measurement of per capita daily energy use
-- measurement of per capita max power
-
 # Introduction
 
-<!-- first paragraph: main issue -->
-<!-- TODO: do I need a clearly stated research question? -->
-<!-- TODO: how does this work further the goals of the energy access field in Indonesia -->
-- This paper provides electricity consumption data and analysis useful to Indonesia's universal electricity access effort
-    - By measuring key electricity parameters, we hope to add to the body of data
-    - A richer body of data will lead to more robust technical, economic, and social designs for electricity
+<!-- p1: main issue: quantifying observed diesel marginal cost  -->
+- this paper establishes the observed marginal cost of diesel generation in a remote area
+    - this establishes the current cost of energy for renewable sources to compare against
+    - evidence shows that tariffs are below operating costs in Haiti and that few if any grids are operating (Schnitzer_Thesis)
 
-<!-- second paragraph: context and motivation -->
+<!-- p2: context and motivation: keeping indonesia on track -->
 - indonesia is executing a large electrification expansion to achieve universal access (ADB paper)
     - has made progress on percent with electricity access over the last decades (ADB?)
     - the archipelago however presents challenges and there are wide differences in the electrification rate
-    - least cost analysis identifies PV microgrids as the best option for some areas (ADB energy access)
+    <!-- is diesel the dominant technology in Indonesia?  (ADB)  -->
+    - geospatial least cost studies show diesel as a significant part of the mix (ADB_AUEAII, modi?).  This assumption would be threatened by oversized generators.
 
-<!-- third paragraph: reason study needed -->
-<!-- academic community doesn't have data, does the electric utility? -->
-<!-- TODO: is it clear that the purpose of paper is to add to consumption data to the literature? -->
-<!-- TODO: is it clear why the paper is needed? -->
-- electricity planning requires an accurate load estimation for financial viability
-    - without this load estimation, getting investment is difficult (jaramillo)
-    - researchers have demonstrated the lack of capital is partly due to lack of data (jaramillo?)
+<!-- p3: reason study needed: least cost electrification efforts need the best data -->
+- least cost electrification needs data to support its assumptions
+    - measuring the percent utilization of diesel generators gives a more accurate estimate of cost for comparison
+    - we want to simultaneously expand access and lower carbon intensity
+    - A diesel microgrid in Nicaragua runs at well below the generator rating (casillas 2010)
 
-- distributed electricity increases the need for accurate load estimation
-    - since DER is dominated by capital costs, the initial allocation is important
-    - getting the load estimation is important and difficult (louie paper)
-    - existing remote grids and diesel-powered microgrids give insight into the loads in similar neighboring areas
+<!-- p4: summary? -->
+- diesel cost and carbon intensity can match or greatly exceed coal and NG averages
+    - an efficient diesel generator has comparable cost and carbon intensity compared to existing fossil sources
+    - when the generator is run at low loads marginal cost and carbon emissions rise
+    - generator sizes are often greatly oversized, adding to cost (casillas, schnitzer)
+    - in the case of photovoltaics, oversizing systems adds to system cost (louie, lee)
+    - while PV costs rise on a capital basis, diesel costs rise on a marginal basis
+    - marginal costs are often more difficult because operation and maintenance isn't well handled
+    - at $400 per kW, $1 per liter, and 300 ml/kWh, fuel cost exceeds capital cost after about 1000 hours, making generator replacement feasible (confirm)
 
-- this paper reports measurements of the load in an area with low electrification that are germane to investment
-    - there are only a few published measurements of electricity use in these areas
-    - we report on saidi, saifi, and load factor
 
-- we compare the reliability of these measured grids to the country and area averages
-    - SAIDI varies widely across the country
-    - We observe SAIDI values well above the averages reported (ADB)
-    - These SAIDI are closer to those observed in SSA (WB "doing business" 2016)
 
-- the observed load factor in these areas is _________
-    - load factor tells how difficult the load is to serve because of variations in the power demanded
-    - kirubi measured the load factor in Mpetonka.  higher load factor is more efficient in capital allocation for the generation assets.
-    - load factor can point to the need to promote assets to smooth this factor
-    - distributed generation has a different requirement for load factor compared to fossil generation
-
-- we include observations on the variation of electricity demand throughout the day
-    - there is little published data on temporal patterns
-    - energy and the time of day that energy is used tell us about the needs of the solar generation
-    - power peaks also tell us about the needs of the generation equipment
-    - these temporal data are necessary for allocating electricity generation equipment
-
-- the paper is arranged in the following sections
-    - methods
-    - uptime results
-    - schedule results
-    - energy and power level results
 
 # Methods
 
@@ -202,6 +182,14 @@ author: Daniel Soto
 
 <!-- TODO: is there a source for a recommended load factor for financial sustainability?  could I estimate this from solar costs? -->
 
+## Microgrid Marginal Cost
+
+- We estimate the per kWh cost of generation on the microgrids
+    - Generators become less efficient in fuel use per energy delivered as the load is decreased
+    - We take the published curves for fuel use and extrapolate to the low loads observed on microgrids
+    - Using these fits, we can create a time series of fuel rates from the observed load data
+    - From these fuel rates we create load duration curves and price duration curves
+
 # Results
 
 ## Data Coverage
@@ -261,6 +249,8 @@ author: Daniel Soto
 <!-- TODO: what is a more specific way than uptime to show the deviation from a promised schedule? -->
 
 ## Electricity Energy Consumption
+
+<!-- TODO: is this subsection relevant to the marginal cost? -->
 
 - grid locations have higher per capita electricity consumptions per day than
 - the microgrid
@@ -341,6 +331,34 @@ Operation of the generators at an inefficient operating point wastes diesel fuel
     - the load factor is higher, 0.70 -- 0.76 in the microgrids.  Since the grid isn't available during the low demand hours, the average load is closer to the peak load.
 
 <!-- Q: how can we estimate the extra revenue required to get to full SAIDI for microgrids? -->
+
+## Microgrid Marginal Cost
+
+- Operating a diesel generator at a power load well below its designed operating point leads to inefficient operation.
+    - This inefficiency increases fuel cost per unit of energy generated.
+    - Ayapo retains a reasonable fuel rate close to the designed operation of the generator.
+    - Atamali and Kensio with average loads at 11 and 6 percent of the design have theoretical specific fuel consumptions (SFC) of 460 ml per kVA-hour and 970 ml per kVA-hour.
+    - This operation could increase wear and tear on the generator, increasing maintenance costs and downtime.
+
+- The operating costs are well above the tariffs
+    - Customers pay 5 cents or less per kWh and many meters don't function
+    - The observed marginal costs due to fuel well exceed this
+
+- The figure shows the ideal specific fuel consumption.
+    - It assumes the fuel consumption matches the data sheet
+    - In practice, we expect wear and tear to reduce the efficiency of the generator.
+
+- The observed average specific fuel consumption can be estimated from fuel logs.
+    - Atamali fuel logs show 30 liters of fuel being used each day.
+    - The mean kWh per day on days where the grid operates is 15 kWh.
+    - This results in a specific fuel consumption of 2 liters per kWh.
+    - This is far above the our ideal fuel consumption estimate for Atamali.
+    - At 1 USD per liter for diesel, this is a marginal cost of 2 USD per kWh
+    - Tariffs in the area are below 5 cents per kWh so the electricity is almost completely subsidized
+
+![](./plots/specific_fuel_consumption_duration.png)
+
+
 
 # Discussion
 
