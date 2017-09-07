@@ -26,6 +26,7 @@ author: Daniel Soto
 - this paper establishes the observed marginal cost of diesel generation in a remote area
     - this establishes the current cost of energy for renewable sources to compare against
     - evidence shows that tariffs are below operating costs in Haiti and that few if any grids are operating (Schnitzer_Thesis)
+    - least cost assumptions are dependent on operating conditions
 
 <!-- p2: context and motivation: keeping indonesia on track -->
 - indonesia is executing a large electrification expansion to achieve universal access (ADB paper)
@@ -50,8 +51,14 @@ author: Daniel Soto
     - marginal costs are often more difficult because operation and maintenance isn't well handled
     - at $400 per kW, $1 per liter, and 300 ml/kWh, fuel cost exceeds capital cost after about 1000 hours, making generator replacement feasible (confirm)
 
-
-
+<!-- p5: summary? -->
+- this study provides estimates and observations of the fuel costs for diesel consumption in three indonesian microgrids
+    - we combine timeseries load and accumulated energy data with generator specifications to estimate fuel use
+    - low utilization of generator capacity leads to marginal costs higher than usual expectations
+    - we find these estimates to be optimistic relative to the observed diesel consumption
+    - the operator fuel logs suggest fuel use well above the predictions for a well-maintained generator at the same operating points
+    - areas with high marginal costs should be identified
+    - right-sized generators or alternate technologies should be considered for areas with high marginal costs
 
 # Methods
 
@@ -67,67 +74,15 @@ author: Daniel Soto
     - The meter measurements are transmitted to a database over a communication network
     - Since the communication network wasn't fully robust, some gaps in the data exist
 
-## Timeseries Synthesis and Quality
-
-<!-- what methods were used to account for missing data? -->
-<!-- do these analyses primarily use the kWh accumulator or the kVA moving average? -->
-
-- Energy analysis techniques rely on a complete observation of the period under question.
-    - Since these grids often have outages gaps in the data exist.
-    - During a power outage, the meter conserves data and power by storing a single message for the power going down.
-    - The one-minute observations are suspended until the power returns and a single message for power up is recorded.
-    - Observations of zero grid voltage and zero power consumption can be inserted into the timeseries for these periods.
-    - Other gaps in the timeseries record exist that do not correspond to a recorded message.
-    - These gaps are left with null rather than zero values so that they do not bias our statistics.
-
-- We quantify the fraction of the observation period with valid data.
-    - Once we have synthesized a timeseries with as much data as available
-    - The percent coverage is defined as the ratio of valid entries to the total time period.
-    - A higher percent coverage will give us more confidence in the measurements we extract from the time series.
-
-<!-- TODO: would it be easier to do the zero insertion from the raw data rather than after the fact? -->
-<!-- TODO: is the network cellular and internet? -->
-<!-- TODO: can I get information on the voltage threshold for a power down and up message? -->
-<!-- TODO: write the make and model of the power meter and method of collection. -->
-<!-- TODO: are we going to fill or interpolate any short data gaps? -->
-
-## Uptime measurement data analysis
-
-- From the meter data we can estimate the fraction of the time that power is available to the customers.
-    - There are two possible methods for this estimation, one using event messages about power loss from the meter and the other using gaps in the timeseries data from the meter.
-    - The meters sends a message that the power has been lost when the voltage drops below a certain level and also when the voltage has recovered.
-    - The time difference between the power down messages and the following power up messages is computed and summed.
-    - If the database is missing any of these event pairs, this method will underestimate the time without power.
-    - During the time when the power is down, the meters do not record or transmit data.
-    - By finding the gaps in the timeseries data that are longer than the one-minute reporting interval, we can estimate the time without power.
-    - This method provides an overestimate because communication problems will also result in missing data despite power being available.
-    - Both of these methods together provide an upper and lower bound for the time without power.
-    - We extrapolate from our sample to the whole year assuming that the downtime statistics will be similar throughout the year.
-
-<!-- TODO: is it possible to find timestamp gaps where the kWh export increments -->
-<!-- TODO: can we combine the message and timestamp methods to get higher confidence in the measurement? -->
-<!-- TODO: did the SATECs have local storage? -->
-<!-- TODO: how do we explain that there may be unreported outages if there is a coincident data outage. -->
-
-## Microgrid schedule data analysis (probability of operation)
-
-<!-- how do we define the probability since some observations are missing? -->
-
-- From the data sets we can observe the adherence of the microgrid power availability to a fixed schedule.
-    - Small diesel microgrids like these often operate only in the evenings to conserve fuel (cite).
-
-- Using the data, we can observe the schedule and find the operation times of the grids.
-    - We plot the probability of observing power as a function of the hour of day to infer the schedule.
-    - The probability is defined as the number valid observations of power at time t divided by the number of valid observations of either power and blackout at time t.
-    - A valid observation of power at time t is defined as having a time series observation of the power at time t.
-    - A valid observation of blackout at time t, is defined as time t falling in a recorded gap observation.
-
 ## Energy consumption analysis
+
+<!-- TODO: explain and demonstrate in SI if the sampling technique is robust or not to missing data -->
 
 - From the metered data and the village populations we can estimate the per capita electricity consumption.
     - The meter records an energy accumulator that is reported at each timestamp with 1 kWh resolution.
     - This energy accumulation record is incomplete.
     - The meter does not record zeros when the grid power is unavailable
+    - TODO: what interpolation methods will we apply for missing data?
     - We resample the timeseries onto a one-minute time scale
     - Take the difference between neighboring minutes
     - Samples without valid data are assigned null values
@@ -144,13 +99,6 @@ author: Daniel Soto
     - The second average is the actual electricity delivered.
     - The difference between these two provides a measure of latent demand.
 
-- We define full access differently for the two grid types
-    - For the centralized grid, we define full access as a day with above a threshold level of grid operation and data coverage over a 24 hour period.
-    - Since the microgrids only operate in the evening, we define full access as an evening of access without interruption.
-
-<!-- TODO: get the village populations to create per&#45;capita estimates -->
-<!-- TODO: will we consider days with valid midnight samples but data missing during the day? -->
-
 ## Power Consumption Analysis
 
 - We investigate the character of the power demand by analyzing the apparent power measurements from the metering hardware.
@@ -158,28 +106,39 @@ author: Daniel Soto
 
 - Load Duration Curve
     - The load duration curve shows the percentage of time that the grid is supplying a given power level.
+    - The meter supplies a time series of kVA apparent power values
     - We sort the time series in descending order and normalize the x-axis to a scale of zero to one.
+    - TODO: what are the interpolation methods to fill power zeros in the time gaps?
 
 - Mean Power Load
     - We plot the mean load by averaging the valid observations for each minute in a time series.
     - We visualize these in a time series plot.
     - TODO: determine how to plot quartiles
 
-
-- the load factor is the average load divided by the peak load
-    - since the average load is related to the revenue and the peak load is related to the capital investment, low load factors are difficult to service
-    - we report one load factor for the average load when the grid is functioning
-    - I report a second load factor for the actual average load (how should I define this?)
-
-<!-- TODO: is there a source for a recommended load factor for financial sustainability?  could I estimate this from solar costs? -->
-
 ## Microgrid Marginal Cost
 
-- We estimate the per kWh cost of generation on the microgrids
+- We estimate the per kWh cost of generation on the microgrids assuming as published genset performance
     - Generators become less efficient in fuel use per energy delivered as the load is decreased
     - We take the published curves for fuel use and extrapolate to the low loads observed on microgrids
     - Using these fits, we can create a time series of fuel rates from the observed load data
     - From these fuel rates we create load duration curves and price duration curves
+
+- We estimate the per kWh cost of generation in real-world conditions
+    - Logs are kept of fuel input to the generator on a nightly basis.
+    - We divide the mean fuel per night with the mean generation per night to get the overall SFC
+
+## Microgrid schedule data analysis (probability of operation)
+
+<!-- how do we define the probability since some observations are missing? -->
+
+- From the data sets we can observe the adherence of the microgrid power availability to a fixed schedule.
+    - Small diesel microgrids like these often operate only in the evenings to conserve fuel (cite).
+
+- Using the data, we can observe the schedule and find the operation times of the grids.
+    - We plot the probability of observing power as a function of the hour of day to infer the schedule.
+    - The probability is defined as the number valid observations of power at time t divided by the number of valid observations of either power and blackout at time t.
+    - A valid observation of power at time t is defined as having a time series observation of the power at time t.
+    - A valid observation of blackout at time t, is defined as time t falling in a recorded gap observation.
 
 # Results
 
@@ -187,21 +146,15 @@ author: Daniel Soto
 
 - The data cover from two to three months in the villages.
     - While there are gaps in the data, there is valid data for at least 86% of the time in all villages.
-    - One grid-connected village has over 99% of the time accounted for with a valid data entry.
-    - These gaps are most likely due to data transmission issues.
     - We have no robust way of the presence or absence of power in the data gaps with the data set available.
-
-<!-- TODO: can we use the increase in accumulated energy to infer a data gap with power present? -->
-<!-- TODO: do I think these missing data will bias uptime or downtime measurements? -->
-<!-- TODO: are statistics of these data gaps different than the power gaps?  if so, how? -->
 
 | Village   | Start Date | End Date   |   Duration |   Coverage |
 |:----------|:-----------|:-----------|-----------:|-----------:|
-| Ajau      | 2015-04-22 | 2015-08-28 |   128.481  |   0.993579 |
-| Asei      | 2015-04-22 | 2015-07-09 |    78.6889 |   0.968477 |
 | Atamali   | 2015-04-24 | 2015-08-26 |   124.065  |   0.863161 |
 | Ayapo     | 2015-04-22 | 2015-08-27 |   127.433  |   0.904552 |
 | Kensio    | 2015-05-11 | 2015-08-21 |   102.194  |   0.92657  |
+
+<!-- SI_missing_data -->
 
 ## Microgrid Uptime
 
