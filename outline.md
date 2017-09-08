@@ -23,41 +23,51 @@ author: Daniel Soto
 # Introduction
 
 <!-- p1: main issue: quantifying observed diesel marginal cost  -->
+
 - this paper establishes the observed marginal cost of diesel generation in a remote area
-    - this establishes the current cost of energy for renewable sources to compare against
-    - evidence shows that tariffs are below operating costs in Haiti and that few if any grids are operating (Schnitzer_Thesis)
-    - least cost assumptions are dependent on operating conditions
+    - least cost assumptions that drive energy allocations are dependent on operating conditions
+    - we observe operating conditions that are likely to cause high operating costs
+    - we measure operating costs that are well above assumptions and recovery tariffs
 
-<!-- p2: context and motivation: keeping indonesia on track -->
+<!-- p2: context, motivation, need: keeping indonesia on track -->
+
 - indonesia is executing a large electrification expansion to achieve universal access (ADB paper)
-    - has made progress on percent with electricity access over the last decades (ADB?)
+    - Indonesia has made progress on percent with electricity access over the last decades (ADB?)
+    - we want to simultaneously expand access, lower cost and lower carbon intensity
     - the archipelago however presents challenges and there are wide differences in the electrification rate
+    - This assumption would be threatened by oversized generators.
+    - Observations of marginal cost can inform future allocations in Indonesia and beyond.
     <!-- is diesel the dominant technology in Indonesia?  (ADB)  -->
-    - geospatial least cost studies show diesel as a significant part of the mix (ADB_AUEAII, modi?).  This assumption would be threatened by oversized generators.
+    <!-- at what time were these grids installed? -->
 
-<!-- p3: reason study needed: least cost electrification efforts need the best data -->
+<!-- p3: lit search shows this study fills a data and analysis gap -->
+
 - least cost electrification needs data to support its assumptions
-    - measuring the percent utilization of diesel generators gives a more accurate estimate of cost for comparison
-    - we want to simultaneously expand access and lower carbon intensity
-    - A diesel microgrid in Nicaragua runs at well below the generator rating (casillas 2010)
+    - these establish a range of diesel operating costs to use in future least-cost studies
+    - geospatial least cost studies show continuing diesel use as a significant part of the mix (ADB_AUEAII)
+    - least cost assumptions are sensitive to operating costs (ADB_AUEAII)
+    - A diesel microgrid in Nicaragua runs at well below the generator rating (Casillas_EP)
+    - Indonesia diesel plant electricity production flattening out (ESDM)
+    - In the case of PV, oversizing leads to higher costs (Louie_ESD, Lee)
+    - Grids in Haiti show oversized grids infrequently operated (Schnitzer_Thesis)
+    - evidence shows that tariffs are below operating costs in Haiti and that few if any grids are operating (Schnitzer_Thesis)
+    - This study adds to the literature by gathering minute-resolution load data
 
-<!-- p4: summary? -->
-- diesel cost and carbon intensity can match or greatly exceed coal and NG averages
-    - an efficient diesel generator has comparable cost and carbon intensity compared to existing fossil sources
-    - when the generator is run at low loads marginal cost and carbon emissions rise
-    - generator sizes are often greatly oversized, adding to cost (casillas, schnitzer)
-    - in the case of photovoltaics, oversizing systems adds to system cost (louie, lee)
-    - while PV costs rise on a capital basis, diesel costs rise on a marginal basis
-    - marginal costs are often more difficult because operation and maintenance isn't well handled
-    - at $400 per kW, $1 per liter, and 300 ml/kWh, fuel cost exceeds capital cost after about 1000 hours, making generator replacement feasible (confirm)
+<!-- p4: results -->
 
-<!-- p5: summary? -->
 - this study provides estimates and observations of the fuel costs for diesel consumption in three indonesian microgrids
-    - we combine timeseries load and accumulated energy data with generator specifications to estimate fuel use
-    - low utilization of generator capacity leads to marginal costs higher than usual expectations
-    - we find these estimates to be optimistic relative to the observed diesel consumption
-    - the operator fuel logs suggest fuel use well above the predictions for a well-maintained generator at the same operating points
-    - areas with high marginal costs should be identified
+    - this work makes two contributions
+    - first, an observation of the specific fuel consumption in three microgrids
+    - second, a modeled estimate of the specific fuel consumptions for well-maintained generators
+    - we find that the generators are providing power well below their intended operating points
+    - we estimate that a new generator operating at these low power operating points would have operating costs at 0.60 USD or above
+    - we find that the observed specific fuel consumption with an installed generator on one grid is as high as 2 USD per kVA-hour delivered, suggesting significant efficiency degradation
+
+<!-- p5: conclusions -->
+
+- These results suggest diesel microgrids may not be performing to expectations
+    - when the generator is run at low loads marginal cost and carbon emissions rise
+    - areas with high marginal costs should be identified and mitigated
     - right-sized generators or alternate technologies should be considered for areas with high marginal costs
 
 # Methods
@@ -292,6 +302,13 @@ Operation of the generators at an inefficient operating point wastes diesel fuel
 
 
 # Discussion
+
+- at $400 per kW, $1 per liter, and 300 ml/kWh, fuel cost exceeds capital cost after about 1000 hours, making generator replacement feasible (confirm)
+- an efficient diesel generator has comparable cost and carbon intensity compared to existing fossil sources
+- diesel cost and carbon intensity can match or greatly exceed coal and NG averages
+- while PV costs rise on a capital basis, diesel costs rise on a marginal basis
+- marginal costs are often more difficult because operation and maintenance isn't well handled
+
 
 # Conclusion
 
