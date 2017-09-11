@@ -72,83 +72,86 @@ author: Daniel Soto
 
 # Methods
 
-## Data Collection
+## Data Collection Context
 
 <!-- where and how was the data collected? -->
 
-- We measure 3 villages with diesel microgrids
-    - The power meter records the power, voltage, and current.
-    - The data is recorded at one-minute intervals.
+- We measured the energy and power delivered to 3 villages with diesel microgrids
+    - These villages are in the Lake Sentani region of Indonesia
     - These recordings were compiled from late April to July 2015
     - The main supply to each of these villages was fitted with a logging electrical power meter
+    - The power meter records the power, voltage, and current.
+    - The data is recorded at one-minute intervals.
     - The meter measurements are transmitted to a database over a communication network
+    - Accumulated energy is reported in units of kilowatt-hours
+    - The apparent power is reported in units of volt-amps
+
+## Data Coverage
+
+- We report the interval of time that is covered by data
     - Since the communication network wasn't fully robust, some gaps in the data exist
+    - We receive measurements at regular intervals during grid operation
+    - We receive reports when the grid ceases operation and returns
+    - We sum these periods of time to report the fraction of time covered by the data record
+
+## Missing data techniques and data integrity
+
+<!-- TODO: should this go before or after the energy and power methods? -->
+<!-- TODO: what do we do to ensure correct data? -->
+
+- We synthesize time series data for the times when the grid isn't running
+    - During power outages, we insert observations of zero power and energy consumption at the same frequency as the meter observations.
+    - There remain times without a measurement or confirmed period of power off
+    - We remove anomalies due to data corruption in the record
 
 ## Energy consumption analysis
 
-<!-- TODO: explain and demonstrate in SI if the sampling technique is robust or not to missing data -->
+<!-- TODO: what is the right level of detail to report here? -->
 
-- From the metered data and the village populations we can estimate the per capita electricity consumption.
+- We report the daily energy use in the microgrid from the accumulated energy timeseries
     - The meter records an energy accumulator that is reported at each timestamp with 1 kWh resolution.
-    - This energy accumulation record is incomplete.
-    - The meter does not record zeros when the grid power is unavailable
-    - TODO: what interpolation methods will we apply for missing data?
+    - To account for gaps we insert zeros during reported downtime as described above.
     - We resample the timeseries onto a one-minute time scale
     - Take the difference between neighboring minutes
-    - Samples without valid data are assigned null values
-    - We insert zeros into the time series during the recorded gaps by the meter
-    - Only the times with data outages are represented by nulls.
-
-- We use this synthesized record of minute-energy differences
-    - By summing these accumulated energy differences over a day, we get the energy consumption.
-
-- We report two electricity consumption averages.
-    - We report an average for energy delivered on days or nights with full access.
-    - We report another average for actual energy delivered each day.
-    - The first average gives the potential energy consumption for the system when it is fully operational without technical or operational constraints.
-    - The second average is the actual electricity delivered.
-    - The difference between these two provides a measure of latent demand.
+    - Samples without valid data are assigned null values that aren't included in sums or means
+    - By summing these energy differences over a day, we get the energy consumption.
 
 ## Power Consumption Analysis
 
-- We investigate the character of the power demand by analyzing the apparent power measurements from the metering hardware.
+- We report the power used on the grids from the apparent power timeseries
     - The meter provides the apparent power in kVA averaged over an interval at each time step.
+    - These data are reported as a mean power for each time of day and as a load duration curve
 
-- Load Duration Curve
-    - The load duration curve shows the percentage of time that the grid is supplying a given power level.
-    - The meter supplies a time series of kVA apparent power values
-    - We sort the time series in descending order and normalize the x-axis to a scale of zero to one.
-    - TODO: what are the interpolation methods to fill power zeros in the time gaps?
+- We construct a typical daily load profile from an average of the apparent power observations.
+    - We plot the mean load by averaging the valid observations for each minute in over all the observation period.
+    - These mean power are then plotted with the time of day as the independent variable.
 
-- Mean Power Load
-    - We plot the mean load by averaging the valid observations for each minute in a time series.
-    - We visualize these in a time series plot.
-    - TODO: determine how to plot quartiles
+<!-- TODO: determine how to plot quartiles on load profile -->
 
-## Microgrid Marginal Cost
+- We construct a load duration curve to show the percentage of time that the grid is supplying a given power level.
+    - We sort the time series in descending order
+    - We normalize the independent variable onto to a scale of zero to one so that the plot represents the time the grid is running.
+    - It is essentially a cumulative distribution function with the axes reversed
 
-- We estimate the per kWh cost of generation on the microgrids assuming as published genset performance
+## State of the art fuel estimation
+
+- We estimate the best possible cost per kWh of generation on the microgrids assuming the datasheets for high quality genset performance and the observed loads.
     - Generators become less efficient in fuel use per energy delivered as the load is decreased
+    - We find specification sheets for a generators of similar size from a leading manufacturer
+    - Specification sheets report fuel use at 25%, 50%, 75%, and 100% of the full load.
+    - We assume a linear relationship between fuel use and generator load.
     - We take the published curves for fuel use and extrapolate to the low loads observed on microgrids
     - Using these fits, we can create a time series of fuel rates from the observed load data
-    - From these fuel rates we create load duration curves and price duration curves
+    - Following the method used to construct a load duration curve, we create a specific fuel consumption duration curve
+    - This curve has the specific fuel consumption in liters per kVA-hour as the independent variable
 
-- We estimate the per kWh cost of generation in real-world conditions
+## Observed fuel use
+
+- We estimate the per kWh cost of generation in real-world conditions from the delivered energy and the reported fuel use.
     - Logs are kept of fuel input to the generator on a nightly basis.
-    - We divide the mean fuel per night with the mean generation per night to get the overall SFC
+    - We divide the mean fuel per night as reported in the written log with the mean generation per night to get the overall specific fuel consumption
 
-## Microgrid schedule data analysis (probability of operation)
-
-<!-- how do we define the probability since some observations are missing? -->
-
-- From the data sets we can observe the adherence of the microgrid power availability to a fixed schedule.
-    - Small diesel microgrids like these often operate only in the evenings to conserve fuel (cite).
-
-- Using the data, we can observe the schedule and find the operation times of the grids.
-    - We plot the probability of observing power as a function of the hour of day to infer the schedule.
-    - The probability is defined as the number valid observations of power at time t divided by the number of valid observations of either power and blackout at time t.
-    - A valid observation of power at time t is defined as having a time series observation of the power at time t.
-    - A valid observation of blackout at time t, is defined as time t falling in a recorded gap observation.
+<!-- TODO: how do we know the sizes of the generators? -->
 
 # Results
 
@@ -308,6 +311,14 @@ Operation of the generators at an inefficient operating point wastes diesel fuel
 - diesel cost and carbon intensity can match or greatly exceed coal and NG averages
 - while PV costs rise on a capital basis, diesel costs rise on a marginal basis
 - marginal costs are often more difficult because operation and maintenance isn't well handled
+
+- We report two electricity consumption averages.
+    - We report an average for energy delivered on days or nights with full access.
+    - We report another average for actual energy delivered each day.
+    - The first average gives the potential energy consumption for the system when it is fully operational without technical or operational constraints.
+    - The second average is the actual electricity delivered.
+    - The difference between these two provides a measure of latent demand.
+
 
 
 # Conclusion
