@@ -273,6 +273,24 @@ def insert_zeros_kVA(energy_data, messages):
             energy_data_rs.loc[i]['kVA sliding window Demand'] = 0
     return energy_data_rs
 
+def insert_zeros_energy(energy_data, messages):
+    # TODO: test this function
+    # assert 1 == 0, 'this function not finished'
+    # returns a dataframe on one-minute intervals with kVA set to zero in message-confirmed-outages
+    power_down = messages[messages['message']=='Power Down'].index.values
+    power_up = messages[messages['message']=='Power Up'].index.values
+    energy_data_rs = energy_data.resample('1T').asfreq()
+    energy_data_diffed = energy_data_rs['kWh export'].diff()
+    # take difference of energy samples
+    for i in energy_data_diffed.index.values:
+        if np.searchsorted(power_down, i) == np.searchsorted(power_up, i) + 1:
+            # insert zeros into energy samples
+            energy_data_diffed.loc[i] = 0
+    # integrate back up
+    energy_data_rs['kWh export'] = energy_data_diffed.cumsum()
+    return energy_data_rs
+
+
 def valid_coverage_percentage(energy_data, messages):
     # if a particular time t is in a recorded gap or has a timestamp, it is valid
     downtime = create_downtime_boolean_message(energy_data, messages)
