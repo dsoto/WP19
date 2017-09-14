@@ -272,3 +272,10 @@ def insert_zeros_kVA(energy_data, messages):
         if np.searchsorted(power_down, i) == np.searchsorted(power_up, i) + 1:
             energy_data_rs.loc[i]['kVA sliding window Demand'] = 0
     return energy_data_rs
+
+def valid_coverage_percentage(energy_data, messages):
+    # if a particular time t is in a recorded gap or has a timestamp, it is valid
+    downtime = create_downtime_boolean_message(energy_data, messages)
+    uptime = create_uptime_boolean_timestamp(energy_data)
+    valid_observations = uptime | downtime
+    return valid_observations.mean()
