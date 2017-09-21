@@ -156,6 +156,8 @@ author: Daniel Soto
 
 # Results
 
+- TODO: format tables with reasonable numbers of significant figures
+
 ## Data Coverage
 
 - We have confidence in the data for 86% to 93% of the observation period for the microgrids
@@ -175,51 +177,50 @@ author: Daniel Soto
 
 ## Electricity Energy Consumption
 
-- TODO: this section can't be finished until energy zero insertion is implemented and tested
-- TODO: revise cumulative distribution plot for daily energy consumption to include zero insertion
-- TODO: create a table with village, mean kWh per day operating, mean kWh all time, number of connections
-- TODO: decide if on presenting per household and per capita
+- TODO: fix order of columns in energy table
+- TODO: write section outline
 
 
 - We report on daily electricity energy consumption
     - daily energy on days of operation
     - daily energy over entire valid observation period
+    - the average energy use for connected household is between 0.4 and 0.9 kWh per day
+    - the cumulative distribution function shows that the electricity most days is clustered around the mean but there is a low energy tail
 
 ![](./plots/daily_energy_CDF.png)
 
-
-|         |   days observed |   mean kWh per day |   median kWh per day |
-|:--------|----------------:|-------------------:|---------------------:|
-| Atamali |             110 |           15.0545  |                 16   |
-| Ayapo   |             117 |           84.9829  |                 95   |
-| Kensio  |              98 |            5.31633 |                  1.5 |
-
-|         |   days observed |   mean kWh per day per household |   median kWh per day per housheold |
-|:--------|----------------:|---------------------------------:|-----------------------------------:|
-| Atamali |             110 |                         0.376364 | 0.4     |
-| Ayapo   |             117 |                         0.825077 | 0.92233 |
-| Kensio  |              98 |                         0.265816 | 0.075   |
+|   operating mean (kWh) |   overall mean (kWh) |   per household operating mean (kWh) | village   |
+|-----------------------:|---------------------:|-------------------------------------:|:----------|
+|               15.213   |             14.9364  |                             0.380324 | atamali   |
+|               90.0091  |             84.6239  |                             0.873875 | ayapo     |
+|                9.12281 |              5.30612 |                             0.45614  | kensio    |
 
 ## Power Consumption
 
 - TODO: clean up date axis on hourly_kVA.png
 - TODO: create time series percentile plot for hourly profile
-- TODO: table (mean kVA, rated kVA, percent of load, number HH, mean kVA per household)
+- TODO: create a CDF of power in the SI
 
-- We report on the apparent power consumption in these microgrids
-    - The mean loads are 2.2, 2.8, and 13 kVA
-    - All of these are well below 50% of the rated load of the generator
-    - The most well-matched microgrid is operating at 32% of the rated load and one grid is only at 6% of the load.
-    - There are relatively small fluctuations in operating load during the evening
-    - The microgrids have an evening peak as well, but aren't running during the day.
+
+- These grids run exclusively during the evening
     - We display the averaged power profile for the three microgrids
-    - We display a load duration curve
-    - The load duration curve for the microgrids shows one broad level of power demand.
-    - It also shows long durations of no power delivery.
+    - The average load plot shows that the grid only provides power in the evenings
 
 ![](./plots/hourly_kVA.png)
 
-![](./plots/load_duration_curve.png)
+- The microgrid has a relatively even load profile
+    - The CDF or load duration curve shows mostly zero load or non-operation
+    - It also shows few power observations between zero and a cutoff power
+    - For the purposes of generator efficiency, we focus on the periods of non-zero power output
+
+![](./plots/power-CDF.png)
+
+![](./plots/power-CDF-no-zeros.png)
+
+- We report on the apparent power consumption in these microgrids
+    - the table shows the mean loads during operation of the microgrids are well below the operating points of the generators
+    - The most well-matched microgrid is operating at 32% of the rated load and one grid is only at 6% of the load.
+    - These means do not include the periods of zero power
 
 Table: Total and per connection apparent power
 
@@ -237,60 +238,72 @@ Table: Generator Utilization
 | Ayapo   | 13.0753  |             40 |             0.326881  |
 | Kensio  |  2.24596 |             35 |             0.0641703 |
 
-
 ## Microgrid Marginal Cost
 
-- data sheet fuel consumption per hour
-TODO: table (village, fuel consumption per hour at 100%, 50%, operating point)
+- I model the specific fuel consumption in liters per kWh for a hypothetical well-maintained generator operating at the manufacturers specifications at the fraction of load we observe
+    - The generators range in size from 25 kVA to 40 kVA
+    - Our fit to the generator specifications has a slope of 0.270 lph per kVA of load
+    - The fit has a slope of 0.059 lph per kVA of rated power
+    - The modeled specific fuel consumption at 100% load range from 0.287 to 0.302 liters per kVA-hour
+    - The modeled specific fuel consumption at the rated load range from 0.361 to 0.681 liters per kVA-hour
 
-- ideal specific fuel consumption
-- ideal specific fuel consumption duration curve
-- observed nightly fuel consumption
-- observed specific fuel consumption
+- Since we have the time series observations of kVA we can model a duration curve for the specific fuel consumption.
+    - TODO: report descriptive statistics on the curves
 
-TODO: table (village, specific fuel consumption at 100%, 50%, mean operating point, observed SFC)
-
-- The figure shows the ideal specific fuel consumption.
-    - It assumes the fuel consumption matches the data sheet
-    - In practice, we expect wear and tear to reduce the efficiency of the generator.
-
-TODO: create table (village, genset rating, expected SFC, observed SFC)
-
-- Observations of fuel consumption are from operator reports
+- I also report an observed specific fuel consumption based on the generator operators daily fuel logs and the observed daily energy use
+    - Observations of fuel consumption are from operator reports
     - Atamali reports 30 liters per night for its 25 kVA genset to deliver 15 kWh
     - This results in a specific fuel consumption of 2 liters per kWh.
     - Ayapo reports 60 liters per night for its 40 kVA genset to deliver 85 kWh
     - This is a specific fuel consumption of 710 ml per kWh, well above predicted.
     - At 1 USD per liter for diesel, this is a marginal cost of 0.70 USD and 2 USD per kWh
 
+|    |   observed SFC |   observed_daily_fuel |   operating mean (kWh) | village   |
+|---:|---------------:|----------------------:|-----------------------:|:----------|
+|  0 |       1.972    |                    30 |               15.213   | atamali   |
+|  1 |       0.666599 |                    60 |               90.0091  | ayapo     |
+|  2 |     nan        |                   nan |                9.12281 | kensio    |
+
+- data sheet fuel consumption per hour
+- TODO: should this be output as a percent penalty over expected in the specific fuel consumption table?
+- TODO: Report median costs and 95th percentile costs?
+- TODO: describe the data sheets
+
+
+|         |   genset rating kVA |   expected fuel rate at 100% (lph) |   mean load (kVA) |   expected fuel rate at mean load (lph) |
+|:--------|--------------------:|-----------------------------------:|------------------:|----------------------------------------:|
+| atamali |                  25 |                            7.16545 |           3.05753 |                                 1.24064 |
+| ayapo   |                  40 |                           12.105   |          14.3235  |                                 5.17199 |
+| kensio  |                  35 |                           10.4585  |           2.45143 |                                 1.66989 |
+
+
+
+|         |   expected specific fuel consumption at 100% load (lpkVA) |   expected specific fuel consumption at mean load (lpkVA) |   genset rating kVA |
+|:--------|----------------------------------------------------------:|----------------------------------------------------------:|--------------------:|
+| atamali |                                                  0.286618 |                                                  0.405766 |                  25 |
+| ayapo   |                                                  0.302626 |                                                  0.361084 |                  40 |
+| kensio  |                                                  0.298815 |                                                  0.681192 |                  35 |
+
+
+- The figure shows the ideal specific fuel consumption.
+    - It assumes the fuel consumption matches the data sheet
+    - In practice, we expect wear and tear to reduce the efficiency of the generator.
+
+
+
 ![](./plots/specific_fuel_consumption_duration.png)
 
 
-## Microgrid Uptime
-
-- To conserve fuel, many microgrids are only operated in the evenings. (cite Schnitzer?)
-    - These microgrids are mostly operated between the hours of X and Y according to the data.
-    - During these times, we observe outages of Z frequency.
-    - The microgrids reflect an uptime that is reasonable given that electricity is only promised to be available 6-8 hours per day.  (cite MBPC)
-    - Atamali and Ayapo showed 33% uptime while Kensio had 16%
-    - If electricity is promised 8 hours per day, an uptime of 33% would be perfect.
-    - At the highest probability times in the evening, the probability peaks at about 80%.
-    - There are times of day when the microgrid is never observed to be running.
-
-![](./plots/uptime-probability.png)
-
-- Cumulative distribution plots show the most frequent durations.
-    - One microgrid shows 6 hours of operation per day on about 75% of the days.
-    - Another microgrid shows over 5 hours of operation per day on 60% of the days observed.
-    - One microgrid, however, shows very few days with more than 5 hours of service.
-
-![](./plots/uptime_CDF.png)
-
-<!-- TODO: is there any literature on microgrid uptimes? -->
-<!-- TODO: what is a more specific way than uptime to show the deviation from a promised schedule? -->
-
-
 # Discussion
+
+- observed fuel costs are well above modeled fuel costs suggesting generator maintenance issues
+- observed fuel costs are well above tariff collection requiring subsidy
+- operating at low load increases engine maintenance requirements and worsens fuel costs
+- it is likely uneconomical to run these generators continuously but unnecessarily high marginal costs worsen the problem
+- these observed fuel costs are likely higher than those in least-cost models
+
+
+
 
 - at $400 per kW, $1 per liter, and 300 ml/kWh, fuel cost exceeds capital cost after about 1000 hours, making generator replacement feasible (confirm)
 - an efficient diesel generator has comparable cost and carbon intensity compared to existing fossil sources
@@ -305,8 +318,6 @@ TODO: create table (village, genset rating, expected SFC, observed SFC)
     - The second average is the actual electricity delivered.
     - The difference between these two provides a measure of latent demand.
 
-- we compare the per capita electricity consumptions to the Indonesia and Papua
-- averages published by ADB/IISD/PLN
 
 Operation of the generators at an inefficient operating point wastes diesel fuel and drives up operating costs.
 
