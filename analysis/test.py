@@ -91,3 +91,27 @@ def test_insert_zeros_kVA():
     assert insert_zeros.iloc[6][9] == 0
     assert insert_zeros.iloc[9][9] == 0
     assert insert_zeros.iloc[10][9] == 2
+
+def test_insert_zeros_energy(): #finish
+    message_data = wpa.load_message_file('test-messages.csv')
+    energy_data = wpa.load_timeseries_file('test-clean.csv')
+    insert_zeros_energy = wpa.insert_zeros_energy(energy_data, message_data)
+    assert type(insert_zeros_energy) == pd.DataFrame
+    # rows 5, 6 and 9, 10 are on the boundaries of a gap
+    # The times after a gap are now nan
+    assert insert_zeros_energy.iloc[5]['kWh export'] == 2
+    assert insert_zeros_energy.iloc[6]['kWh export'] == 2
+    assert insert_zeros_energy.iloc[9]['kWh export'] == 2
+    assert np.isnan(insert_zeros_energy.iloc[10]['kWh export']) == True
+    assert insert_zeros_energy.iloc[13]['kWh export'] == 5
+    assert insert_zeros_energy.iloc[14]['kWh export'] == 5
+    assert insert_zeros_energy.iloc[16]['kWh export'] == 5 
+    assert np.isnan(insert_zeros_energy.iloc[17]['kWh export']) == True
+
+def test_valid_coverage_percentage(): #finish
+    message_data = wpa.load_message_file('test-messages.csv')
+    energy_data = wpa.load_timeseries_file('test-clean.csv')
+    valid_coverage = wpa.valid_coverage_percentage(energy_data, message_data)
+    assert type(valid_coverage) == float
+    # matches hand count of current test data
+    assert valid_coverage == 0.92
