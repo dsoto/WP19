@@ -201,7 +201,7 @@ Table: Mean Energy Delivered During Grid Operation {needs label, SI_energy?}
 
 Table: Mean Energy Delivered During Grid Operation {needs label, SI_energy?}
 
-[table](observed_SFC.md)
+[table](./tables/observed_SFC.md)
 
 
 ## Power Consumption
