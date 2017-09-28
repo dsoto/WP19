@@ -6,7 +6,6 @@ author: Daniel Soto
 # Key Questions
 
 - What are the observed costs of electrical energy on these microgrids?
-- How reliable is the electricity on these microgrids?
 
 # Contributions
 
@@ -14,9 +13,9 @@ author: Daniel Soto
 
 # Possible Titles
 
+- Measurements of Specific Fuel Consumption on Diesel Microgrids in Lake Sentani, Indonesia
 - Microgrid Marginal Electricity cost in Lake Sentani, Indonesia
 - Measurements of Microgrid Consumption in Lake Sentani, Indonesia
-- Microgrid Energy Consumption, Uptime and Load Factor in Lake Sentani, Indonesia
 
 # Abstract
 
@@ -121,30 +120,20 @@ author: Daniel Soto
 - We report the power used on the grids from the apparent power timeseries
     - The meter provides the apparent power in kVA averaged over an interval at each time step.
     - These data are reported as a mean power for each time of day and as a load duration curve
+    - We construct a cumulative distribution function of the observed apparent power to show the percentage of time that the grid is supplying a given power level.
 
-- We construct a typical daily load profile from an average of the apparent power observations.
-    - We plot the mean load by averaging the valid observations for each minute in over all the observation period.
-    - These mean power are then plotted with the time of day as the independent variable.
+## Modeled fuel estimation
 
-<!-- TODO: determine how to plot quartiles on load profile -->
-
-- We construct a load duration curve to show the percentage of time that the grid is supplying a given power level.
-    - We sort the time series in descending order
-    - We normalize the independent variable onto to a scale of zero to one so that the plot represents the time the grid is running.
-    - It is essentially a cumulative distribution function with the axes reversed
-
-## State of the art fuel estimation
-
-- We estimate the best possible cost per kWh of generation on the microgrids assuming the datasheets for high quality genset performance and the observed loads.
-    - Generators become less efficient in fuel use per energy delivered as the load is decreased
-    - We find specification sheets for a generators of similar size from a leading manufacturer
-    - Specification sheets report fuel use at 25%, 50%, 75%, and 100% of the full load.
-    - We assume a linear relationship between fuel use and generator load.
-    - We take the published curves for fuel use and extrapolate to the low loads observed on microgrids
+- We model the cost per kWh of generation on these microgrids assuming the generators perform according to the datasheets for the observed loads.
+    - We use 9 specification sheets for a generators of similar size from a leading manufacturer
+    - These are available in supplemental table {label}
+    - All specification sheets report fuel use at 50%, 75%, and 100% of the full load.
+    - Some sheets also specify fuel use at 25% of the full load.
+    - We assume a linear relationship between fuel use and generator load as well as fuel use and the rated generator size.
+    - I create a dataset of the expected fuel consumption for several generators as a function of the delivered load and maximum power output.
+    - I perform a regression on this data set to create a linear model of fuel use as a function of delivered load and maximum power output.
+    - This model is used to extrapolate the fuel use for loads below the specified range.
     - We divide the fuel rate by the apparent power to get the instantaneous specific fuel consumption
-    - Using these fits, we can create a time series of fuel rates from the observed load data
-    - Following the method used to construct a load duration curve, we create a specific fuel consumption duration curve
-    - This curve has the specific fuel consumption in liters per kVA-hour as the independent variable
 
 ## Observed fuel use
 
@@ -156,7 +145,10 @@ author: Daniel Soto
 
 # Results
 
-- TODO: format tables with reasonable numbers of significant figures
+- TODO: format tables with reasonable numbers of significant figures GT
+- TODO: fix order of columns in energy table
+- TODO: create a markdown file for each table
+- TODO: capitalize village names
 
 ## Data Coverage
 
@@ -164,8 +156,8 @@ author: Daniel Soto
     - The data cover from two to three months in the villages.
     - We have direct time series measurements for 9 to 23 percent of the observation period
     - We have messages indicating the grid going off and back on that bring coverage up to 86 to 93 percent.
-    - We have no robust way of the presence or absence of power in the data gaps with the data set available.
 
+Table: Data Coverage {label: data_coverage SI: SI_data_integrity}
 
 | Village   |   Duration (days) |   Percent data |   Percent known downtime |   Total Coverage |
 |:----------|------------------:|---------------:|-------------------------:|-----------------:|
@@ -173,56 +165,61 @@ author: Daniel Soto
 | ayapo     |           127.433 |      0.232502  |                 0.672051 |         0.904552 |
 | kensio    |           102.194 |      0.0893443 |                 0.837226 |         0.92657  |
 
-<!-- SI_data_integrity -->
+## Microgrid Uptime
+
+- TODO: is the Kensio result biased by missing observations
+
+- Our data show the total duration of operation each day {ref uptime_CDF}
+    - The figure shows that two grids don't operate at on 15% of the days and another on 35% of the days.
+    - The Atamali provides between 5 and 7 hours 75% of the observed days
+    - The Ayapo grid provides between 4 and 7 hours on about 75% of the observed days
+    - The Kensio microgrid, however, shows very few days with more than 5 hours of service.
+    - These data are consistent with the evening-only operation and also show some days with less service.
+
+![](./plots/uptime_CDF.png)
 
 ## Electricity Energy Consumption
 
-- TODO: fix order of columns in energy table
-- TODO: write section outline
+- TODO: remove overall mean from table generation code and link generated table
 
-
-- We report on daily electricity energy consumption
-    - daily energy on days of operation
-    - daily energy over entire valid observation period
-    - the average energy use for connected household is between 0.4 and 0.9 kWh per day
-    - the cumulative distribution function shows that the electricity most days is clustered around the mean but there is a low energy tail
+- We report on the daily electricity energy consumption for days the grid is operating
+    - we define operation as a day where there is any non-zero energy reported
+    - on operating days the table {label} shows that total energy delivered is 9, 15, and 90 kWh per day.
+    - the average energy use on days of operation per connected household is between 0.4 and 0.9 kWh per day
+    - the cumulative distribution function {label} shows that the electricity most days is clustered around the mean but there is a low energy tail
+    - these daily energy totals were used to calculate the observed specific fuel consumption
 
 ![](./plots/daily_energy_CDF.png)
 
-|   operating mean (kWh) |   overall mean (kWh) |   per household operating mean (kWh) | village   |
-|-----------------------:|---------------------:|-------------------------------------:|:----------|
-|               15.213   |             14.9364  |                             0.380324 | atamali   |
-|               90.0091  |             84.6239  |                             0.873875 | ayapo     |
-|                9.12281 |              5.30612 |                             0.45614  | kensio    |
+Table: Mean Energy Delivered During Grid Operation {needs label, SI_energy?}
+
+|   operating mean (kWh) |   per household operating mean (kWh) | village   |
+|-----------------------:|-------------------------------------:|:----------|
+|               15.213   |                             0.380324 | atamali   |
+|               90.0091  |                             0.873875 | ayapo     |
+|                9.12281 |                             0.45614  | kensio    |
 
 ## Power Consumption
 
-- TODO: clean up date axis on hourly_kVA.png
-- TODO: create time series percentile plot for hourly profile
-- TODO: create a CDF of power in the SI
+- TODO: what conclusion does this support?
+- TODO: describe mean power per hh. is consistent with energy?
+- TODO: teacher scholar activity on units and dimensions
+- TODO: decide on flow and narrative
+- TODO: decide if the power consumption is important
+- TODO: decide on whether zeros belong in the figure
 
-
-- These grids run exclusively during the evening
-    - We display the averaged power profile for the three microgrids
-    - The average load plot shows that the grid only provides power in the evenings
-
-![](./plots/hourly_kVA.png)
-
-- The microgrid has a relatively even load profile
-    - The CDF or load duration curve shows mostly zero load or non-operation
-    - It also shows few power observations between zero and a cutoff power
-    - For the purposes of generator efficiency, we focus on the periods of non-zero power output
+- We report on the apparent power consumption in these microgrids during these times of operation
+    - The table (label) shows the mean loads during operation of the microgrids are well below the operating points of the generators
+    - The most well-matched microgrid is operating at 32% of the rated load and one grid is only at 6% of the generators rated load.
+    - These means do not include the periods of zero power since the generators don't run during these periods and fuel isn't consumed
 
 ![](./plots/power-CDF.png)
 
 ![](./plots/power-CDF-no-zeros.png)
 
-- We report on the apparent power consumption in these microgrids
-    - the table shows the mean loads during operation of the microgrids are well below the operating points of the generators
-    - The most well-matched microgrid is operating at 32% of the rated load and one grid is only at 6% of the load.
-    - These means do not include the periods of zero power
+- TODO: decide on columns for this table
 
-Table: Total and per connection apparent power
+Table: Total and per connection apparent power {needs label, SI_power?}
 
 |    |   HH |   kVA factor |   max kVA |   max kVA per HH |   mean kVA |   mean kVA per HH | village   |
 |---:|-----:|-------------:|----------:|-----------------:|-----------:|------------------:|:----------|
@@ -230,7 +227,7 @@ Table: Total and per connection apparent power
 |  1 |  103 |     0.767282 |    17.041 |         0.165447 |   13.0753  |         0.126944  | ayapo     |
 |  2 |   20 |     0.690428 |     3.253 |         0.16265  |    2.24596 |         0.112298  | kensio    |
 
-Table: Generator Utilization
+Table: Generator Utilization {needs label, SI_marginal_cost?}
 
 |         |     mean |   rating (kVA) |   percent genset load |
 |:--------|---------:|---------------:|----------------------:|
@@ -244,11 +241,35 @@ Table: Generator Utilization
     - The generators range in size from 25 kVA to 40 kVA
     - Our fit to the generator specifications has a slope of 0.270 lph per kVA of load
     - The fit has a slope of 0.059 lph per kVA of rated power
-    - The modeled specific fuel consumption at 100% load range from 0.287 to 0.302 liters per kVA-hour
-    - The modeled specific fuel consumption at the rated load range from 0.361 to 0.681 liters per kVA-hour
+    - Figure {label} shows the modeled specific fuel consumption.
+    - In practice, we expect wear and tear to reduce the efficiency of the generator.
 
 - Since we have the time series observations of kVA we can model a duration curve for the specific fuel consumption.
     - TODO: report descriptive statistics on the curves
+    - report CDFs of specific fuel
+    - The modeled specific fuel consumption at 100% load range from 0.287 to 0.302 liters per kVA-hour
+    - The modeled specific fuel consumption at the rated load range from 0.361 to 0.681 liters per kVA-hour
+
+- TODO: should this be output as a percent penalty over expected in the specific fuel consumption table?
+- TODO: Report median costs and 95th percentile costs?
+
+Table: Modeled Specific Fuel Consumption {needs label, SI_marginal_cost?}
+
+|         |   expected specific fuel consumption at 100% load (lpkVA) |   expected specific fuel consumption at mean load (lpkVA) |   genset rating kVA |
+|:--------|----------------------------------------------------------:|----------------------------------------------------------:|--------------------:|
+| atamali |                                                  0.286618 |                                                  0.405766 |                  25 |
+| ayapo   |                                                  0.302626 |                                                  0.361084 |                  40 |
+| kensio  |                                                  0.298815 |                                                  0.681192 |                  35 |
+
+- TODO: decide if fuel rates are helpful
+
+Table: Modeled Specific Fuel Consumption {needs label, SI_marginal_cost?}
+
+|         |   genset rating kVA |   expected fuel rate at 100% (lph) |   mean load (kVA) |   expected fuel rate at mean load (lph) |
+|:--------|--------------------:|-----------------------------------:|------------------:|----------------------------------------:|
+| atamali |                  25 |                            7.16545 |           3.05753 |                                 1.24064 |
+| ayapo   |                  40 |                           12.105   |          14.3235  |                                 5.17199 |
+| kensio  |                  35 |                           10.4585  |           2.45143 |                                 1.66989 |
 
 - I also report an observed specific fuel consumption based on the generator operators daily fuel logs and the observed daily energy use
     - Observations of fuel consumption are from operator reports
@@ -258,58 +279,58 @@ Table: Generator Utilization
     - This is a specific fuel consumption of 710 ml per kWh, well above predicted.
     - At 1 USD per liter for diesel, this is a marginal cost of 0.70 USD and 2 USD per kWh
 
+Table: Observed Specific Fuel Consumption {needs label, SI_marginal_cost?}
+
 |    |   observed SFC |   observed_daily_fuel |   operating mean (kWh) | village   |
 |---:|---------------:|----------------------:|-----------------------:|:----------|
 |  0 |       1.972    |                    30 |               15.213   | atamali   |
 |  1 |       0.666599 |                    60 |               90.0091  | ayapo     |
 |  2 |     nan        |                   nan |                9.12281 | kensio    |
 
-- data sheet fuel consumption per hour
-- TODO: should this be output as a percent penalty over expected in the specific fuel consumption table?
-- TODO: Report median costs and 95th percentile costs?
-- TODO: describe the data sheets
-
-
-|         |   genset rating kVA |   expected fuel rate at 100% (lph) |   mean load (kVA) |   expected fuel rate at mean load (lph) |
-|:--------|--------------------:|-----------------------------------:|------------------:|----------------------------------------:|
-| atamali |                  25 |                            7.16545 |           3.05753 |                                 1.24064 |
-| ayapo   |                  40 |                           12.105   |          14.3235  |                                 5.17199 |
-| kensio  |                  35 |                           10.4585  |           2.45143 |                                 1.66989 |
 
 
 
-|         |   expected specific fuel consumption at 100% load (lpkVA) |   expected specific fuel consumption at mean load (lpkVA) |   genset rating kVA |
-|:--------|----------------------------------------------------------:|----------------------------------------------------------:|--------------------:|
-| atamali |                                                  0.286618 |                                                  0.405766 |                  25 |
-| ayapo   |                                                  0.302626 |                                                  0.361084 |                  40 |
-| kensio  |                                                  0.298815 |                                                  0.681192 |                  35 |
 
 
-- The figure shows the ideal specific fuel consumption.
-    - It assumes the fuel consumption matches the data sheet
-    - In practice, we expect wear and tear to reduce the efficiency of the generator.
-
-
-
-![](./plots/specific_fuel_consumption_duration.png)
+<!-- ![](./plots/specific_fuel_consumption_duration.png) -->
 
 
 # Discussion
 
-- observed fuel costs are well above modeled fuel costs suggesting generator maintenance issues
-- observed fuel costs are well above tariff collection requiring subsidy
-- operating at low load increases engine maintenance requirements and worsens fuel costs
-- it is likely uneconomical to run these generators continuously but unnecessarily high marginal costs worsen the problem
-- these observed fuel costs are likely higher than those in least-cost models
+## Inefficient Operation Leads to Poorer Service
 
+- Operating a diesel generator at a power load well below its designed operating point leads to inefficient operation.
+    - operating at low load increases engine maintenance requirements and worsens fuel costs
+    - This inefficiency increases fuel cost per unit of energy generated.
+    - This operation could increase wear and tear on the generator, increasing maintenance costs and downtime.
+    - These drive up operating costs through increased fuel consumption.
+    - To conserve fuel, many microgrids are only operated in the evenings. (cite Schnitzer?)
+    - Is this consistent with Nicaragua diesel observations (casillas)
+    - These SFC costs also restrict generator operation to evenings
+    - it is likely uneconomical to run these generators continuously but unnecessarily high marginal costs worsen the problem
+    - observed fuel costs are well above modeled fuel costs suggesting generator maintenance issues
 
+## Insufficient Cost Recovery
 
+- Observed fuel costs are well above tariff collection requiring subsidy
+    - The operating costs are well above the tariffs
+    - Customers pay 5 cents or less per kWh and many meters don't function
+    - Tariffs in the area are below 5 cents per kWh so the electricity is almost completely subsidized
+    - The observed marginal costs due to fuel well exceed this
+    - This subsidized operation is found in other grids (cite)
 
-- at $400 per kW, $1 per liter, and 300 ml/kWh, fuel cost exceeds capital cost after about 1000 hours, making generator replacement feasible (confirm)
-- an efficient diesel generator has comparable cost and carbon intensity compared to existing fossil sources
-- diesel cost and carbon intensity can match or greatly exceed coal and NG averages
-- while PV costs rise on a capital basis, diesel costs rise on a marginal basis
-- marginal costs are often more difficult because operation and maintenance isn't well handled
+## Least Cost Model Assumptions
+
+- These observed fuel costs are likely higher than those in least-cost models
+    - TODO: where can I find least cost model parameters
+    - at $400 per kW, $1 per liter, and 300 ml/kWh, fuel cost exceeds capital cost after about 1000 hours, making generator replacement feasible (confirm)
+    - under ideal conditions an efficient diesel generator has comparable cost and carbon intensity compared to existing fossil sources
+    - these data show that these ideal condition costs may not be valid
+    - diesel cost and carbon intensity can match or greatly exceed coal and NG averages
+    - while PV costs rise on a capital basis, diesel costs rise on a marginal basis
+    - marginal costs are often more difficult because operation and maintenance isn't well handled
+
+## Capital vs Operating Costs
 
 - We report two electricity consumption averages.
     - We report an average for energy delivered on days or nights with full access.
@@ -318,22 +339,14 @@ Table: Generator Utilization
     - The second average is the actual electricity delivered.
     - The difference between these two provides a measure of latent demand.
 
+## Potential Improvements
 
-Operation of the generators at an inefficient operating point wastes diesel fuel and drives up operating costs.
+- Matching generators to loads could improve SFC and operating costs
+- A smaller generator operating at 75% load would provide X improvement
+- Running the generator at this 75% load could slow degradation and SFC increases
+- Revisiting the least cost assumptions in actual operation may lead to different generation allocation decisions
 
-- Operating a diesel generator at a power load well below its designed operating point leads to inefficient operation.
-    - This inefficiency increases fuel cost per unit of energy generated.
-    - Ayapo retains a reasonable fuel rate close to the designed operation of the generator.
-    - Atamali and Kensio with average loads at 11 and 6 percent of the design have theoretical specific fuel consumptions (SFC) of 460 ml per kVA-hour and 970 ml per kVA-hour.
-    - This operation could increase wear and tear on the generator, increasing maintenance costs and downtime.
+## Findings
 
-- The operating costs are well above the tariffs
-    - Customers pay 5 cents or less per kWh and many meters don't function
-    - The observed marginal costs due to fuel well exceed this
-
-- This is far above the our ideal fuel consumption estimate for Atamali.
-- Tariffs in the area are below 5 cents per kWh so the electricity is almost completely subsidized
-
-# Conclusion
-
-
+- We find that the modeled fuel use is above least cost assumptions
+- We find that the observed fuel use is well above both the modeled fuel use and the least cost assumptions
