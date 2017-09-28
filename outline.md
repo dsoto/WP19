@@ -199,6 +199,11 @@ Table: Mean Energy Delivered During Grid Operation {needs label, SI_energy?}
 |               90.0091  |                             0.873875 | ayapo     |
 |                9.12281 |                             0.45614  | kensio    |
 
+Table: Mean Energy Delivered During Grid Operation {needs label, SI_energy?}
+
+[table](observed_SFC.md)
+
+
 ## Power Consumption
 
 - TODO: what conclusion does this support?
