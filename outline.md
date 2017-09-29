@@ -159,11 +159,7 @@ author: Daniel Soto
 
 Table: Data Coverage {label: data_coverage SI: SI_data_integrity}
 
-| Village   |   Duration (days) |   Percent data |   Percent known downtime |   Total Coverage |
-|:----------|------------------:|---------------:|-------------------------:|-----------------:|
-| atamali   |           124.065 |      0.1904    |                 0.67276  |         0.863161 |
-| ayapo     |           127.433 |      0.232502  |                 0.672051 |         0.904552 |
-| kensio    |           102.194 |      0.0893443 |                 0.837226 |         0.92657  |
+{% include './tables/data_coverage.md' %}
 
 [table label: data_coverage](./tables/data_coverage.md)
 
@@ -195,13 +191,7 @@ Table: Data Coverage {label: data_coverage SI: SI_data_integrity}
 
 Table: Mean Energy Delivered During Grid Operation {needs label, SI_energy?}
 
-|   operating mean (kWh) |   per household operating mean (kWh) | village   |
-|-----------------------:|-------------------------------------:|:----------|
-|               15.213   |                             0.380324 | atamali   |
-|               90.0091  |                             0.873875 | ayapo     |
-|                9.12281 |                             0.45614  | kensio    |
-
-Table: Mean Energy Delivered During Grid Operation {needs label, SI_energy?}
+{% include './tables/daily_operating_energy.md' %}
 
 [table label: daily_operating_energy](./tables/daily_operating_energy.md)
 
@@ -226,13 +216,10 @@ Table: Mean Energy Delivered During Grid Operation {needs label, SI_energy?}
 
 Table: Generator Utilization {needs label, SI_marginal_cost?}
 
-|         |     mean |   rating (kVA) |   percent genset load |   mean kVA |
-|:--------|---------:|---------------:|----------------------:|-----------:|
-| Atamali |  2.8561  |             25 |             0.114244  |    2.8561  |
-| Ayapo   | 13.0753  |             40 |             0.326881  |   13.0753  |
-| Kensio  |  2.24596 |             35 |             0.0641703 |    2.24596 |
+{% include './tables/genset_utilization.md' %}
 
 [table label: genset_utilization](./tables/genset_utilization.md)
+
 
 ## Microgrid Marginal Cost
 
@@ -254,14 +241,9 @@ Table: Generator Utilization {needs label, SI_marginal_cost?}
 
 Table: Modeled Specific Fuel Consumption {needs label, SI_marginal_cost?}
 
-|         |   expected specific fuel consumption at 100% load (lpkVA) |   expected specific fuel consumption at mean load (lpkVA) |   genset rating kVA |
-|:--------|----------------------------------------------------------:|----------------------------------------------------------:|--------------------:|
-| atamali |                                                  0.286618 |                                                  0.405766 |                  25 |
-| ayapo   |                                                  0.302626 |                                                  0.361084 |                  40 |
-| kensio  |                                                  0.298815 |                                                  0.681192 |                  35 |
+{% include './tables/modeled_SFC.md' %}
 
 [table label: modeled_SFC](./tables/modeled_SFC.md)
-
 
 - I also report an observed specific fuel consumption based on the generator operators daily fuel logs and the observed daily energy use
     - Observations of fuel consumption are from operator reports
@@ -273,20 +255,11 @@ Table: Modeled Specific Fuel Consumption {needs label, SI_marginal_cost?}
 
 Table: Observed Specific Fuel Consumption {observed_SFC, SI_marginal_cost?}
 
-|    |   observed SFC |   observed_daily_fuel |   operating mean (kWh) | village   |
-|---:|---------------:|----------------------:|-----------------------:|:----------|
-|  0 |       1.972    |                    30 |               15.213   | atamali   |
-|  1 |       0.666599 |                    60 |               90.0091  | ayapo     |
-|  2 |     nan        |                   nan |                9.12281 | kensio    |
+{% include './tables/observed_SFC.md' %}
 
 [table label: observed_SFC](./tables/observed_SFC.md)
 
-
-
-
-
 <!-- ![](./plots/specific_fuel_consumption_duration.png) -->
-
 
 # Discussion
 
