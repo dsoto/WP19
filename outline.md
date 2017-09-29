@@ -165,6 +165,8 @@ Table: Data Coverage {label: data_coverage SI: SI_data_integrity}
 | ayapo     |           127.433 |      0.232502  |                 0.672051 |         0.904552 |
 | kensio    |           102.194 |      0.0893443 |                 0.837226 |         0.92657  |
 
+[table label: data_coverage](./tables/data_coverage.md)
+
 ## Microgrid Uptime
 
 - TODO: is the Kensio result biased by missing observations
@@ -201,9 +203,7 @@ Table: Mean Energy Delivered During Grid Operation {needs label, SI_energy?}
 
 Table: Mean Energy Delivered During Grid Operation {needs label, SI_energy?}
 
-[table](./tables/observed_SFC.md)
-
-{% include './tables/observed_SFC.md' %}
+[table label: daily_operating_energy](./tables/daily_operating_energy.md)
 
 
 ## Power Consumption
@@ -224,23 +224,15 @@ Table: Mean Energy Delivered During Grid Operation {needs label, SI_energy?}
 
 ![](./plots/power-CDF-no-zeros.png)
 
-- TODO: decide on columns for this table
-
-Table: Total and per connection apparent power {needs label, SI_power?}
-
-|    |   HH |   kVA factor |   max kVA |   max kVA per HH |   mean kVA |   mean kVA per HH | village   |
-|---:|-----:|-------------:|----------:|-----------------:|-----------:|------------------:|:----------|
-|  0 |   40 |     0.73535  |     3.884 |         0.0971   |    2.8561  |         0.0714024 | atamali   |
-|  1 |  103 |     0.767282 |    17.041 |         0.165447 |   13.0753  |         0.126944  | ayapo     |
-|  2 |   20 |     0.690428 |     3.253 |         0.16265  |    2.24596 |         0.112298  | kensio    |
-
 Table: Generator Utilization {needs label, SI_marginal_cost?}
 
-|         |     mean |   rating (kVA) |   percent genset load |
-|:--------|---------:|---------------:|----------------------:|
-| Atamali |  2.8561  |             25 |             0.114244  |
-| Ayapo   | 13.0753  |             40 |             0.326881  |
-| Kensio  |  2.24596 |             35 |             0.0641703 |
+|         |     mean |   rating (kVA) |   percent genset load |   mean kVA |
+|:--------|---------:|---------------:|----------------------:|-----------:|
+| Atamali |  2.8561  |             25 |             0.114244  |    2.8561  |
+| Ayapo   | 13.0753  |             40 |             0.326881  |   13.0753  |
+| Kensio  |  2.24596 |             35 |             0.0641703 |    2.24596 |
+
+[table label: genset_utilization](./tables/genset_utilization.md)
 
 ## Microgrid Marginal Cost
 
@@ -268,15 +260,8 @@ Table: Modeled Specific Fuel Consumption {needs label, SI_marginal_cost?}
 | ayapo   |                                                  0.302626 |                                                  0.361084 |                  40 |
 | kensio  |                                                  0.298815 |                                                  0.681192 |                  35 |
 
-- TODO: decide if fuel rates are helpful
+[table label: modeled_SFC](./tables/modeled_SFC.md)
 
-Table: Modeled Specific Fuel Consumption {needs label, SI_marginal_cost?}
-
-|         |   genset rating kVA |   expected fuel rate at 100% (lph) |   mean load (kVA) |   expected fuel rate at mean load (lph) |
-|:--------|--------------------:|-----------------------------------:|------------------:|----------------------------------------:|
-| atamali |                  25 |                            7.16545 |           3.05753 |                                 1.24064 |
-| ayapo   |                  40 |                           12.105   |          14.3235  |                                 5.17199 |
-| kensio  |                  35 |                           10.4585  |           2.45143 |                                 1.66989 |
 
 - I also report an observed specific fuel consumption based on the generator operators daily fuel logs and the observed daily energy use
     - Observations of fuel consumption are from operator reports
@@ -286,7 +271,7 @@ Table: Modeled Specific Fuel Consumption {needs label, SI_marginal_cost?}
     - This is a specific fuel consumption of 710 ml per kWh, well above predicted.
     - At 1 USD per liter for diesel, this is a marginal cost of 0.70 USD and 2 USD per kWh
 
-Table: Observed Specific Fuel Consumption {needs label, SI_marginal_cost?}
+Table: Observed Specific Fuel Consumption {observed_SFC, SI_marginal_cost?}
 
 |    |   observed SFC |   observed_daily_fuel |   operating mean (kWh) | village   |
 |---:|---------------:|----------------------:|-----------------------:|:----------|
@@ -294,6 +279,7 @@ Table: Observed Specific Fuel Consumption {needs label, SI_marginal_cost?}
 |  1 |       0.666599 |                    60 |               90.0091  | ayapo     |
 |  2 |     nan        |                   nan |                9.12281 | kensio    |
 
+[table label: observed_SFC](./tables/observed_SFC.md)
 
 
 
