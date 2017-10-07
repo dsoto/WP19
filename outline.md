@@ -1,13 +1,10 @@
 ---
-title: Sentani Microgrid Marginal Cost Working Paper
+title: 'Working Paper 19: Model and Measurement of Specific Fuel Consumption on Diesel Microgrids in Lake Sentani, Indonesia'
 author: Daniel Soto
+figureTitle: Figure
+figPrefix: Figure
+tblPrefix: Table
 ---
-
-# Possible Titles
-
-- Measurements of Specific Fuel Consumption on Diesel Microgrids in Lake Sentani, Indonesia
-- Microgrid Marginal Electricity cost in Lake Sentani, Indonesia
-- Measurements of Microgrid Consumption in Lake Sentani, Indonesia
 
 # Abstract
 
@@ -137,43 +134,45 @@ author: Daniel Soto
 ## Data Coverage
 
 - We have confidence in the data for 86% to 93% of the observation period for the microgrids
-    - The data cover from two to three months in the villages. [@tbl:data_coverage]
+    - The data cover from two to three months in the villages. (@tbl:data_coverage)
     - We have direct time series measurements for 9 to 23 percent of the observation period
     - We have messages indicating the grid going off and back on that bring coverage up to 86 to 93 percent.
+
+TODO: report as percent or change column name to fraction
 
 Table: Data Coverage {#tbl:data_coverage}
 
 {% include './tables/data_coverage.md' %}
 
-[table label: data_coverage](./tables/data_coverage.md)
+<!-- [table label: data_coverage](./tables/data_coverage.md) -->
 
 ## Microgrid Uptime
 
-- Our data show the total duration of operation each day {@fig:uptime_CDF}
+- Our data show the total duration of operation each day (@fig:uptime_CDF)
     - The figure shows that two grids don't operate at on 15% of the days and another on 35% of the days.
     - The Atamali provides between 5 and 7 hours 75% of the observed days
     - The Ayapo grid provides between 4 and 7 hours on about 75% of the observed days
     - The Kensio microgrid, however, shows very few days with more than 5 hours of service.
     - These data are consistent with the evening-only operation and also show some days with less service.
 
-![](./plots/uptime_CDF.png){#fig:uptime_CDF}
+![Cumulative distribution function of Uptime](./plots/uptime_CDF.png){#fig:uptime_CDF}
 
 ## Electricity Energy Consumption
 
 - We report on the daily electricity energy consumption for days the grid is operating
     - we define operation as a day where there is any non-zero energy reported
-    - on operating days the table {label} shows that total energy delivered is 9, 15, and 90 kWh per day.
+    - on operating days @tbl:daily_operating_energy shows that total energy delivered is 9, 15, and 90 kWh per day.
     - the average energy use on days of operation per connected household is between 0.4 and 0.9 kWh per day
-    - the cumulative distribution function {label} shows that the electricity most days is clustered around the mean but there is a low energy tail
+    - the cumulative distribution function (@fig:daily_energy_CDF} shows that the electricity most days is clustered around the mean but there is a low energy tail
     - these daily energy totals were used to calculate the observed specific fuel consumption
 
-![](./plots/daily_energy_CDF.png)
+![Daily Energy Cumulative Distribution Function](./plots/daily_energy_CDF.png){#fig:daily_energy_CDF}
 
-Table: Mean Energy Delivered During Grid Operation {needs label, SI_energy?}
+Table: Mean Energy Delivered During Grid Operation {#tbl:daily_operating_energy}
 
 {% include './tables/daily_operating_energy.md' %}
 
-[table label: daily_operating_energy](./tables/daily_operating_energy.md)
+<!-- [table label: daily_operating_energy](./tables/daily_operating_energy.md) -->
 
 
 ## Power Consumption
@@ -181,19 +180,19 @@ Table: Mean Energy Delivered During Grid Operation {needs label, SI_energy?}
 - TODO: decide on whether the power CDF should include zeros
 
 - We report on the apparent power consumption in these microgrids during these times of operation
-    - The table (label) shows the mean loads during operation of the microgrids are well below the operating points of the generators
+    - The @tbl:genset_utilization shows the mean loads during operation of the microgrids are well below the operating points of the generators
     - The most well-matched microgrid is operating at 32% of the rated load and one grid is only at 6% of the generators rated load.
     - These means do not include the periods of zero power since the generators don't run during these periods and fuel isn't consumed
 
-![](./plots/power-CDF.png)
+![Power Cumulative Distribution Function](./plots/power-CDF.png){#fig:power-CDF}
 
-![](./plots/power-CDF-no-zeros.png)
+![Power Cumulative Distribution Function](./plots/power-CDF-no-zeros.png){#fig:power-CDF-no-zeros.png}
 
-Table: Generator Utilization {needs label, SI_marginal_cost?}
+Table: Generator Utilization {#tbl:genset_utilization}
 
 {% include './tables/genset_utilization.md' %}
 
-[table label: genset_utilization](./tables/genset_utilization.md)
+<!-- [table label: genset_utilization](./tables/genset_utilization.md) -->
 
 
 ## Microgrid Marginal Cost
@@ -202,7 +201,7 @@ Table: Generator Utilization {needs label, SI_marginal_cost?}
     - The generators range in size from 25 kVA to 40 kVA
     - Our fit to the generator specifications has a slope of 0.270 lph per kVA of load
     - The fit has a slope of 0.059 lph per kVA of rated power
-    - Figure {label} shows the modeled specific fuel consumption.
+    - Figure {which label?} shows the modeled specific fuel consumption.
     - In practice, we expect wear and tear to reduce the efficiency of the generator.
 
 - Since we have the time series observations of kVA we can model a duration curve for the specific fuel consumption.
@@ -210,11 +209,11 @@ Table: Generator Utilization {needs label, SI_marginal_cost?}
     - The modeled specific fuel consumption at 100% load range from 0.287 to 0.302 liters per kVA-hour
     - The modeled specific fuel consumption at the rated load range from 0.361 to 0.681 liters per kVA-hour
 
-Table: Modeled Specific Fuel Consumption {needs label, SI_marginal_cost?}
+Table: Modeled Specific Fuel Consumption {#tbl:modeled_SFC}
 
 {% include './tables/modeled_SFC.md' %}
 
-[table label: modeled_SFC](./tables/modeled_SFC.md)
+<!-- [table label: modeled_SFC](./tables/modeled_SFC.md) -->
 
 - I also report an observed specific fuel consumption based on the generator operators daily fuel logs and the observed daily energy use
     - Observations of fuel consumption are from operator reports
@@ -224,11 +223,11 @@ Table: Modeled Specific Fuel Consumption {needs label, SI_marginal_cost?}
     - This is a specific fuel consumption of 710 ml per kWh, well above predicted.
     - At 1 USD per liter for diesel, this is a marginal cost of 0.70 USD and 2 USD per kWh
 
-Table: Observed Specific Fuel Consumption {observed_SFC, SI_marginal_cost?}
+Table: Observed Specific Fuel Consumption {#tbl:observed_SFC}
 
 {% include './tables/observed_SFC.md' %}
 
-[table label: observed_SFC](./tables/observed_SFC.md)
+<!-- [table label: observed_SFC](./tables/observed_SFC.md) -->
 
 <!-- ![](./plots/specific_fuel_consumption_duration.png) -->
 
@@ -258,11 +257,11 @@ Table: Observed Specific Fuel Consumption {observed_SFC, SI_marginal_cost?}
 
 ## Least Cost Model Assumptions
 
-- TODO: where can I find least cost model assumptions for Indonesia or other models? (VM, TW)
-
 - These observed fuel costs are likely higher than those in least-cost models for electricity planning
     - If the observed costs are above another option, least-cost planning hasn't been achieved
     - The $2 per kVA is likely above the levelized cost for solar PV with battery storage
+    - Using the Lazard LCOE and LCOS studies we can create a composite estimate of 1.03 -- 1.70 USD per kWh for PV and storage. {cite Lazard_LCOE, Lazard_LCOS}
+    - While this is a high LCOE it is below the observed fuel cost for one of the villages and invites us to reconsider the least cost assumptions.
 
 ## Capital vs Operating Costs
 
