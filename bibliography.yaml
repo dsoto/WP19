@@ -2,6 +2,8 @@
 references:
 - id: ADB_AUEAII
   title: Achieving Universal Electricity Access in Indonesia
+  issued:
+  - year: 2016
 - id: Casillas_EP
   title: The delivery of low-cost, low-carbon rural energy services
   author:
@@ -19,6 +21,8 @@ references:
     month:
 - id: ESDM
   title: Handbook of Energy and Economic Statistics of Indonesia
+  issued:
+  - year: 2014
 - id: Schnitzer_Thesis
   title: "Microgrids and High-Quality Central Grid Alternatives: Challenges and Imperatives Elucidated by Case Studies and Simulation"
   author:
@@ -28,6 +32,7 @@ references:
     year: 2014
     month:
 - id: Louie_ESD
+  title: Effects of load estimation error on small-scale off-grid photovoltaic system design, cost and reliability
   type: article-journal
   author:
   - family: Louie
@@ -35,10 +40,20 @@ references:
   - family: Dauenhauer
     given: Peter
   issued:
-  - year: '2016'
-    month: '10'
-  title: Effects of load estimation error on small-scale off-grid photovoltaic system
-    design, cost and reliability
+  - year: 2016
+    month: 10
   page: '30-43'
   volume: '34'
+- id: Lazard_LCOE
+  title: Levelized Cost of Energy Analysis 10.0
+  type: report
+  issued:
+  - year: 2016
+    month: 12
+- id: Lazard_LCOS
+  title: Levelized Cost of Storage Analysis 2.0
+  type: report
+  issued:
+  - year: 2016
+    month: 12
 ---
