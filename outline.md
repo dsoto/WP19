@@ -19,8 +19,8 @@ tblPrefix: Table
 
 <!-- p2: context, motivation, need: keeping indonesia on track -->
 
-- indonesia is executing a large electrification expansion to achieve universal access (ADB paper)
-    - Indonesia has made progress on percent with electricity access over the last decades (ADB?)
+- indonesia is executing a large electrification expansion to achieve universal access [@ADB_AUEAII]
+    - Indonesia has made progress on percent with electricity access over the last decades [@ADB_AUEAII]
     - we want to simultaneously expand access, lower cost and lower carbon intensity
     - the archipelago however presents challenges and there are wide differences in the electrification rate
     - This assumption would be threatened by oversized generators.
@@ -32,13 +32,13 @@ tblPrefix: Table
 
 - least cost electrification needs data to support its assumptions
     - these establish a range of diesel operating costs to use in future least-cost studies
-    - geospatial least cost studies show continuing diesel use as a significant part of the mix (ADB_AUEAII)
-    - least cost assumptions are sensitive to operating costs (ADB_AUEAII)
-    - A diesel microgrid in Nicaragua runs at well below the generator rating (Casillas_EP)
-    - Indonesia diesel plant electricity production flattening out (ESDM)
-    - In the case of PV, oversizing leads to higher costs (Louie_ESD, Lee)
-    - Grids in Haiti show oversized grids infrequently operated (Schnitzer_Thesis)
-    - evidence shows that tariffs are below operating costs in Haiti and that few if any grids are operating (Schnitzer_Thesis)
+    - geospatial least cost studies show continuing diesel use as a significant part of the mix [@ADB_AUEAII]
+    - least cost assumptions are sensitive to operating costs [@ADB_AUEAII]
+    - A diesel microgrid in Nicaragua runs at well below the generator rating [@Casillas_EP]
+    - Indonesia diesel plant electricity production flattening out [@ESDM]
+    - In the case of PV, oversizing leads to higher costs [@Louie_ESD]
+    - Grids in Haiti show oversized grids infrequently operated [@Schnitzer_Thesis]
+    - evidence shows that tariffs are below operating costs in Haiti and that few if any grids are operating [@Schnitzer_Thesis]
     - This study adds to the literature by gathering minute-resolution load data
 
 <!-- p4: results -->
