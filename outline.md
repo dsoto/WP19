@@ -10,59 +10,42 @@ tblPrefix: Table
 
 # Introduction
 
-<!-- p1: main issue: quantifying observed diesel marginal cost  -->
-
-- This paper establishes the observed marginal cost of diesel generation in a remote area
-    - Least cost assumptions that drive energy allocations are dependent on operating conditions
-    - We observe operating conditions that are likely to cause high operating costs
-    - We measure operating costs that are well above assumptions and recovery tariffs
-
-<!-- p2: context, motivation, need: keeping indonesia on track -->
-
-- Indonesia is executing a large electrification expansion to achieve universal access [@ADB_AUEAII]
-    - Indonesia has made progress on percent with electricity access over the last decades [@ADB_AUEAII]
-    - We want to simultaneously expand access, lower cost and lower carbon intensity
-    - The archipelago however presents challenges and there are wide differences in the electrification rate
-    - This assumption would be threatened by oversized generators.
-    - Observations of marginal cost can inform future allocations in Indonesia and beyond.
-    <!-- is diesel the dominant technology in Indonesia?  (ADB)  -->
-    <!-- at what time were these grids installed? -->
-
-<!-- p3: lit search shows this study fills a data and analysis gap -->
-
-- Least cost electrification needs data to support its assumptions
-    - These establish a range of diesel operating costs to use in future least-cost studies
+- Electrification of the remaining 1.2 billion people without access requires close attention to operating costs.
+    - Areas beyond the grid require decentralized solutions that can be more costly both to install and to maintain.
+    - Indonesia is executing a large electrification expansion to achieve universal access [@ADB_AUEAII]
+    - Indonesia has made progress on percentage of households with electricity access over the last decades [@ADB_AUEAII]
+    - The archipelago however presents challenges and there are wide differences in the electrification rate [@cite]
+    - Diesel electricity generation with internal-combustion engines is an important source of decentalized energy.
     - Geospatial least cost studies show continuing diesel use as a significant part of the mix [@ADB_AUEAII]
     - Least cost assumptions are sensitive to operating costs [@ADB_AUEAII]
-    - A diesel microgrid in Nicaragua runs at well below the generator rating [@Casillas_EP]
-    - Indonesia diesel plant electricity production flattening out [@ESDM]
-    - In the case of PV, oversizing leads to higher costs [@Louie_ESD]
+    - To support this effort we must observe the costs and compare to expectations.
+    - Observations of marginal cost can inform future allocations in Indonesia and beyond.
+    - If the fuel costs are significantly greater than assumptions, the assumptions should be revisited.
+
+- This work adds to previous work that has shown problems with diesel generation by directly modelling and measuring the fuel used per unit of electricity delivered.
+    - Work in off-grid generation show that diesel grids are expensive to run and do not operate at all hours.
     - Grids in Haiti show oversized grids infrequently operated [@Schnitzer_Thesis]
-    - Evidence shows that tariffs are below operating costs in Haiti and that few if any grids are operating [@Schnitzer_Thesis]
-    - This study adds to the literature by gathering minute-resolution load data
+    - A diesel microgrid in Nicaragua runs at well below the generator rating [@Casillas_EP]
+    - In the case of PV, oversizing leads to higher costs [@Louie_ESD]
+    - Evidence shows that tariffs are below operating costs in Haiti and that few if any grids are operating since they are not economically viable [@Schnitzer_Thesis]
+    - All this evidence strongly suggests that the operating costs for diesel be verified.
 
-<!-- p4: results -->
-
-- This study provides estimates and observations of the fuel costs for diesel consumption in three indonesian microgrids
-    - This work makes two contributions
-    - First, an observation of the specific fuel consumption in three microgrids
-    - Second, a modeled estimate of the specific fuel consumptions for well-maintained generators
+- This study provides estimates and observations of the fuel costs for diesel consumption in three Indonesian microgrids
+    - This work presents a model and estimate of fuel consumption under low loads and observes the fuel use per unit of energy delivered.
     - We find that the generators are providing power well below their intended operating points
-    - We estimate that a new generator operating at these low power operating points would have operating costs at 0.60 USD or above
-    - We find that the observed specific fuel consumption with an installed generator on one grid is as high as 2 USD per kVA-hour delivered, suggesting significant efficiency degradation
+    - The model estimates that a new generator operating at these low power operating points would have operating costs at 0.60 USD or above
+    - Our observations show that the observed specific fuel consumption with an installed generator on one grid is as high as 2 USD per kVA-hour delivered, suggesting significant efficiency degradation.
 
-<!-- p5: conclusions -->
-
-- These results suggest diesel microgrids may not be performing to expectations
+- These results suggest diesel microgrids may not all be performing to expectations.
     - When the generator is run at low loads marginal cost and carbon emissions rise
     - Areas with high marginal costs should be identified and mitigated
     - Right-sized generators or alternate technologies should be considered for areas with high marginal costs
+    - Indonesia overall diesel plant electricity production flattening out [@ESDM].
+    - The remaining off-grid diesel market should be investigated for efficiency.
 
 # Methods
 
 ## Data Collection Context
-
-<!-- where and how was the data collected? -->
 
 - We measured the energy and power delivered to 3 villages with diesel microgrids
     - These villages are in the Lake Sentani region of Indonesia
