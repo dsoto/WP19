@@ -16,12 +16,14 @@ all: out/wp19_outline.pdf \
 # $@ is the target variable (left side of colon)
 # $< is the first prerequisite (right side of colon)
 
-out/tmp_output.md: outline.md
+out/tmp_output.md: outline.md bibliography.yaml
 	python include_tables.py outline.md $@
 
-out/wp19_outline.pdf: out/tmp_output.md
-	pandoc $(filters) \
-	       -o $@ $<
+# out/wp19_outline.pdf: out/tmp_output.md
+out/wp19_outline.pdf: out/wp19_outline.html
+	# pandoc $(filters) \
+	#        -o $@ $<
+	/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --headless --disable-gpu --print-to-pdf=$@ file:///Users/dsoto/Dropbox/writing/WP19\ Sentani\ Microgrid\ Cost/out/wp19_outline.html
 
 out/wp19_outline.docx: out/tmp_output.md
 	pandoc $(filters) \
