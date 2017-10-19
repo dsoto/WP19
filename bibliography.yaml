@@ -56,4 +56,15 @@ references:
   issued:
   - year: 2016
     month: 12
+- id: IEEFA
+  title: Overpaid and Underutilized
+  type: report
+  URL: http://ieefa.org/ieefa-indonesia-potential-overcommitment-coal-fired-electricity-puts-nation-risk/
+  issued:
+  - year: 2017
+  month: 8
+- id: RUPTL
+  title: 'PLN RUPTL 2017-2026'
+  issued:
+  - year: 2017
 ---

@@ -16,7 +16,7 @@ tblPrefix: Table
     - Indonesia has made progress on percentage of households with electricity access over the last decades [@ADB_AUEAII]
     - The archipelago however presents challenges and there are wide differences in the electrification rate [@cite]
     - Diesel electricity generation with internal-combustion engines is an important source of decentalized energy.
-    - Geospatial least cost studies show continuing diesel use as a significant part of the mix [@ADB_AUEAII]
+    - Geospatial least cost studies and Indonesian planning documents show continuing diesel use as a significant part of the mix [@ADB_AUEAII; @IEEFA; @RUPTL]
     - Least cost assumptions are sensitive to operating costs [@ADB_AUEAII]
     - To support this effort we must observe the costs and compare to expectations.
     - Observations of marginal cost can inform future allocations in Indonesia and beyond.
