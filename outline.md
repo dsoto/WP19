@@ -1,79 +1,51 @@
 ---
-title: Sentani Microgrid Marginal Cost Working Paper
+title: 'Working Paper 19: Model and Measurement of Specific Fuel Consumption on Diesel Microgrids in Lake Sentani, Indonesia'
 author: Daniel Soto
+figureTitle: Figure
+figPrefix: Figure
+tblPrefix: Table
 ---
-
-# Key Questions
-
-- What are the observed costs of electrical energy on these microgrids?
-
-# Contributions
-
-- estimations of specific fuel consumption for electricity generation on diesel microgrids
-
-# Possible Titles
-
-- Measurements of Specific Fuel Consumption on Diesel Microgrids in Lake Sentani, Indonesia
-- Microgrid Marginal Electricity cost in Lake Sentani, Indonesia
-- Measurements of Microgrid Consumption in Lake Sentani, Indonesia
 
 # Abstract
 
 # Introduction
 
-<!-- p1: main issue: quantifying observed diesel marginal cost  -->
-
-- this paper establishes the observed marginal cost of diesel generation in a remote area
-    - least cost assumptions that drive energy allocations are dependent on operating conditions
-    - we observe operating conditions that are likely to cause high operating costs
-    - we measure operating costs that are well above assumptions and recovery tariffs
-
-<!-- p2: context, motivation, need: keeping indonesia on track -->
-
-- indonesia is executing a large electrification expansion to achieve universal access (ADB paper)
-    - Indonesia has made progress on percent with electricity access over the last decades (ADB?)
-    - we want to simultaneously expand access, lower cost and lower carbon intensity
-    - the archipelago however presents challenges and there are wide differences in the electrification rate
-    - This assumption would be threatened by oversized generators.
+- Electrification of the remaining 1.2 billion people without access requires close attention to operating costs.
+    - Areas beyond the grid require decentralized solutions that can be more costly both to install and to maintain.
+    - Indonesia is executing a large electrification expansion to achieve universal access [@ADB_AUEAII]
+    - Indonesia has made progress on percentage of households with electricity access over the last decades [@ADB_AUEAII]
+    - The archipelago however presents challenges and there are wide differences in the electrification rate [@cite]
+    - Diesel electricity generation with internal-combustion engines is an important source of decentalized energy.
+    - Geospatial least cost studies and Indonesian planning documents show continuing diesel use as a significant part of the mix [@ADB_AUEAII; @IEEFA; @RUPTL]
+    - Least cost assumptions are sensitive to operating costs [@ADB_AUEAII]
+    - To support this effort we must observe the costs and compare to expectations.
     - Observations of marginal cost can inform future allocations in Indonesia and beyond.
-    <!-- is diesel the dominant technology in Indonesia?  (ADB)  -->
-    <!-- at what time were these grids installed? -->
+    - If the fuel costs are significantly greater than assumptions, the assumptions should be revisited.
 
-<!-- p3: lit search shows this study fills a data and analysis gap -->
+- This work adds to previous work that has shown problems with diesel generation by directly modelling and measuring the fuel used per unit of electricity delivered.
+    - Work in off-grid generation show that diesel grids are expensive to run and do not operate at all hours.
+    - Grids in Haiti show oversized grids infrequently operated [@Schnitzer_Thesis]
+    - A diesel microgrid in Nicaragua runs at well below the generator rating [@Casillas_EP]
+    - In the case of PV, oversizing leads to higher costs [@Louie_ESD]
+    - Evidence shows that tariffs are below operating costs in Haiti and that few if any grids are operating since they are not economically viable [@Schnitzer_Thesis]
+    - All this evidence strongly suggests that the operating costs for diesel be verified.
 
-- least cost electrification needs data to support its assumptions
-    - these establish a range of diesel operating costs to use in future least-cost studies
-    - geospatial least cost studies show continuing diesel use as a significant part of the mix (ADB_AUEAII)
-    - least cost assumptions are sensitive to operating costs (ADB_AUEAII)
-    - A diesel microgrid in Nicaragua runs at well below the generator rating (Casillas_EP)
-    - Indonesia diesel plant electricity production flattening out (ESDM)
-    - In the case of PV, oversizing leads to higher costs (Louie_ESD, Lee)
-    - Grids in Haiti show oversized grids infrequently operated (Schnitzer_Thesis)
-    - evidence shows that tariffs are below operating costs in Haiti and that few if any grids are operating (Schnitzer_Thesis)
-    - This study adds to the literature by gathering minute-resolution load data
+- This study provides estimates and observations of the fuel costs for diesel consumption in three Indonesian microgrids
+    - This work presents a model and estimate of fuel consumption under low loads and observes the fuel use per unit of energy delivered.
+    - We find that the generators are providing power well below their intended operating points
+    - The model estimates that a new generator operating at these low power operating points would have operating costs at 0.60 USD or above
+    - Our observations show that the observed specific fuel consumption with an installed generator on one grid is as high as 2 USD per kVA-hour delivered, suggesting significant efficiency degradation.
 
-<!-- p4: results -->
-
-- this study provides estimates and observations of the fuel costs for diesel consumption in three indonesian microgrids
-    - this work makes two contributions
-    - first, an observation of the specific fuel consumption in three microgrids
-    - second, a modeled estimate of the specific fuel consumptions for well-maintained generators
-    - we find that the generators are providing power well below their intended operating points
-    - we estimate that a new generator operating at these low power operating points would have operating costs at 0.60 USD or above
-    - we find that the observed specific fuel consumption with an installed generator on one grid is as high as 2 USD per kVA-hour delivered, suggesting significant efficiency degradation
-
-<!-- p5: conclusions -->
-
-- These results suggest diesel microgrids may not be performing to expectations
-    - when the generator is run at low loads marginal cost and carbon emissions rise
-    - areas with high marginal costs should be identified and mitigated
-    - right-sized generators or alternate technologies should be considered for areas with high marginal costs
+- These results suggest diesel microgrids may not all be performing to expectations.
+    - When the generator is run at low loads marginal cost and carbon emissions rise
+    - Areas with high marginal costs should be identified and mitigated
+    - Right-sized generators or alternate technologies should be considered for areas with high marginal costs
+    - Indonesia overall diesel plant electricity production flattening out [@ESDM].
+    - The remaining off-grid diesel market should be investigated for efficiency.
 
 # Methods
 
 ## Data Collection Context
-
-<!-- where and how was the data collected? -->
 
 - We measured the energy and power delivered to 3 villages with diesel microgrids
     - These villages are in the Lake Sentani region of Indonesia
@@ -95,17 +67,12 @@ author: Daniel Soto
 
 ## Missing data techniques and data integrity
 
-<!-- TODO: should this go before or after the energy and power methods? -->
-<!-- TODO: what do we do to ensure correct data? -->
-
 - We synthesize time series data for the times when the grid isn't running
     - During power outages, we insert observations of zero power and energy consumption at the same frequency as the meter observations.
     - There remain times without a measurement or confirmed period of power off
     - We remove anomalies due to data corruption in the record
 
 ## Energy consumption analysis
-
-<!-- TODO: what is the right level of detail to report here? -->
 
 - We report the daily energy use in the microgrid from the accumulated energy timeseries
     - The meter records an energy accumulator that is reported at each timestamp with 1 kWh resolution.
@@ -126,7 +93,6 @@ author: Daniel Soto
 
 - We model the cost per kWh of generation on these microgrids assuming the generators perform according to the datasheets for the observed loads.
     - We use 9 specification sheets for a generators of similar size from a leading manufacturer
-    - These are available in supplemental table {label}
     - All specification sheets report fuel use at 50%, 75%, and 100% of the full load.
     - Some sheets also specify fuel use at 25% of the full load.
     - We assume a linear relationship between fuel use and generator load as well as fuel use and the rated generator size.
@@ -141,99 +107,51 @@ author: Daniel Soto
     - Logs are kept of fuel input to the generator on a nightly basis.
     - We divide the mean fuel per night as reported in the written log with the mean generation per night to get the overall specific fuel consumption
 
-<!-- TODO: how do we know the sizes of the generators? -->
-
 # Results
 
-- TODO: format tables with reasonable numbers of significant figures GT
-- TODO: fix order of columns in energy table
-- TODO: create a markdown file for each table
-- TODO: capitalize village names
 
 ## Data Coverage
 
 - We have confidence in the data for 86% to 93% of the observation period for the microgrids
-    - The data cover from two to three months in the villages.
+    - The data cover from two to three months in the villages. (@tbl:data_coverage)
     - We have direct time series measurements for 9 to 23 percent of the observation period
     - We have messages indicating the grid going off and back on that bring coverage up to 86 to 93 percent.
 
-Table: Data Coverage {label: data_coverage SI: SI_data_integrity}
 
-| Village   |   Duration (days) |   Percent data |   Percent known downtime |   Total Coverage |
-|:----------|------------------:|---------------:|-------------------------:|-----------------:|
-| atamali   |           124.065 |      0.1904    |                 0.67276  |         0.863161 |
-| ayapo     |           127.433 |      0.232502  |                 0.672051 |         0.904552 |
-| kensio    |           102.194 |      0.0893443 |                 0.837226 |         0.92657  |
+Table: Data Coverage {#tbl:data_coverage}
 
-## Microgrid Uptime
-
-- TODO: is the Kensio result biased by missing observations
-
-- Our data show the total duration of operation each day {ref uptime_CDF}
-    - The figure shows that two grids don't operate at on 15% of the days and another on 35% of the days.
-    - The Atamali provides between 5 and 7 hours 75% of the observed days
-    - The Ayapo grid provides between 4 and 7 hours on about 75% of the observed days
-    - The Kensio microgrid, however, shows very few days with more than 5 hours of service.
-    - These data are consistent with the evening-only operation and also show some days with less service.
-
-![](./plots/uptime_CDF.png)
+{% include './tables/data_coverage.md' %}
 
 ## Electricity Energy Consumption
 
-- TODO: remove overall mean from table generation code and link generated table
-
 - We report on the daily electricity energy consumption for days the grid is operating
-    - we define operation as a day where there is any non-zero energy reported
-    - on operating days the table {label} shows that total energy delivered is 9, 15, and 90 kWh per day.
-    - the average energy use on days of operation per connected household is between 0.4 and 0.9 kWh per day
-    - the cumulative distribution function {label} shows that the electricity most days is clustered around the mean but there is a low energy tail
-    - these daily energy totals were used to calculate the observed specific fuel consumption
+    - We define operation as a day where there is any non-zero energy reported
+    - On operating days @tbl:daily_operating_energy shows that total energy delivered is 9, 15, and 90 kWh per day.
+    - The average energy use on days of operation per connected household is between 0.4 and 0.9 kWh per day
+    - The cumulative distribution function in @fig:daily_energy_CDF shows that the electricity most days is clustered around the mean but there is a low energy tail for two villages
+    - These daily energy totals were used to calculate the observed specific fuel consumption
 
-![](./plots/daily_energy_CDF.png)
+![Daily Energy Cumulative Distribution Function](./plots/daily_energy_CDF.png){#fig:daily_energy_CDF}
 
-Table: Mean Energy Delivered During Grid Operation {needs label, SI_energy?}
+Table: Mean Energy Delivered During Grid Operation {#tbl:daily_operating_energy}
 
-|   operating mean (kWh) |   per household operating mean (kWh) | village   |
-|-----------------------:|-------------------------------------:|:----------|
-|               15.213   |                             0.380324 | atamali   |
-|               90.0091  |                             0.873875 | ayapo     |
-|                9.12281 |                             0.45614  | kensio    |
+{% include './tables/daily_operating_energy.md' %}
+
 
 ## Power Consumption
 
-- TODO: what conclusion does this support?
-- TODO: describe mean power per hh. is consistent with energy?
-- TODO: teacher scholar activity on units and dimensions
-- TODO: decide on flow and narrative
-- TODO: decide if the power consumption is important
-- TODO: decide on whether zeros belong in the figure
-
 - We report on the apparent power consumption in these microgrids during these times of operation
-    - The table (label) shows the mean loads during operation of the microgrids are well below the operating points of the generators
+    - The @tbl:genset_utilization shows the mean loads during operation of the microgrids are well below the operating points of the generators
     - The most well-matched microgrid is operating at 32% of the rated load and one grid is only at 6% of the generators rated load.
     - These means do not include the periods of zero power since the generators don't run during these periods and fuel isn't consumed
 
-![](./plots/power-CDF.png)
+![Power Cumulative Distribution Function](./plots/power-CDF.png){#fig:power-CDF}
 
-![](./plots/power-CDF-no-zeros.png)
+<!-- ![Power Cumulative Distribution Function](./plots/power&#45;CDF&#45;no&#45;zeros.png){#fig:power&#45;CDF&#45;no&#45;zeros.png} -->
 
-- TODO: decide on columns for this table
+Table: Generator Utilization {#tbl:genset_utilization}
 
-Table: Total and per connection apparent power {needs label, SI_power?}
-
-|    |   HH |   kVA factor |   max kVA |   max kVA per HH |   mean kVA |   mean kVA per HH | village   |
-|---:|-----:|-------------:|----------:|-----------------:|-----------:|------------------:|:----------|
-|  0 |   40 |     0.73535  |     3.884 |         0.0971   |    2.8561  |         0.0714024 | atamali   |
-|  1 |  103 |     0.767282 |    17.041 |         0.165447 |   13.0753  |         0.126944  | ayapo     |
-|  2 |   20 |     0.690428 |     3.253 |         0.16265  |    2.24596 |         0.112298  | kensio    |
-
-Table: Generator Utilization {needs label, SI_marginal_cost?}
-
-|         |     mean |   rating (kVA) |   percent genset load |
-|:--------|---------:|---------------:|----------------------:|
-| Atamali |  2.8561  |             25 |             0.114244  |
-| Ayapo   | 13.0753  |             40 |             0.326881  |
-| Kensio  |  2.24596 |             35 |             0.0641703 |
+{% include './tables/genset_utilization.md' %}
 
 ## Microgrid Marginal Cost
 
@@ -241,35 +159,17 @@ Table: Generator Utilization {needs label, SI_marginal_cost?}
     - The generators range in size from 25 kVA to 40 kVA
     - Our fit to the generator specifications has a slope of 0.270 lph per kVA of load
     - The fit has a slope of 0.059 lph per kVA of rated power
-    - Figure {label} shows the modeled specific fuel consumption.
+    - Table @tbl:modeled_SFC shows the modeled specific fuel consumption.
     - In practice, we expect wear and tear to reduce the efficiency of the generator.
 
 - Since we have the time series observations of kVA we can model a duration curve for the specific fuel consumption.
-    - TODO: report descriptive statistics on the curves
-    - report CDFs of specific fuel
+    - Report CDFs of specific fuel
     - The modeled specific fuel consumption at 100% load range from 0.287 to 0.302 liters per kVA-hour
     - The modeled specific fuel consumption at the rated load range from 0.361 to 0.681 liters per kVA-hour
 
-- TODO: should this be output as a percent penalty over expected in the specific fuel consumption table?
-- TODO: Report median costs and 95th percentile costs?
+Table: Modeled Specific Fuel Consumption {#tbl:modeled_SFC}
 
-Table: Modeled Specific Fuel Consumption {needs label, SI_marginal_cost?}
-
-|         |   expected specific fuel consumption at 100% load (lpkVA) |   expected specific fuel consumption at mean load (lpkVA) |   genset rating kVA |
-|:--------|----------------------------------------------------------:|----------------------------------------------------------:|--------------------:|
-| atamali |                                                  0.286618 |                                                  0.405766 |                  25 |
-| ayapo   |                                                  0.302626 |                                                  0.361084 |                  40 |
-| kensio  |                                                  0.298815 |                                                  0.681192 |                  35 |
-
-- TODO: decide if fuel rates are helpful
-
-Table: Modeled Specific Fuel Consumption {needs label, SI_marginal_cost?}
-
-|         |   genset rating kVA |   expected fuel rate at 100% (lph) |   mean load (kVA) |   expected fuel rate at mean load (lph) |
-|:--------|--------------------:|-----------------------------------:|------------------:|----------------------------------------:|
-| atamali |                  25 |                            7.16545 |           3.05753 |                                 1.24064 |
-| ayapo   |                  40 |                           12.105   |          14.3235  |                                 5.17199 |
-| kensio  |                  35 |                           10.4585  |           2.45143 |                                 1.66989 |
+{% include './tables/modeled_SFC.md' %}
 
 - I also report an observed specific fuel consumption based on the generator operators daily fuel logs and the observed daily energy use
     - Observations of fuel consumption are from operator reports
@@ -279,74 +179,77 @@ Table: Modeled Specific Fuel Consumption {needs label, SI_marginal_cost?}
     - This is a specific fuel consumption of 710 ml per kWh, well above predicted.
     - At 1 USD per liter for diesel, this is a marginal cost of 0.70 USD and 2 USD per kWh
 
-Table: Observed Specific Fuel Consumption {needs label, SI_marginal_cost?}
+Table: Observed Specific Fuel Consumption {#tbl:observed_SFC}
 
-|    |   observed SFC |   observed_daily_fuel |   operating mean (kWh) | village   |
-|---:|---------------:|----------------------:|-----------------------:|:----------|
-|  0 |       1.972    |                    30 |               15.213   | atamali   |
-|  1 |       0.666599 |                    60 |               90.0091  | ayapo     |
-|  2 |     nan        |                   nan |                9.12281 | kensio    |
-
-
-
-
-
-
-<!-- ![](./plots/specific_fuel_consumption_duration.png) -->
-
+{% include './tables/observed_SFC.md' %}
 
 # Discussion
 
 ## Inefficient Operation Leads to Poorer Service
 
 - Operating a diesel generator at a power load well below its designed operating point leads to inefficient operation.
-    - operating at low load increases engine maintenance requirements and worsens fuel costs
+    - Operating at low load increases engine maintenance requirements and worsens fuel costs [@Schnitzer_Thesis]
     - This inefficiency increases fuel cost per unit of energy generated.
     - This operation could increase wear and tear on the generator, increasing maintenance costs and downtime.
     - These drive up operating costs through increased fuel consumption.
-    - To conserve fuel, many microgrids are only operated in the evenings. (cite Schnitzer?)
-    - Is this consistent with Nicaragua diesel observations (casillas)
+    - To conserve fuel, many microgrids are only operated in the evenings. [@Schnitzer_Thesis,  @Casillas_EP ?]
+    - Our observations adhere to this prediction of higher SFC
+    - The observed fuel costs are well above modeled fuel costs suggesting generator maintenance issues
     - These SFC costs also restrict generator operation to evenings
-    - it is likely uneconomical to run these generators continuously but unnecessarily high marginal costs worsen the problem
-    - observed fuel costs are well above modeled fuel costs suggesting generator maintenance issues
+    - It is likely uneconomical to run these generators continuously but unnecessarily high marginal costs worsen the problem
+    - The village nominally has been electrified but has an expensive and intermittent electricity service.
+
+- Our data show the total duration of operation each day (@fig:uptime_CDF)
+    - The figure shows that two grids don't operate at on 15% of the days and another on 35% of the days.
+    - The Atamali provides between 5 and 7 hours 75% of the observed days
+    - The Ayapo grid provides between 4 and 7 hours on about 75% of the observed days
+    - The Kensio microgrid, however, shows very few days with more than 5 hours of service.
+    - These data are consistent with the evening-only operation and also show some days with less service.
+
+![Cumulative distribution function of Uptime](./plots/uptime_CDF.png){#fig:uptime_CDF}
 
 ## Insufficient Cost Recovery
 
 - Observed fuel costs are well above tariff collection requiring subsidy
-    - The operating costs are well above the tariffs
     - Customers pay 5 cents or less per kWh and many meters don't function
-    - Tariffs in the area are below 5 cents per kWh so the electricity is almost completely subsidized
-    - The observed marginal costs due to fuel well exceed this
+    - The electricity is almost completely subsidized
+    - The operating costs are well above the tariffs
     - This subsidized operation is found in other grids (cite)
 
 ## Least Cost Model Assumptions
 
-- These observed fuel costs are likely higher than those in least-cost models
-    - TODO: where can I find least cost model parameters
-    - at $400 per kW, $1 per liter, and 300 ml/kWh, fuel cost exceeds capital cost after about 1000 hours, making generator replacement feasible (confirm)
-    - under ideal conditions an efficient diesel generator has comparable cost and carbon intensity compared to existing fossil sources
-    - these data show that these ideal condition costs may not be valid
-    - diesel cost and carbon intensity can match or greatly exceed coal and NG averages
-    - while PV costs rise on a capital basis, diesel costs rise on a marginal basis
-    - marginal costs are often more difficult because operation and maintenance isn't well handled
+- These observed fuel costs are likely higher than those in least-cost models for electricity planning
+    - If the observed costs are above another option, least-cost planning hasn't been achieved
+    - The $2 per kVA is likely above the levelized cost for solar PV with battery storage
+    - Using the Lazard LCOE and LCOS studies we can create a composite estimate of 1.03 -- 1.70 USD per kWh for PV and storage. [@Lazard_LCOE @Lazard_LCOS]
+    - While this is a high LCOE it is below the observed fuel cost for one of the villages and invites us to reconsider the least cost assumptions.
 
 ## Capital vs Operating Costs
 
-- We report two electricity consumption averages.
-    - We report an average for energy delivered on days or nights with full access.
-    - We report another average for actual energy delivered each day.
-    - The first average gives the potential energy consumption for the system when it is fully operational without technical or operational constraints.
-    - The second average is the actual electricity delivered.
-    - The difference between these two provides a measure of latent demand.
+- Diesel generators are attractive because they are affordable to purchase and install
+    - Diesel is the least cost option from a capital perspective
+    - If the cost of maintenance and operation isn't priced, they will be installed in cases where they are not the least cost option (jaramillo?)
+
+## Carbon Impact
+
+- High specific fuel consumption means high carbon intensity of electricity
+    - Under ideal conditions an efficient diesel generator has comparable cost and carbon intensity compared to existing fossil sources
+    - Diesel cost and carbon intensity can match or greatly exceed coal and NG averages
 
 ## Potential Improvements
 
+- These problems of high marginal costs and insufficient tariff recovery suggest that other approaches could provide better service at a lower cost.
+    - Revisiting the least cost assumptions in actual operation may lead to different generation allocation decisions
+
 - Matching generators to loads could improve SFC and operating costs
-- A smaller generator operating at 75% load would provide X improvement
-- Running the generator at this 75% load could slow degradation and SFC increases
-- Revisiting the least cost assumptions in actual operation may lead to different generation allocation decisions
+    - A smaller generator operating at 75% load would provide X improvement
+    - Running the generator at this 75% load could slow degradation and SFC increases
+    - at $400 per kW, $1 per liter, and 300 ml/kWh, fuel cost exceeds capital cost after about 1000 hours, making generator replacement feasible (confirm)
 
-## Findings
+- Replacing diesel generation with PV and battery storage could improve levelized cost
+    - It is plausible that PV systems with storage can deliver electricity for less than the $2 per kWh that we observe
+    - While the levelized cost of a battery and PV system may be lower, the capital investment is much higher.
+    - While PV costs rise on a capital basis, diesel costs rise on a marginal basis
+    - To move to a least cost option from a total cost perspective may require new ways to access capital.
 
-- We find that the modeled fuel use is above least cost assumptions
-- We find that the observed fuel use is well above both the modeled fuel use and the least cost assumptions
+# Bibliography

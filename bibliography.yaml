@@ -1,0 +1,70 @@
+---
+references:
+- id: ADB_AUEAII
+  title: Achieving Universal Electricity Access in Indonesia
+  issued:
+  - year: 2016
+- id: Casillas_EP
+  title: The delivery of low-cost, low-carbon rural energy services
+  author:
+  - family: Casillas
+    given: Christian E.
+  - family: Kammen
+    given: Daniel M.
+  container-title: Energy Policy
+  volume: 39
+  DOI: https://doi.org/10.1016/j.enpol.2011.04.018
+  URL: http://www.sciencedirect.com/science/article/pii/S0301421511003016
+  page: 4520
+  issued:
+    year: 2011
+    month:
+- id: ESDM
+  title: Handbook of Energy and Economic Statistics of Indonesia
+  issued:
+  - year: 2014
+- id: Schnitzer_Thesis
+  title: "Microgrids and High-Quality Central Grid Alternatives: Challenges and Imperatives Elucidated by Case Studies and Simulation"
+  author:
+  - family: Schnitzer
+    given: Daniel A. K.
+  issued:
+    year: 2014
+    month:
+- id: Louie_ESD
+  title: Effects of load estimation error on small-scale off-grid photovoltaic system design, cost and reliability
+  type: article-journal
+  author:
+  - family: Louie
+    given: Henry
+  - family: Dauenhauer
+    given: Peter
+  issued:
+  - year: 2016
+    month: 10
+  page: '30-43'
+  volume: '34'
+- id: Lazard_LCOE
+  title: Levelized Cost of Energy Analysis 10.0
+  type: report
+  issued:
+  - year: 2016
+    month: 12
+- id: Lazard_LCOS
+  title: Levelized Cost of Storage Analysis 2.0
+  type: report
+  issued:
+  - year: 2016
+    month: 12
+- id: IEEFA
+  title: Overpaid and Underutilized
+  type: report
+  URL: http://ieefa.org/ieefa-indonesia-potential-overcommitment-coal-fired-electricity-puts-nation-risk/
+  issued:
+  - year: 2017
+  month: 8
+- id: RUPTL
+  title: 'PLN RUPTL 2017-2026'
+  issued:
+  - year: 2017
+---
