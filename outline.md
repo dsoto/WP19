@@ -8,6 +8,13 @@ tblPrefix: Table
 
 # Abstract
 
+- topic: energy access, cost of electricity
+- problem being addressed: marginal cost of diesel
+- gap: little direct measurement?  nothing in indonesia?
+- approach: accurate energy monitoring and fuel refill logs
+- result: we observe reasonable to unacceptable SFC
+- key impact: we should revisit load factor and least cost assumptions going forward
+
 # Introduction
 
 - Electrification of the remaining 1.2 billion people without access requires close attention to operating costs.
@@ -15,7 +22,7 @@ tblPrefix: Table
     - Indonesia is executing a large electrification expansion to achieve universal access [@ADB_AUEAII]
     - Indonesia has made progress on percentage of households with electricity access over the last decades [@ADB_AUEAII]
     - The archipelago however presents challenges and there are wide differences in the electrification rate [@cite]
-    - Diesel electricity generation with internal-combustion engines is an important source of decentalized energy.
+    - Diesel electricity generation with internal-combustion engines is an important source of decentralized energy.
     - Geospatial least cost studies and Indonesian planning documents show continuing diesel use as a significant part of the mix [@ADB_AUEAII; @IEEFA; @RUPTL]
     - Least cost assumptions are sensitive to operating costs [@ADB_AUEAII]
     - To support this effort we must observe the costs and compare to expectations.
@@ -26,15 +33,15 @@ tblPrefix: Table
     - Work in off-grid generation show that diesel grids are expensive to run and do not operate at all hours.
     - Grids in Haiti show oversized grids infrequently operated [@Schnitzer_Thesis]
     - A diesel microgrid in Nicaragua runs at well below the generator rating [@Casillas_EP]
-    - In the case of PV, oversizing leads to higher costs [@Louie_ESD]
+    - In the case of photovoltaic (PV) electricity, oversizing leads to higher costs [@Louie_ESD]
     - Evidence shows that tariffs are below operating costs in Haiti and that few if any grids are operating since they are not economically viable [@Schnitzer_Thesis]
     - All this evidence strongly suggests that the operating costs for diesel be verified.
 
 - This study provides estimates and observations of the fuel costs for diesel consumption in three Indonesian microgrids
     - This work presents a model and estimate of fuel consumption under low loads and observes the fuel use per unit of energy delivered.
     - We find that the generators are providing power well below their intended operating points
-    - The model estimates that a new generator operating at these low power operating points would have operating costs at 0.60 USD or above
-    - Our observations show that the observed specific fuel consumption with an installed generator on one grid is as high as 2 USD per kVA-hour delivered, suggesting significant efficiency degradation.
+    - The model estimates that a new generator operating at these low power operating points would have operating costs at 0.60 USD per kWh or above
+    - Our observations show that the observed specific fuel consumption (SFC) with an installed generator on one grid is as high as 2 USD per kWh delivered, suggesting significant efficiency degradation.
 
 - These results suggest diesel microgrids may not all be performing to expectations.
     - When the generator is run at low loads marginal cost and carbon emissions rise
@@ -128,7 +135,7 @@ Table: Data Coverage {#tbl:data_coverage}
     - We define operation as a day where there is any non-zero energy reported
     - On operating days @tbl:daily_operating_energy shows that total energy delivered is 9, 15, and 90 kWh per day.
     - The average energy use on days of operation per connected household is between 0.4 and 0.9 kWh per day
-    - The cumulative distribution function in @fig:daily_energy_CDF shows that the electricity most days is clustered around the mean but there is a low energy tail for two villages
+    - The cumulative distribution function (CDF) in @fig:daily_energy_CDF shows that the electricity most days is clustered around the mean but there is a low energy tail for two villages
     - These daily energy totals were used to calculate the observed specific fuel consumption
 
 ![Daily Energy Cumulative Distribution Function](./plots/daily_energy_CDF.png){#fig:daily_energy_CDF}
@@ -177,7 +184,7 @@ Table: Modeled Specific Fuel Consumption {#tbl:modeled_SFC}
     - This results in a specific fuel consumption of 2 liters per kWh.
     - Ayapo reports 60 liters per night for its 40 kVA genset to deliver 85 kWh
     - This is a specific fuel consumption of 710 ml per kWh, well above predicted.
-    - At 1 USD per liter for diesel, this is a marginal cost of 0.70 USD and 2 USD per kWh
+    - At 1 USD per liter for diesel, this is a marginal cost of 0.70 and 2 USD per kWh
 
 Table: Observed Specific Fuel Consumption {#tbl:observed_SFC}
 
@@ -221,7 +228,7 @@ Table: Observed Specific Fuel Consumption {#tbl:observed_SFC}
 - These observed fuel costs are likely higher than those in least-cost models for electricity planning
     - If the observed costs are above another option, least-cost planning hasn't been achieved
     - The $2 per kVA is likely above the levelized cost for solar PV with battery storage
-    - Using the Lazard LCOE and LCOS studies we can create a composite estimate of 1.03 -- 1.70 USD per kWh for PV and storage. [@Lazard_LCOE @Lazard_LCOS]
+    - Using the Lazard levelized cost of energy (LCOE) and levelized cost of storage LCOS studies we can create a composite estimate of 1.03 -- 1.70 USD per kWh for PV and storage. [@Lazard_LCOE @Lazard_LCOS]
     - While this is a high LCOE it is below the observed fuel cost for one of the villages and invites us to reconsider the least cost assumptions.
 
 ## Capital vs Operating Costs
