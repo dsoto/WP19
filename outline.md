@@ -21,7 +21,7 @@ tblPrefix: Table
     - Areas beyond the grid require decentralized solutions that can be more costly both to install and to maintain.
     - Indonesia is executing a large electrification expansion to achieve universal access [@ADB_AUEAII]
     - Indonesia has made progress on percentage of households with electricity access over the last decades [@ADB_AUEAII]
-    - The archipelago however presents challenges and there are wide differences in the electrification rate [@cite]
+    - The archipelago however presents challenges and there are wide differences in the electrification rate [@no_cite_yet]
     - Diesel electricity generation with internal-combustion engines is an important source of decentralized energy.
     - Geospatial least cost studies and Indonesian planning documents show continuing diesel use as a significant part of the mix [@ADB_AUEAII; @IEEFA; @RUPTL]
     - Least cost assumptions are sensitive to operating costs [@ADB_AUEAII]
@@ -206,8 +206,9 @@ Table: Observed Specific Fuel Consumption {#tbl:observed_SFC}
     - It is likely uneconomical to run these generators continuously but unnecessarily high marginal costs worsen the problem
     - The village nominally has been electrified but has an expensive and intermittent electricity service.
 
-- Our data show the total duration of operation each day (@fig:uptime_CDF)
-    - The figure shows that two grids don't operate at on 15% of the days and another on 35% of the days.
+- Our data show the total duration of operation each day
+- Our data show the grids operating only for a portion of the day
+    - Figure (@fig:uptime_CDF) shows that two grids don't operate at on 15% of the days and another on 35% of the days.
     - The Atamali provides between 5 and 7 hours 75% of the observed days
     - The Ayapo grid provides between 4 and 7 hours on about 75% of the observed days
     - The Kensio microgrid, however, shows very few days with more than 5 hours of service.
@@ -217,31 +218,24 @@ Table: Observed Specific Fuel Consumption {#tbl:observed_SFC}
 
 ## Insufficient Cost Recovery
 
-- Observed fuel costs are well above tariff collection requiring subsidy
-    - Customers pay 5 cents or less per kWh and many meters don't function
-    - The electricity is almost completely subsidized
-    - The operating costs are well above the tariffs
-    - This subsidized operation is found in other grids (cite)
+- The observed fuel costs are well above the tariffs charged on the grids requiring subsidy
+    - Customers pay 5 cents or less per kWh and many meters don't function (personal communication)
+    - This suggests electricity is almost completely subsidized similar to other grids [@Schnitzer_Thesis]
 
 ## Least Cost Model Assumptions
 
-- These observed fuel costs are likely higher than those in least-cost models for electricity planning
+- These observed fuel costs are likely higher than the cost assumptions in least-cost models for electricity planning
     - If the observed costs are above another option, least-cost planning hasn't been achieved
     - The $2 per kVA is likely above the levelized cost for solar PV with battery storage
-    - Using the Lazard levelized cost of energy (LCOE) and levelized cost of storage LCOS studies we can create a composite estimate of 1.03 -- 1.70 USD per kWh for PV and storage. [@Lazard_LCOE @Lazard_LCOS]
+    - Using the Lazard levelized cost of energy (LCOE) and levelized cost of storage LCOS studies we can create a composite estimate of 1.22 -- 1.56 USD per kWh for PV and storage. [@Lazard_LCOE @Lazard_LCOS]
     - While this is a high LCOE it is below the observed fuel cost for one of the villages and invites us to reconsider the least cost assumptions.
 
 ## Capital vs Operating Costs
 
 - Diesel generators are attractive because they are affordable to purchase and install
-    - Diesel is the least cost option from a capital perspective
-    - If the cost of maintenance and operation isn't priced, they will be installed in cases where they are not the least cost option (jaramillo?)
-
-## Carbon Impact
-
-- High specific fuel consumption means high carbon intensity of electricity
-    - Under ideal conditions an efficient diesel generator has comparable cost and carbon intensity compared to existing fossil sources
-    - Diesel cost and carbon intensity can match or greatly exceed coal and NG averages
+    - Diesel costs the least to purchase and install per kW among any generation source [@Lazard_LCOE]
+    - Because of fuel cost they end up on the high end of levelized cost [@Lazard_LCOE]
+    - If the true, observed cost of maintenance and operation isn't priced, they will be installed in cases where they are not the least cost option
 
 ## Potential Improvements
 
@@ -249,9 +243,9 @@ Table: Observed Specific Fuel Consumption {#tbl:observed_SFC}
     - Revisiting the least cost assumptions in actual operation may lead to different generation allocation decisions
 
 - Matching generators to loads could improve SFC and operating costs
-    - A smaller generator operating at 75% load would provide X improvement
-    - Running the generator at this 75% load could slow degradation and SFC increases
-    - at $400 per kW, $1 per liter, and 300 ml/kWh, fuel cost exceeds capital cost after about 1000 hours, making generator replacement feasible (confirm)
+    - A smaller generator operating at or above 75% of the rated load will bring the SFC within the range of assumptions.
+    - Running the generator at this better matched load could slow degradation and SFC increases due to the incomplete combustion (wet stacking) observed at low loads.  [@Hove_Tazvinga]
+    - The low initial cost and high fuel cost allow this replacement to pay back quickly.
 
 - Replacing diesel generation with PV and battery storage could improve levelized cost
     - It is plausible that PV systems with storage can deliver electricity for less than the $2 per kWh that we observe
