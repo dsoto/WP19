@@ -8,12 +8,12 @@ tblPrefix: Table
 
 # Abstract
 
-- topic: energy access, cost of electricity
-- problem being addressed: marginal cost of diesel
-- gap: little direct measurement?  nothing in indonesia?
-- approach: accurate energy monitoring and fuel refill logs
-- result: we observe reasonable to unacceptable SFC
-- key impact: we should revisit load factor and least cost assumptions going forward
+- Supplying electricity to the remaining unconnected populations requires cost-effective distributed sources of electricity generation.
+- Diesel reciprocating engine generators are a popular generation source because of their low capital cost but can have high operating costs.
+- Little data exists for the real-world behavior and operating costs on installed diesel micro-grids.
+- We report on the energy delivery and fuel consumption on three diesel micro-grids in the Lake Sentani region of Indonesia.
+- We find that these generators are sometimes operated below their capacity and that the diesel cost to electricity delivered ratio can be over five times greater than what we expect from the manufacturer specifications.
+- These estimations of the specific fuel consumption suggest that diesel in practice is not always a least cost technology and other options should be carefully considered.
 
 # Introduction
 
