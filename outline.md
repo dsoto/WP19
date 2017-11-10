@@ -99,8 +99,8 @@ tblPrefix: Table
 ## Modeled fuel estimation
 
 - We model the cost per kWh of generation on these microgrids assuming the generators perform according to the datasheets for the observed loads.
-    - We use 9 specification sheets for a generators of similar size from a leading manufacturer
-    - All specification sheets report fuel use at 50%, 75%, and 100% of the full load.
+    - We use nice specification sheets for generators of similar size from three manufacturers.
+    - All specification sheets report fuel use in liters per kWh while delivering power equal to 50%, 75%, and 100% of the rated load.
     - Some sheets also specify fuel use at 25% of the full load.
     - We assume a linear relationship between fuel use and generator load as well as fuel use and the rated generator size.
     - I create a dataset of the expected fuel consumption for several generators as a function of the delivered load and maximum power output.
@@ -119,11 +119,10 @@ tblPrefix: Table
 
 ## Data Coverage
 
-- We have confidence in the data for 86% to 93% of the observation period for the microgrids
+- We have direct or indirect data for 86% to 93% of the observation period on these microgrids
     - The data cover from two to three months in the villages. (@tbl:data_coverage)
     - We have direct time series measurements for 9 to 23 percent of the observation period
     - We have messages indicating the grid going off and back on that bring coverage up to 86 to 93 percent.
-
 
 Table: Data Coverage {#tbl:data_coverage}
 
@@ -167,10 +166,9 @@ Table: Generator Utilization {#tbl:genset_utilization}
     - Our fit to the generator specifications has a slope of 0.270 lph per kVA of load
     - The fit has a slope of 0.059 lph per kVA of rated power
     - Table @tbl:modeled_SFC shows the modeled specific fuel consumption.
-    - In practice, we expect wear and tear to reduce the efficiency of the generator.
+    - In practice, we expect wear and tear to reduce the efficiency of the generator and increase the SFC.
 
 - Since we have the time series observations of kVA we can model a duration curve for the specific fuel consumption.
-    - Report CDFs of specific fuel
     - The modeled specific fuel consumption at 100% load range from 0.287 to 0.302 liters per kVA-hour
     - The modeled specific fuel consumption at the rated load range from 0.361 to 0.681 liters per kVA-hour
 
@@ -179,7 +177,6 @@ Table: Modeled Specific Fuel Consumption {#tbl:modeled_SFC}
 {% include './tables/modeled_SFC.md' %}
 
 - I also report an observed specific fuel consumption based on the generator operators daily fuel logs and the observed daily energy use
-    - Observations of fuel consumption are from operator reports
     - Atamali reports 30 liters per night for its 25 kVA genset to deliver 15 kWh
     - This results in a specific fuel consumption of 2 liters per kWh.
     - Ayapo reports 60 liters per night for its 40 kVA genset to deliver 85 kWh
@@ -192,7 +189,13 @@ Table: Observed Specific Fuel Consumption {#tbl:observed_SFC}
 
 # Discussion
 
-## Inefficient Operation Leads to Poorer Service
+## Diesel and Least Cost Assumptions
+
+- Diesel generators are attractive because they are affordable to purchase and install
+    - Diesel costs the least to purchase and install per kW among any generation source [@Lazard_LCOE]
+    - Because of fuel cost they end up on the high end of levelized cost [@Lazard_LCOE]
+    - If the true, observed cost of maintenance and operation isn't priced, they will be installed in cases where they are not the least cost option
+    - These results show marginal cost above assumptions.
 
 - Operating a diesel generator at a power load well below its designed operating point leads to inefficient operation.
     - Operating at low load increases engine maintenance requirements and worsens fuel costs [@Schnitzer_Thesis]
@@ -203,26 +206,6 @@ Table: Observed Specific Fuel Consumption {#tbl:observed_SFC}
     - Our observations adhere to this prediction of higher SFC
     - The observed fuel costs are well above modeled fuel costs suggesting generator maintenance issues
     - These SFC costs also restrict generator operation to evenings
-    - It is likely uneconomical to run these generators continuously but unnecessarily high marginal costs worsen the problem
-    - The village nominally has been electrified but has an expensive and intermittent electricity service.
-
-- Our data show the total duration of operation each day
-- Our data show the grids operating only for a portion of the day
-    - Figure (@fig:uptime_CDF) shows that two grids don't operate at on 15% of the days and another on 35% of the days.
-    - The Atamali provides between 5 and 7 hours 75% of the observed days
-    - The Ayapo grid provides between 4 and 7 hours on about 75% of the observed days
-    - The Kensio microgrid, however, shows very few days with more than 5 hours of service.
-    - These data are consistent with the evening-only operation and also show some days with less service.
-
-![Cumulative distribution function of Uptime](./plots/uptime_CDF.png){#fig:uptime_CDF}
-
-## Insufficient Cost Recovery
-
-- The observed fuel costs are well above the tariffs charged on the grids requiring subsidy
-    - Customers pay 5 cents or less per kWh and many meters don't function (personal communication)
-    - This suggests electricity is almost completely subsidized similar to other grids [@Schnitzer_Thesis]
-
-## Least Cost Model Assumptions
 
 - These observed fuel costs are likely higher than the cost assumptions in least-cost models for electricity planning
     - If the observed costs are above another option, least-cost planning hasn't been achieved
@@ -230,12 +213,23 @@ Table: Observed Specific Fuel Consumption {#tbl:observed_SFC}
     - Using the Lazard levelized cost of energy (LCOE) and levelized cost of storage LCOS studies we can create a composite estimate of 1.22 -- 1.56 USD per kWh for PV and storage. [@Lazard_LCOE @Lazard_LCOS]
     - While this is a high LCOE it is below the observed fuel cost for one of the villages and invites us to reconsider the least cost assumptions.
 
-## Capital vs Operating Costs
+## Inefficient Operation and Level of Service
 
-- Diesel generators are attractive because they are affordable to purchase and install
-    - Diesel costs the least to purchase and install per kW among any generation source [@Lazard_LCOE]
-    - Because of fuel cost they end up on the high end of levelized cost [@Lazard_LCOE]
-    - If the true, observed cost of maintenance and operation isn't priced, they will be installed in cases where they are not the least cost option
+- The observed fuel costs are well above the tariffs charged on the grids requiring subsidy
+    - Customers pay 5 cents or less per kWh and many meters don't function (personal communication)
+    - This suggests electricity is almost completely subsidized similar to other grids [@Schnitzer_Thesis]
+    - While there is insufficient cost recovery even if running efficiently, degraded generators exacerbate this problem.
+
+- Our data show the grids operating only for a portion of the day
+    - Figure (@fig:uptime_CDF) shows that two grids don't operate at on 15% of the days and another on 35% of the days.
+    - The Atamali provides between 5 and 7 hours 75% of the observed days
+    - The Ayapo grid provides between 4 and 7 hours on about 75% of the observed days
+    - The Kensio microgrid, however, shows very few days with more than 5 hours of service.
+    - These data are consistent with the evening-only operation and also show some days with less service.
+    - It is likely uneconomical to run these generators continuously but unnecessarily high marginal costs worsen the problem
+    - The village nominally has been electrified but has an expensive and intermittent electricity service.
+
+![Cumulative distribution function of Uptime](./plots/uptime_CDF.png){#fig:uptime_CDF}
 
 ## Potential Improvements
 
