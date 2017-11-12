@@ -27,3 +27,36 @@ Areas that are struggling with high costs of electricity delivery can estimate t
 These micro-grids could be retrofitted with diesel generators that are a better match to the load or with alternative electricity generation technologies.
 Improving these operating costs could improve the financial viability on these existing grids and inform future electricity planning.
 
+# Methods
+
+We model and estimate the fuel use per unit of electrical energy delivered (specific fuel consumption or SFC) for three village microgrids.
+Power and energy data from data logging meters are collected, cleaned, and analyzed to extract the energy and power delivered.
+We create a model of generator fuel consumption as a function of the rated power and delivered power based on the specification sheets of nine comparable generators.
+The observed power during operation and rated energy size is used to infer the SFC for each of the three microgrids.
+To estimate the actual observed SFC we take the ratio of the reported fuel use per day by the operator and the measured energy use per day.
+
+We measured the energy and power delivered to three villages with diesel microgrids using data logging meters.
+The recordings were compiled from late April to July 2015 as part of the work of a private microgrid provider in the area.
+The meters were placed at the main output of the generator and measured the energy delivered to the village distribution system.
+The data logger measured power in volt-amps and accumulated energy in kilowatt-hours at one-minute intervals.
+These measurements were transmitted over a communication network to a database for storage.
+
+We assemble a time series record from our record of data.
+There are three possibilities in the data recording process.
+One, the meter and generator were properly functioning and data was stored on one-minute intervals.
+Two, the meter is properly functioning and the generator was dormant and a data point for the shutdown and startup of the generator was stored.
+Third, the meter or communication networks were not functioning properly and no data is in the record.
+We account for each of these possibilities as we assemble the time series of generator data.
+
+We model the cost per kWh of generation on these microgrids using a linear fit of manufacturer generator specification data from nine specification sheets from three manufacturers.
+All specification sheets report the fuel use in liters per kWh as a function of the power delivered by the generator (load).
+All specification sheets report on SFC while delivering power at 50%, 75%, and 100% of the rated load while some also include a 25% data point.
+We assume a linear relationship between the SFC and the delivered power as well as the SFC and the rated power for the generator.
+These data are used to create a linear regression model of fuel use.
+The rated power for each of the three generators and the observed average power of operation for each microgrid is fed into this linear model to predict the SFC for each generator.
+
+We also estimate the per kWh cost of generation in real-world conditions on these grids from the delivered energy and the reported fuel use.
+Operators keep logs of the approximate fuel use per day for the microgrids.
+The ratio of this approximate fuel use per day and the energy delivered per day gives the observed specific fuel consumption.
+
+
