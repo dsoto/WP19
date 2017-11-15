@@ -98,8 +98,8 @@ tblPrefix: Table
 
 ## Modeled fuel estimation
 
-- We model the cost per kWh of generation on these microgrids assuming the generators perform according to the datasheets for the observed loads.
-    - We use nice specification sheets for generators of similar size from three manufacturers.
+- We model the cost per kWh of generation on these microgrids using a linear fit of manufacturer data for SFC and the observed loads.
+    - We use nine specification sheets for generators of similar size from three manufacturers.
     - All specification sheets report fuel use in liters per kWh while delivering power equal to 50%, 75%, and 100% of the rated load.
     - Some sheets also specify fuel use at 25% of the full load.
     - We assume a linear relationship between fuel use and generator load as well as fuel use and the rated generator size.
@@ -153,8 +153,6 @@ Table: Mean Energy Delivered During Grid Operation {#tbl:daily_operating_energy}
 
 ![Power Cumulative Distribution Function](./plots/power-CDF.png){#fig:power-CDF}
 
-<!-- ![Power Cumulative Distribution Function](./plots/power&#45;CDF&#45;no&#45;zeros.png){#fig:power&#45;CDF&#45;no&#45;zeros.png} -->
-
 Table: Generator Utilization {#tbl:genset_utilization}
 
 {% include './tables/genset_utilization.md' %}
@@ -165,12 +163,13 @@ Table: Generator Utilization {#tbl:genset_utilization}
     - The generators range in size from 25 kVA to 40 kVA
     - Our fit to the generator specifications has a slope of 0.270 lph per kVA of load
     - The fit has a slope of 0.059 lph per kVA of rated power
+    - The r-squared value for the fit is 0.915
     - Table @tbl:modeled_SFC shows the modeled specific fuel consumption.
     - In practice, we expect wear and tear to reduce the efficiency of the generator and increase the SFC.
 
-- Since we have the time series observations of kVA we can model a duration curve for the specific fuel consumption.
-    - The modeled specific fuel consumption at 100% load range from 0.287 to 0.302 liters per kVA-hour
-    - The modeled specific fuel consumption at the rated load range from 0.361 to 0.681 liters per kVA-hour
+<!-- &#45; Since we have the time series observations of kVA we can model a duration curve for the specific fuel consumption. -->
+<!--     &#45; The modeled specific fuel consumption at 100% load range from 0.287 to 0.302 liters per kVA&#45;hour -->
+<!--     &#45; The modeled specific fuel consumption at the rated load range from 0.361 to 0.681 liters per kVA&#45;hour -->
 
 Table: Modeled Specific Fuel Consumption {#tbl:modeled_SFC}
 
