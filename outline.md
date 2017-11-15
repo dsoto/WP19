@@ -8,49 +8,59 @@ tblPrefix: Table
 
 # Abstract
 
-- Supplying electricity to the remaining unconnected populations requires cost-effective distributed sources of electricity generation.
-- Diesel reciprocating engine generators are a popular generation source because of their low capital cost but can have high operating costs.
-- Little data exists for the real-world behavior and operating costs on installed diesel micro-grids.
-- We report on the energy delivery and fuel consumption on three diesel micro-grids in the Lake Sentani region of Indonesia.
-- We find that these generators are sometimes operated below their capacity and that the diesel cost to electricity delivered ratio can be over five times greater than what we expect from the manufacturer specifications.
-- These estimations of the specific fuel consumption suggest that diesel in practice is not always a least cost technology and other options should be carefully considered.
+Supplying electricity to the remaining unconnected populations requires cost-effective distributed sources of electricity generation.
+Diesel reciprocating engine generators are a popular generation source because of their low capital cost but can have high operating costs.
+Little data exists for the real-world behavior and operating costs on installed diesel micro-grids.
+We report on the energy delivery and fuel consumption on three diesel micro-grids in the Lake Sentani region of Indonesia.
+We find that these generators are sometimes operated below their capacity and that the diesel cost to electricity delivered ratio can be over five times greater than what we expect from the manufacturer specifications.
+These estimations of the specific fuel consumption suggest that diesel in practice is not always a least cost technology and other options should be carefully considered.
 
 # Introduction
 
-- Electrification of the remaining 1.2 billion people without access requires close attention to operating costs.
-    - Areas beyond the grid require decentralized solutions that can be more costly both to install and to maintain.
-    - Indonesia is executing a large electrification expansion to achieve universal access [@ADB_AUEAII]
-    - Indonesia has made progress on percentage of households with electricity access over the last decades [@ADB_AUEAII]
-    - The archipelago however presents challenges and there are wide differences in the electrification rate [@no_cite_yet]
-    - Diesel electricity generation with internal-combustion engines is an important source of decentralized energy.
-    - Geospatial least cost studies and Indonesian planning documents show continuing diesel use as a significant part of the mix [@ADB_AUEAII; @IEEFA; @RUPTL]
-    - Least cost assumptions are sensitive to operating costs [@ADB_AUEAII]
-    - To support this effort we must observe the costs and compare to expectations.
-    - Observations of marginal cost can inform future allocations in Indonesia and beyond.
-    - If the fuel costs are significantly greater than assumptions, the assumptions should be revisited.
+The electrification of the remaining 1.2 billion people without access requires a close attention to costs.
+Indonesia is executing a large electrification expansion to achieve universal access [@ADB_AUEAII].
+Indonesia has made significant progress reducing the number of households without electricity access over the last decades.
+A significant fraction of the remaining households are beyond the reach of centralized grids and will require decentralized solutions.
+Indonesian planning documents based on least-cost studies show diesel generators as a significant part of the new electricity supply [@ADB_AUEAII; @IEEFA; @RUPTL].
+To ensure the delivery of electricity at the lowest price, the operating costs should be compared to assumptions over time.
+If these operating costs are significantly different from the assumptions, the electrification plan should be revisited.
 
-- This work adds to previous work that has shown problems with diesel generation by directly modelling and measuring the fuel used per unit of electricity delivered.
-    - Work in off-grid generation show that diesel grids are expensive to run and do not operate at all hours.
-    - Grids in Haiti show oversized grids infrequently operated [@Schnitzer_Thesis]
-    - A diesel microgrid in Nicaragua runs at well below the generator rating [@Casillas_EP]
-    - In the case of photovoltaic (PV) electricity, oversizing leads to higher costs [@Louie_ESD]
-    - Evidence shows that tariffs are below operating costs in Haiti and that few if any grids are operating since they are not economically viable [@Schnitzer_Thesis]
-    - All this evidence strongly suggests that the operating costs for diesel be verified.
+Previous work has shown problems with diesel generation but there are few examples of direct modeling and measurement of the fuel used per unit of electricity delivered (specific fuel consumption or SFC).
+Grids in Haiti show problems with loads below the capacity of the generator that lead to infrequent operation over limited hours.
+These problems make sustainable financial operation of the microgrids very difficult and many have fallen into disuse.
+[@Schnitzer_Thesis].
+A diesel microgrid in Nicaragua also runs at well below the generator rating [@Casillas_EP].
+In the case of photovoltaic (PV) electricity, having components that provide more energy than is being used leads to higher costs [@Louie_ESD, @Lee].
+Diesel generators that can deliver more power than is required by the customers can lead to higher fuel costs and generator degradation over time [@Hove_Tazvinga].
 
-- This study provides estimates and observations of the fuel costs for diesel consumption in three Indonesian microgrids
-    - This work presents a model and estimate of fuel consumption under low loads and observes the fuel use per unit of energy delivered.
-    - We find that the generators are providing power well below their intended operating points
-    - The model estimates that a new generator operating at these low power operating points would have operating costs at 0.60 USD per kWh or above
-    - Our observations show that the observed specific fuel consumption (SFC) with an installed generator on one grid is as high as 2 USD per kWh delivered, suggesting significant efficiency degradation.
+This study provides modeled and observed costs for diesel consumption in three microgrids in the Lake Sentani region of Indonesia.
+We find that the generators are providing power well below their intended operating points.
+Using a model based on the manufacturer specifications for several generators, we estimate that these generators would use 0.6 liters per kWh of electricity or above.
+This is about twice the value for a well-maintained generator operating according to its specifications.
+The observed fuel use reached as high as 1.9 liters per kWh suggesting serious fuel inefficiency likely due to issues of generator maintenance.
 
-- These results suggest diesel microgrids may not all be performing to expectations.
-    - When the generator is run at low loads marginal cost and carbon emissions rise
-    - Areas with high marginal costs should be identified and mitigated
-    - Right-sized generators or alternate technologies should be considered for areas with high marginal costs
-    - Indonesia overall diesel plant electricity production flattening out [@ESDM].
-    - The remaining off-grid diesel market should be investigated for efficiency.
+These results suggest that diesel micro-grids operating outside of centralized grid areas may not be performing to the expectations of the electricity planners.
+Areas that are struggling with high costs of electricity delivery can estimate the SFC of their generators to check for degradation or insufficient loads.
+These micro-grids could be retrofitted with diesel generators that are a better match to the load or with alternative electricity generation technologies.
+Improving these operating costs could improve the financial viability on these existing grids and inform future electricity planning.
 
 # Methods
+
+## Overall
+
+- We model and estimate the fuel use per unit of energy (specific fuel consumption or SFC) delivered for three villages.
+    - Power and energy data is collected, cleaned, and analyzed to find the daily energy and the power delivered
+    - We create a model of fuel use based on the specification sheets for nine generators of comparable power output that predicts the SFC based on the generator size and load.
+    - The average observed power during operation and the generator size is used by the model to infer the SFC for each of the three microgrids.
+    - We then take the ratio of the observed fuel use to the average energy used while in operation to estimate the observed SFC.
+    - The observed fuel use is collected from logs or verbal accounts from the microgrid operators.
+    - We report the modeled and observed SFC in liters of fuel consumed per kWh of electricity output.
+
+<!-- optimum vs optimal? -->
+<!-- how do I add microgrid to my dictionary -->
+<!-- move timeseries to time series -->
+<!-- move timestamp to time stamp -->
+<!-- the SFC vs power curve must be linear to use the average -->
 
 ## Data Collection Context
 
