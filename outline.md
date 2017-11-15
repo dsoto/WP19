@@ -46,83 +46,35 @@ Improving these operating costs could improve the financial viability on these e
 
 # Methods
 
-## Overall
+We model and estimate the fuel use per unit of electrical energy delivered (specific fuel consumption or SFC) for three village microgrids.
+Power and energy data from data logging meters are collected, cleaned, and analyzed to extract the energy and power delivered.
+We create a model of generator fuel consumption as a function of the rated power and delivered power based on the specification sheets of nine comparable generators.
+The observed power during operation and rated energy size is used to infer the SFC for each of the three microgrids.
+To estimate the actual observed SFC we take the ratio of the reported fuel use per day by the operator and the measured energy use per day.
 
-- We model and estimate the fuel use per unit of energy (specific fuel consumption or SFC) delivered for three villages.
-    - Power and energy data is collected, cleaned, and analyzed to find the daily energy and the power delivered
-    - We create a model of fuel use based on the specification sheets for nine generators of comparable power output that predicts the SFC based on the generator size and load.
-    - The average observed power during operation and the generator size is used by the model to infer the SFC for each of the three microgrids.
-    - We then take the ratio of the observed fuel use to the average energy used while in operation to estimate the observed SFC.
-    - The observed fuel use is collected from logs or verbal accounts from the microgrid operators.
-    - We report the modeled and observed SFC in liters of fuel consumed per kWh of electricity output.
+We measured the energy and power delivered to three villages with diesel microgrids using data logging meters.
+The recordings were compiled from late April to July 2015 as part of the work of a private microgrid provider in the area.
+The meters were placed at the main output of the generator and measured the energy delivered to the village distribution system.
+The data logger measured power in volt-amps and accumulated energy in kilowatt-hours at one-minute intervals.
+These measurements were transmitted over a communication network to a database for storage.
 
-<!-- optimum vs optimal? -->
-<!-- how do I add microgrid to my dictionary -->
-<!-- move timeseries to time series -->
-<!-- move timestamp to time stamp -->
-<!-- the SFC vs power curve must be linear to use the average -->
+We assemble a time series record from our record of data.
+There are three possibilities in the data recording process.
+One, the meter and generator were properly functioning and data was stored on one-minute intervals.
+Two, the meter is properly functioning and the generator was dormant and a data point for the shutdown and startup of the generator was stored.
+Third, the meter or communication networks were not functioning properly and no data is in the record.
+We account for each of these possibilities as we assemble the time series of generator data.
 
-## Data Collection Context
+We model the cost per kWh of generation on these microgrids using a linear fit of manufacturer generator specification data from nine specification sheets from three manufacturers.
+All specification sheets report the fuel use in liters per kWh as a function of the power delivered by the generator (load).
+All specification sheets report on SFC while delivering power at 50%, 75%, and 100% of the rated load while some also include a 25% data point.
+We assume a linear relationship between the SFC and the delivered power as well as the SFC and the rated power for the generator.
+These data are used to create a linear regression model of fuel use.
+The rated power for each of the three generators and the observed average power of operation for each microgrid is fed into this linear model to predict the SFC for each generator.
 
-- We measured the energy and power delivered to 3 villages with diesel microgrids
-    - These villages are in the Lake Sentani region of Indonesia
-    - These recordings were compiled from late April to July 2015
-    - The main supply to each of these villages was fitted with a logging electrical power meter
-    - The power meter records the power, voltage, and current.
-    - The data is recorded at one-minute intervals.
-    - The meter measurements are transmitted to a database over a communication network
-    - Accumulated energy is reported in units of kilowatt-hours
-    - The apparent power is reported in units of volt-amps
-
-## Data Coverage
-
-- We report the interval of time that is covered by data
-    - Since the communication network wasn't fully robust, some gaps in the data exist
-    - We receive measurements at regular intervals during grid operation
-    - We receive reports when the grid ceases operation and returns
-    - We sum these periods of time to report the fraction of time covered by the data record
-
-## Missing data techniques and data integrity
-
-- We synthesize time series data for the times when the grid isn't running
-    - During power outages, we insert observations of zero power and energy consumption at the same frequency as the meter observations.
-    - There remain times without a measurement or confirmed period of power off
-    - We remove anomalies due to data corruption in the record
-
-## Energy consumption analysis
-
-- We report the daily energy use in the microgrid from the accumulated energy timeseries
-    - The meter records an energy accumulator that is reported at each timestamp with 1 kWh resolution.
-    - To account for gaps we insert zeros during reported downtime as described above.
-    - We resample the timeseries onto a one-minute time scale
-    - Take the difference between neighboring minutes
-    - Samples without valid data are assigned null values that aren't included in sums or means
-    - By summing these energy differences over a day, we get the energy consumption.
-
-## Power Consumption Analysis
-
-- We report the power used on the grids from the apparent power timeseries
-    - The meter provides the apparent power in kVA averaged over an interval at each time step.
-    - These data are reported as a mean power for each time of day and as a load duration curve
-    - We construct a cumulative distribution function of the observed apparent power to show the percentage of time that the grid is supplying a given power level.
-
-## Modeled fuel estimation
-
-- We model the cost per kWh of generation on these microgrids using a linear fit of manufacturer data for SFC and the observed loads.
-    - We use nine specification sheets for generators of similar size from three manufacturers.
-    - All specification sheets report fuel use in liters per kWh while delivering power equal to 50%, 75%, and 100% of the rated load.
-    - Some sheets also specify fuel use at 25% of the full load.
-    - We assume a linear relationship between fuel use and generator load as well as fuel use and the rated generator size.
-    - I create a dataset of the expected fuel consumption for several generators as a function of the delivered load and maximum power output.
-    - I perform a regression on this data set to create a linear model of fuel use as a function of delivered load and maximum power output.
-    - This model is used to extrapolate the fuel use for loads below the specified range.
-    - We divide the fuel rate by the apparent power to get the instantaneous specific fuel consumption
-
-## Observed fuel use
-
-- We estimate the per kWh cost of generation in real-world conditions from the delivered energy and the reported fuel use.
-    - Logs are kept of fuel input to the generator on a nightly basis.
-    - We divide the mean fuel per night as reported in the written log with the mean generation per night to get the overall specific fuel consumption
+We also estimate the per kWh cost of generation in real-world conditions on these grids from the delivered energy and the reported fuel use.
+Operators keep logs of the approximate fuel use per day for the microgrids.
+The ratio of this fuel use over time and the total energy delivered over that time period gives the observed specific fuel consumption and thus the marginal cost of fuel for the grids.
 
 # Results
 
