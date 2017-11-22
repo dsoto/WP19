@@ -66,11 +66,15 @@ Third, the meter or communication networks were not functioning properly and no 
 We account for each of these possibilities as we assemble the time series of generator data.
 
 We model the cost per kWh of generation on these microgrids using a linear fit of manufacturer generator specification data from nine specification sheets from three manufacturers.
-All specification sheets report the fuel use in liters per kWh as a function of the power delivered by the generator (load).
-All specification sheets report on SFC while delivering power at 50%, 75%, and 100% of the rated load while some also include a 25% data point.
-We assume a linear relationship between the SFC and the delivered power as well as the SFC and the rated power for the generator.
-These data are used to create a linear regression model of fuel use.
-The rated power for each of the three generators and the observed average power of operation for each microgrid is fed into this linear model to predict the SFC for each generator.
+All specification sheets report the fuel use in liters per hour as a function of the power delivered by the generator (load).
+The fuel rate is reported while delivering power at 50%, 75%, and 100% of the rated load while some also include a 25% data point.
+We assume a linear relationship between the fuel rate and the delivered power.
+We produce a linear fit to each generator.
+The slope of the fit is the increased fuel rate for each additional kW of power delivered.
+The intercept of the fit is the fuel rate with no power delivered (no-load fuel consumption).
+The mean of the slopes and intercepts are used to create a linear model of fuel use for a general generator.
+Dividing by the fuel rate by the power delivered yields the specific fuel consumption.
+The observed average power of operation for each microgrid is fed into this linear model to predict the SFC for each generator.
 
 We also estimate the per kWh cost of generation in real-world conditions on these grids from the delivered energy and the reported fuel use.
 Operators keep logs of the approximate fuel use per day for the microgrids.
@@ -78,26 +82,17 @@ The ratio of this fuel use over time and the total energy delivered over that ti
 
 # Results
 
-
-## Data Coverage
-
-- We have direct or indirect data for 86% to 93% of the observation period on these microgrids
-    - The data cover from two to three months in the villages. (@tbl:data_coverage)
-    - We have direct time series measurements for 9 to 23 percent of the observation period
-    - We have messages indicating the grid going off and back on that bring coverage up to 86 to 93 percent.
+The data cover 86% to 93% of the observation period on the three microgrids.
+Table @tbl:data_coverage shows that there are direct observations over 9% to 23% of the observation periods where the grid is operating.
+The indirect observations are from periods where the meter was operating but not taking one-minute samples while the grid wasn't operating and zero electricity delivery was assumed during these periods.
 
 Table: Data Coverage {#tbl:data_coverage}
 
 {% include './tables/data_coverage.md' %}
 
-## Electricity Energy Consumption
-
-- We report on the daily electricity energy consumption for days the grid is operating
-    - We define operation as a day where there is any non-zero energy reported
-    - On operating days @tbl:daily_operating_energy shows that total energy delivered is 9, 15, and 90 kWh per day.
-    - The average energy use on days of operation per connected household is between 0.4 and 0.9 kWh per day
-    - The cumulative distribution function (CDF) in @fig:daily_energy_CDF shows that the electricity most days is clustered around the mean but there is a low energy tail for two villages
-    - These daily energy totals were used to calculate the observed specific fuel consumption
+The daily electricity energy consumption on the days the grid is operating is between 0.4 and 0.9 kWh per day per household (Table @tbl:daily_operating_energy.
+We define operation as any day where any energy was delivered to households.
+The cumulative distribution function (CDF) in @fig:daily_energy_CDF shows that the electricity on most days is clustered around a central value but that there is a tail of lower values.
 
 ![Daily Energy Cumulative Distribution Function](./plots/daily_energy_CDF.png){#fig:daily_energy_CDF}
 
@@ -105,13 +100,13 @@ Table: Mean Energy Delivered During Grid Operation {#tbl:daily_operating_energy}
 
 {% include './tables/daily_operating_energy.md' %}
 
-
-## Power Consumption
-
-- We report on the apparent power consumption in these microgrids during these times of operation
-    - The @tbl:genset_utilization shows the mean loads during operation of the microgrids are well below the operating points of the generators
-    - The most well-matched microgrid is operating at 32% of the rated load and one grid is only at 6% of the generators rated load.
-    - These means do not include the periods of zero power since the generators don't run during these periods and fuel isn't consumed
+The power delivered to the households during operation is below the rated power for the generators.
+Table @tbl:genset_utilization shows the mean load during operation of the microgrids.
+The microgrid with the highest utilization is operating at 32% of the rated load and the lowest is at 6%.
+These means do not include the periods of zero power when the generator is not operating and fuel isn't being consumed.
+Figure @fig:power-CDF includes times when the grid is not operating.
+It shows that although there is a significant tail of zero power, two of the grid distributions don't have long tails.
+The Kensio grid however shows a low-power non-zero tail.
 
 ![Power Cumulative Distribution Function](./plots/power-CDF.png){#fig:power-CDF}
 
@@ -119,30 +114,22 @@ Table: Generator Utilization {#tbl:genset_utilization}
 
 {% include './tables/genset_utilization.md' %}
 
-## Microgrid Marginal Cost
+The specific fuel consumption regression model has a no-load fuel conumption of 1.39 liters per hour and a marginal fuel rate of 0.256 liters per hour per additional kW delivered.
+The r-squared values for each of the fits is above 0.98.
+The standard deviation of the marginal fuel rate is 0.019 liters per hour per kWh which is about 7% of the mean.
+The extrapolated no load consumption had much more variation with the standard deviation at 46% of the mean.
 
-- I model the specific fuel consumption in liters per kWh for a hypothetical well-maintained generator operating at the manufacturers specifications at the fraction of load we observe
-    - The generators range in size from 25 kVA to 40 kVA
-    - Our fit to the generator specifications has a slope of 0.270 lph per kVA of load
-    - The fit has a slope of 0.059 lph per kVA of rated power
-    - The r-squared value for the fit is 0.915
-    - Table @tbl:modeled_SFC shows the modeled specific fuel consumption.
-    - In practice, we expect wear and tear to reduce the efficiency of the generator and increase the SFC.
-
-<!-- &#45; Since we have the time series observations of kVA we can model a duration curve for the specific fuel consumption. -->
-<!--     &#45; The modeled specific fuel consumption at 100% load range from 0.287 to 0.302 liters per kVA&#45;hour -->
-<!--     &#45; The modeled specific fuel consumption at the rated load range from 0.361 to 0.681 liters per kVA&#45;hour -->
+The modeled specific fuel consumption is as high as 0.82 liters per kWh, more than twice the value at the optimum power delivered.
+Ayapo, with an average operating load of 33% of the rated load, increases fuel consumption by about 20% from the value at 100% load.
+Kensio has an average load of 6% of the rated load which increases the specific fuel consumption by over a factor of two from the optimal.
 
 Table: Modeled Specific Fuel Consumption {#tbl:modeled_SFC}
 
 {% include './tables/modeled_SFC.md' %}
 
-- I also report an observed specific fuel consumption based on the generator operators daily fuel logs and the observed daily energy use
-    - Atamali reports 30 liters per night for its 25 kVA genset to deliver 15 kWh
-    - This results in a specific fuel consumption of 2 liters per kWh.
-    - Ayapo reports 60 liters per night for its 40 kVA genset to deliver 85 kWh
-    - This is a specific fuel consumption of 710 ml per kWh, well above predicted.
-    - At 1 USD per liter for diesel, this is a marginal cost of 0.70 and 2 USD per kWh
+The observed fuel consumption is as high as 2 USD per kWh.
+@tbl:observed_SFC shows the reported average fuel use per night as reported by operators, as well as the mean energy on operating days and the observed specific fuel consumption (@no_cite_yet).
+These observed fuel uses exceed the modeled specific fuel consumption for all grids.
 
 Table: Observed Specific Fuel Consumption {#tbl:observed_SFC}
 
