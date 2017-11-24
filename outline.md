@@ -83,14 +83,14 @@ The ratio of this fuel use over time and the total energy delivered over that ti
 # Results
 
 The data cover 86% to 93% of the observation period on the three microgrids.
-Table @tbl:data_coverage shows that there are direct observations over 9% to 23% of the observation periods where the grid is operating.
+@tbl:data_coverage shows that there are direct observations over 9% to 23% of the observation periods where the grid is operating.
 The indirect observations are from periods where the meter was operating but not taking one-minute samples while the grid wasn't operating and zero electricity delivery was assumed during these periods.
 
 Table: Data Coverage {#tbl:data_coverage}
 
 {% include './tables/data_coverage.md' %}
 
-The daily electricity energy consumption on the days the grid is operating is between 0.4 and 0.9 kWh per day per household (Table @tbl:daily_operating_energy.
+The daily electricity energy consumption on the days the grid is operating is between 0.4 and 0.9 kWh per day per household (@tbl:daily_operating_energy).
 We define operation as any day where any energy was delivered to households.
 The cumulative distribution function (CDF) in @fig:daily_energy_CDF shows that the electricity on most days is clustered around a central value but that there is a tail of lower values.
 
@@ -101,10 +101,10 @@ Table: Mean Energy Delivered During Grid Operation {#tbl:daily_operating_energy}
 {% include './tables/daily_operating_energy.md' %}
 
 The power delivered to the households during operation is below the rated power for the generators.
-Table @tbl:genset_utilization shows the mean load during operation of the microgrids.
+@tbl:genset_utilization shows the mean load during operation of the microgrids.
 The microgrid with the highest utilization is operating at 32% of the rated load and the lowest is at 6%.
 These means do not include the periods of zero power when the generator is not operating and fuel isn't being consumed.
-Figure @fig:power-CDF includes times when the grid is not operating.
+@fig:power-CDF includes times when the grid is not operating.
 It shows that although there is a significant tail of zero power, two of the grid distributions don't have long tails.
 The Kensio grid however shows a low-power non-zero tail.
 
@@ -137,62 +137,66 @@ Table: Observed Specific Fuel Consumption {#tbl:observed_SFC}
 
 # Discussion
 
-## Diesel and Least Cost Assumptions
 
-- Diesel generators are attractive because they are affordable to purchase and install
-    - Diesel costs the least to purchase and install per kW among any generation source [@Lazard_LCOE]
-    - Because of fuel cost they end up on the high end of levelized cost [@Lazard_LCOE]
-    - If the true, observed cost of maintenance and operation isn't priced, they will be installed in cases where they are not the least cost option
-    - These results show marginal cost above assumptions.
+<!-- high marginal costs contradict the assumptions for diesel costs -->
+<!-- high marginal costs may mean diesel is not the least&#45;cost option -->
 
-- Operating a diesel generator at a power load well below its designed operating point leads to inefficient operation.
-    - Operating at low load increases engine maintenance requirements and worsens fuel costs [@Schnitzer_Thesis]
-    - This inefficiency increases fuel cost per unit of energy generated.
-    - This operation could increase wear and tear on the generator, increasing maintenance costs and downtime.
-    - These drive up operating costs through increased fuel consumption.
-    - To conserve fuel, many microgrids are only operated in the evenings. [@Schnitzer_Thesis,  @Casillas_EP ?]
-    - Our observations adhere to this prediction of higher SFC
-    - The observed fuel costs are well above modeled fuel costs suggesting generator maintenance issues
-    - These SFC costs also restrict generator operation to evenings
+Higher than expected marginal costs have electricity planning impacts.
+Low loads leading to high specific fuel costs erode the least-cost advantage of diesel generation.
+These higher specific fuel costs make delivery of energy expensive reducing the time service is available.
+The costs suggest that improvements be investigated.
 
-- These observed fuel costs are likely higher than the cost assumptions in least-cost models for electricity planning
-    - If the observed costs are above another option, least-cost planning hasn't been achieved
-    - The $2 per kVA is likely above the levelized cost for solar PV with battery storage
-    - Using the Lazard levelized cost of energy (LCOE) and levelized cost of storage LCOS studies we can create a composite estimate of 1.22 -- 1.56 USD per kWh for PV and storage. [@Lazard_LCOE @Lazard_LCOS]
-    - While this is a high LCOE it is below the observed fuel cost for one of the villages and invites us to reconsider the least cost assumptions.
+<!-- Diesel and Least Cost Assumptions -->
 
-## Inefficient Operation and Level of Service
+Operating diesel generators at low loads reduces the rate of fuel use but increases the rate of fuel use per unit of energy delivered.
+Over time, this lo load operation increases engine maintenance requirements and degrades performance. [@Schnitzer_Thesis, @Hove_Tazvinga]
+Two of these generators operate in a regime that causes a significant increase in the specific fuel consumption relative to the intended operating point of the generator.
+The observations of fuel use well above the model prediction suggests that these generators have seen performance degradation due to wet-stacking due to the low operation points.
 
-- The observed fuel costs are well above the tariffs charged on the grids requiring subsidy
-    - Customers pay 5 cents or less per kWh and many meters don't function (personal communication)
-    - This suggests electricity is almost completely subsidized similar to other grids [@Schnitzer_Thesis]
-    - While there is insufficient cost recovery even if running efficiently, degraded generators exacerbate this problem.
+If these observed fuel costs in operation but the total levelized cost above another option, least-cost planning hasn't been achieved.
+Diesel generators are attractive because they cost the least to purchase and install per kW among any generation source [@Lazard_LCOE].
+However, the high fuel costs relative to other options put them on the high end of levelized cost [@Lazard_LCOE].
+This can create a split incentive problem if the fuel costs are not borne by the installer of the generators.
+Despite the relatively high cost of electricity, in areas beyond the centralized grids, diesel is a viable option.
+The observed fuel rates we observe in some grids are well above levelized cost estimations for diesel of 0.20--0.28 USD per kWh.
+Our data suggest that the assumption that diesel is the least cost option should be revisited for many operating grids.
 
-- Our data show the grids operating only for a portion of the day
-    - Figure (@fig:uptime_CDF) shows that two grids don't operate at on 15% of the days and another on 35% of the days.
-    - The Atamali provides between 5 and 7 hours 75% of the observed days
-    - The Ayapo grid provides between 4 and 7 hours on about 75% of the observed days
-    - The Kensio microgrid, however, shows very few days with more than 5 hours of service.
-    - These data are consistent with the evening-only operation and also show some days with less service.
-    - It is likely uneconomical to run these generators continuously but unnecessarily high marginal costs worsen the problem
-    - The village nominally has been electrified but has an expensive and intermittent electricity service.
+<!-- &#45; The observed fuel costs are well above the tariffs charged on the grids requiring subsidy -->
+<!--     &#45; Customers pay 5 cents or less per kWh and many meters don't function (personal communication) -->
+<!--     &#45; This suggests electricity is almost completely subsidized similar to other grids [@Schnitzer_Thesis] -->
+<!--     &#45; While there is insufficient cost recovery even if running efficiently, degraded generators exacerbate this problem. -->
+
+
+<!-- Inefficient Operation and Level of Service -->
+
+Our data show that these grids only operate in the evenings.
+The Atamali provides between 5 and 7 hours 75% of the observed days
+The Ayapo grid provides between 4 and 7 hours on about 75% of the observed days
+The Kensio microgrid, however, shows very few days with more than 5 hours of service.
+@fig:uptime_CDF shows that two grids don't operate at on 15% of the days and another on 35% of the days.
+To conserve fuel, many microgrids are only operated in the evenings since the consumer demand is the highest at those times. [@Schnitzer_Thesis,  @Casillas_EP, @no_cite_yet]
+Consumers on these grids take turns purchasing the kerosene for the night on the grids.
+Higher specific fuel consumption increases pressure to restrict operating hours to reduce fuel use.
+While the village nominally has been electrified it has an expensive and intermittent electricity service.
 
 ![Cumulative distribution function of Uptime](./plots/uptime_CDF.png){#fig:uptime_CDF}
 
-## Potential Improvements
+<!-- Potential Improvements -->
 
-- These problems of high marginal costs and insufficient tariff recovery suggest that other approaches could provide better service at a lower cost.
-    - Revisiting the least cost assumptions in actual operation may lead to different generation allocation decisions
+These problems of high marginal costs and insufficient tariff recovery suggest that other approaches could provide better service at a lower cost.
+Revisiting the least cost assumptions in actual operation may lead to different generation allocation decisions.
 
-- Matching generators to loads could improve SFC and operating costs
-    - A smaller generator operating at or above 75% of the rated load will bring the SFC within the range of assumptions.
-    - Running the generator at this better matched load could slow degradation and SFC increases due to the incomplete combustion (wet stacking) observed at low loads.  [@Hove_Tazvinga]
-    - The low initial cost and high fuel cost allow this replacement to pay back quickly.
+In areas where the loads are much lower than the operating points of the generators, matching new smaller generators to the customer loads would improve SFC and operating and maintenance costs.
+A smaller generator operating at or above 75% of the rated load will maintain a reasonable SFC.
+The very low initial cost of purchasing a generator and high fuel cost allow this replacement to pay back quickly.
 
-- Replacing diesel generation with PV and battery storage could improve levelized cost
-    - It is plausible that PV systems with storage can deliver electricity for less than the $2 per kWh that we observe
-    - While the levelized cost of a battery and PV system may be lower, the capital investment is much higher.
-    - While PV costs rise on a capital basis, diesel costs rise on a marginal basis
-    - To move to a least cost option from a total cost perspective may require new ways to access capital.
+At the very high fuel costs observed in some villages, replacing diesel generation with PV and battery storage could improve levelized cost.
+Using the Lazard levelized cost of energy (LCOE) and levelized cost of storage LCOS studies we can create a composite estimate of 1.22 -- 1.56 USD per kWh for PV and storage. [@Lazard_LCOE @Lazard_LCOS]
+While this is a high LCOE it is below the observed fuel cost for one of the villages and invites us to reconsider the least cost assumptions.
+While the levelized cost of a battery and PV system may be lower, the capital investment is much higher.
+With sufficient battery storage, it is possible to provide energy throughout the day.
+If these additional service hours could increase revenue on these grids it
+Increased revenue on these photovoltaic grids due to increased service hours could improve the financial viability of the projects.
+Since PV is expensive on a capital basis, but diesel is expensive during operation, providing solar electricity would require new ways to access capital.
 
 # Bibliography
