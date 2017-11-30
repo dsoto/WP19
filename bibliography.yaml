@@ -31,6 +31,9 @@ references:
   issued:
     year: 2014
     month:
+  notes:
+  - section 4.4 mentions the tariff problems arising from a national uniform tariff below costs as well as cost estimations
+  - mentions ECA report from the IFC with other data "The potential for private supply" but I do not see the report online.
 - id: Louie_ESD
   title: Effects of load estimation error on small-scale off-grid photovoltaic system design, cost and reliability
   type: article-journal
@@ -45,17 +48,23 @@ references:
   page: '30-43'
   volume: '34'
 - id: Lazard_LCOE
-  title: Levelized Cost of Energy Analysis 10.0
+  title: Levelized Cost of Energy Analysis 11.0
   type: report
   issued:
-  - year: 2016
-    month: 12
+  - year: 2017
+    month: 11
+  notes:
+  - LCOE 11 page 2 shows diesel reciprocating at 0.20 to 0.28 USD per kWh
+  - page 2 shows PV rooftop residential at 0.19 to 0.32 USD per kWh
+  - page 11 shows diesel engine as the lowest capital cost generation
 - id: Lazard_LCOS
-  title: Levelized Cost of Storage Analysis 2.0
+  title: Levelized Cost of Storage Analysis 3.0
   type: report
   issued:
-  - year: 2016
-    month: 12
+  - year: 2017
+    month: 11
+  notes:
+  - page 12 shows residential behind the meter lithium cost of storage at 1.03 to 1.24 USD per kWh
 - id: IEEFA
   title: Overpaid and Underutilized
   type: report
@@ -67,4 +76,16 @@ references:
   title: 'PLN RUPTL 2017-2026'
   issued:
   - year: 2017
+- id: Hove_Tazvinga
+  title: A techno-economic model for optimising component sizing and energy dispatch strategy for PV-diesel-battery hybrid power systems
+  author:
+  - family: Hove
+    given: Tawanda
+  - family: Tazvinga
+    given: Henerica
+  container-title: Journal of Energy in Southern Africa
+  volume: 23
+  year: 2012
+  notes:
+  - section 6.1 shows a diesel consumption model and mentions wet stacking
 ---
