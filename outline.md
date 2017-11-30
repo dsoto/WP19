@@ -34,10 +34,10 @@ In the case of photovoltaic (PV) electricity, having components that provide mor
 Diesel generators that can deliver more power than is required by the customers can lead to higher fuel costs and generator degradation over time [@Hove_Tazvinga].
 
 This study provides modeled and observed costs for diesel consumption in three microgrids in the Lake Sentani region of Indonesia.
-We find that the generators are providing power well below their intended operating points.
-Using a model based on the manufacturer specifications for several generators, we estimate that these generators would use 0.6 liters per kWh of electricity or above.
+We find that two generators are providing power well below their intended operating points.
+Using a model based on the manufacturer specifications for several generators, we estimate that these generators would use 0.7 liters per kWh of electricity or above.
 This is about twice the value for a well-maintained generator operating according to its specifications.
-The observed fuel use reached as high as 1.9 liters per kWh suggesting serious fuel inefficiency likely due to issues of generator maintenance.
+The observed fuel use reached as high as 1.97 liters per kWh suggesting serious fuel inefficiency likely due to issues of generator maintenance.
 
 These results suggest that diesel micro-grids operating outside of centralized grid areas may not be performing to the expectations of the electricity planners.
 Areas that are struggling with high costs of electricity delivery can estimate the SFC of their generators to check for degradation or insufficient loads.
@@ -82,7 +82,8 @@ The ratio of this fuel use over time and the total energy delivered over that ti
 
 # Results
 
-The data cover 86% to 93% of the observation period on the three microgrids.
+The combined data observations cover the majority of the observation time period.
+The data cover at least 86% of the observation period on the three microgrids.
 @tbl:data_coverage shows that there are direct observations over 9% to 23% of the observation periods where the grid is operating.
 The indirect observations are from periods where the meter was operating but not taking one-minute samples while the grid wasn't operating and zero electricity delivery was assumed during these periods.
 
@@ -90,19 +91,20 @@ Table: Data Coverage {#tbl:data_coverage}
 
 {% include './tables/data_coverage.md' %}
 
-The daily electricity energy consumption on the days the grid is operating is between 0.4 and 0.9 kWh per day per household (@tbl:daily_operating_energy).
+The daily electricity energy consumption per household is modest and shows high variability on two grids (@fig:daily_energy_CDF).
+<!-- The daily electricity energy consumption on the days the grid is operating is between 0.4 and 0.9 kWh per day per household (@tbl:daily_operating_energy). -->
 We define operation as any day where any energy was delivered to households.
 The cumulative distribution function (CDF) in @fig:daily_energy_CDF shows that the electricity on most days is clustered around a central value but that there is a tail of lower values.
 
 ![Daily Energy Cumulative Distribution Function](./plots/daily_energy_CDF.png){#fig:daily_energy_CDF}
 
-Table: Mean Energy Delivered During Grid Operation {#tbl:daily_operating_energy}
+<!-- Table: Mean Energy Delivered During Grid Operation {#tbl:daily_operating_energy} -->
 
-{% include './tables/daily_operating_energy.md' %}
+<!-- {% include './tables/daily_operating_energy.md' %} -->
 
 The power delivered to the households during operation is below the rated power for the generators.
 @tbl:genset_utilization shows the mean load during operation of the microgrids.
-The microgrid with the highest utilization is operating at 32% of the rated load and the lowest is at 6%.
+The microgrid with the highest utilization is operating at 33% of the rated load on average and the lowest is at 6%.
 These means do not include the periods of zero power when the generator is not operating and fuel isn't being consumed.
 @fig:power-CDF includes times when the grid is not operating.
 It shows that although there is a significant tail of zero power, two of the grid distributions don't have long tails.
@@ -119,14 +121,15 @@ The r-squared values for each of the fits is above 0.98.
 The standard deviation of the marginal fuel rate is 0.019 liters per hour per kWh which is about 7% of the mean.
 The extrapolated no load consumption had much more variation with the standard deviation at 46% of the mean.
 
-The modeled specific fuel consumption is as high as 0.82 liters per kWh, more than twice the value at the optimum power delivered.
+The modeled specific fuel consumption exceeds the specific fuel consumption for a generator operating at its peak (@fig:SFC-bar-graph).
 Ayapo, with an average operating load of 33% of the rated load, increases fuel consumption by about 20% from the value at 100% load.
 Kensio has an average load of 6% of the rated load which increases the specific fuel consumption by over a factor of two from the optimal.
 
-Table: Modeled Specific Fuel Consumption {#tbl:modeled_SFC}
+<!-- Table: Modeled Specific Fuel Consumption {#tbl:modeled_SFC} -->
 
-{% include './tables/modeled_SFC.md' %}
+<!-- {% include './tables/modeled_SFC.md' %} -->
 
+The observed specific fuel consumption greatly exceeds the expected SFC on two of the grids.
 The observed fuel consumption is as high as 2 USD per kWh.
 @tbl:observed_SFC shows the reported average fuel use per night as reported by operators, as well as the mean energy on operating days and the observed specific fuel consumption (@no_cite_yet).
 These observed fuel uses exceed the modeled specific fuel consumption for all grids.
@@ -134,6 +137,8 @@ These observed fuel uses exceed the modeled specific fuel consumption for all gr
 Table: Observed Specific Fuel Consumption {#tbl:observed_SFC}
 
 {% include './tables/observed_SFC.md' %}
+
+![Ideal, Modeled and Observed Specific Fuel Consumption](./plots/SFC-bar-graph.png){#fig:SFC-bar-graph}
 
 # Discussion
 
@@ -154,7 +159,7 @@ Two of these generators operate in a regime that causes a significant increase i
 The observations of fuel use well above the model prediction suggests that these generators have seen performance degradation due to wet-stacking due to the low operation points.
 
 If these observed fuel costs in operation but the total levelized cost above another option, least-cost planning hasn't been achieved.
-Diesel generators are attractive because they cost the least to purchase and install per kW among any generation source [@Lazard_LCOE].
+Diesel generators are attractive because they cost the least to purchase and install per kW among any generation source.
 However, the high fuel costs relative to other options put them on the high end of levelized cost [@Lazard_LCOE].
 This can create a split incentive problem if the fuel costs are not borne by the installer of the generators.
 Despite the relatively high cost of electricity, in areas beyond the centralized grids, diesel is a viable option.
@@ -169,7 +174,7 @@ Our data suggest that the assumption that diesel is the least cost option should
 
 <!-- Inefficient Operation and Level of Service -->
 
-Our data show that these grids only operate in the evenings.
+Grids operate in the evening and service is often curtailed both in the amount of time operating and the amount of energy delivered.
 The Atamali provides between 5 and 7 hours 75% of the observed days
 The Ayapo grid provides between 4 and 7 hours on about 75% of the observed days
 The Kensio microgrid, however, shows very few days with more than 5 hours of service.
